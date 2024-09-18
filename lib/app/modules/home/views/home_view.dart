@@ -60,7 +60,6 @@ class HomeView extends GetView<HomeController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 ImageSwitcher(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -134,6 +133,7 @@ class HomeView extends GetView<HomeController> {
                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
               ),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
@@ -161,112 +161,110 @@ class HomeView extends GetView<HomeController> {
                   ),
                   SizedBox(
                     height: 190,
-                    child: Expanded(
-                      child: ListView.builder(
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(16),
-                                  child: const PreviewCardImage(
-                                    height: 185,
-                                    width: 300,
-                                    url: ApiUrls.dummyDestinationImage,
-                                    // radius: 16,
-                                    errorImage: AssetImage(
-                                      ApiUrls.dummyDestinationImage,
-                                    ),
+                    child: ListView.builder(
+                      itemCount: 10,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: const PreviewCardImage(
+                                  height: 185,
+                                  width: 300,
+                                  url: ApiUrls.dummyDestinationImage,
+                                  // radius: 16,
+                                  errorImage: AssetImage(
+                                    ApiUrls.dummyDestinationImage,
                                   ),
                                 ),
-                                Positioned(
-                                  right: 0,
-                                  child: Container(
-                                    width: 150,
-                                    height: 185,
-                                    padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(topRight: Radius.circular(16), bottomRight: Radius.circular(16)),
-                                      color: Colors.white.withOpacity(0.9),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Pashupatinath",
-                                          style: smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 4.0),
-                                        Text(
-                                          "Kathmandu, Nepal",
-                                          style: smallStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 4.0),
-                                        Wrap(
-                                          spacing: 0,
-                                          runSpacing: 0,
-                                          children: [
-                                            Text(
-                                              '\u2022 Sacred Temple',
-                                              style: smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '\u2022 Spiritual place',
-                                              style: smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '\u2022 Cultural Heritage',
-                                              style: smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '\u2022 Religious',
-                                              style: smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        const Row(
-                                          children: [
-                                            Icon(
-                                              Icons.flight,
-                                              color: AppColors.black,
-                                              size: 20,
-                                            ),
-                                            SizedBox(width: 4),
-                                            Icon(
-                                              Icons.directions_bus,
-                                              color: AppColors.black,
-                                              size: 20,
-                                            ),
-                                            SizedBox(width: 4),
-                                            Icon(
-                                              Icons.pedal_bike_rounded,
-                                              color: AppColors.black,
-                                              size: 20,
-                                            ),
-                                            SizedBox(width: 4),
-                                            Icon(
-                                              Icons.directions_train_rounded,
-                                              color: AppColors.grey,
-                                              size: 20,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                              ),
+                              Positioned(
+                                right: 0,
+                                child: Container(
+                                  width: 150,
+                                  height: 185,
+                                  padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(topRight: Radius.circular(16), bottomRight: Radius.circular(16)),
+                                    color: Colors.white.withOpacity(0.9),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Pashupatinath",
+                                        style: smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 4.0),
+                                      Text(
+                                        "Kathmandu, Nepal",
+                                        style: smallStyle,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 4.0),
+                                      Wrap(
+                                        spacing: 0,
+                                        runSpacing: 0,
+                                        children: [
+                                          Text(
+                                            '\u2022 Sacred Temple',
+                                            style: smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '\u2022 Spiritual place',
+                                            style: smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '\u2022 Cultural Heritage',
+                                            style: smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '\u2022 Religious',
+                                            style: smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8.0),
+                                      const Row(
+                                        children: [
+                                          Icon(
+                                            Icons.flight,
+                                            color: AppColors.black,
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 4),
+                                          Icon(
+                                            Icons.directions_bus,
+                                            color: AppColors.black,
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 4),
+                                          Icon(
+                                            Icons.pedal_bike_rounded,
+                                            color: AppColors.black,
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 4),
+                                          Icon(
+                                            Icons.directions_train_rounded,
+                                            color: AppColors.grey,
+                                            size: 20,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ),
                   Padding(
@@ -295,153 +293,151 @@ class HomeView extends GetView<HomeController> {
                   ),
                   SizedBox(
                     height: 190,
-                    child: Expanded(
-                      child: ListView.builder(
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(16),
-                                  child: const PreviewCardImage(
-                                    height: 185,
-                                    width: 300,
-                                    url: ApiUrls.dummyHotelImage,
-                                    // radius: 16,
-                                    errorImage: AssetImage(
-                                      ApiUrls.dummyImage,
-                                    ),
+                    child: ListView.builder(
+                      itemCount: 10,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: const PreviewCardImage(
+                                  height: 185,
+                                  width: 300,
+                                  url: ApiUrls.dummyHotelImage,
+                                  // radius: 16,
+                                  errorImage: AssetImage(
+                                    ApiUrls.dummyImage,
                                   ),
                                 ),
-                                Positioned(
-                                  right: 0,
-                                  child: Container(
-                                    width: 150,
-                                    height: 185,
-                                    padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(topRight: Radius.circular(16), bottomRight: Radius.circular(16)),
-                                      color: Colors.white.withOpacity(0.9),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Hotel Siddartha",
-                                          style: smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "5.0",
-                                              style: smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
-                                            ),
-                                            const SizedBox(width: 4.0),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        Text(
-                                          "Kathmandu, Nepal",
-                                          style: smallStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        Text(
-                                          "\$500.00",
-                                          style: smallStyle.copyWith(
-                                            color: Colors.red,
-                                            decoration: TextDecoration.lineThrough,
-                                            decorationColor: Colors.red,
+                              ),
+                              Positioned(
+                                right: 0,
+                                child: Container(
+                                  width: 150,
+                                  height: 185,
+                                  padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(topRight: Radius.circular(16), bottomRight: Radius.circular(16)),
+                                    color: Colors.white.withOpacity(0.9),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Hotel Siddartha",
+                                        style: smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "5.0",
+                                            style: smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
                                           ),
-                                          textAlign: TextAlign.center,
+                                          const SizedBox(width: 4.0),
+                                          const Icon(
+                                            Icons.star_rounded,
+                                            color: AppColors.darkYellow,
+                                            size: 16,
+                                          ),
+                                          const Icon(
+                                            Icons.star_rounded,
+                                            color: AppColors.darkYellow,
+                                            size: 16,
+                                          ),
+                                          const Icon(
+                                            Icons.star_rounded,
+                                            color: AppColors.darkYellow,
+                                            size: 16,
+                                          ),
+                                          const Icon(
+                                            Icons.star_rounded,
+                                            color: AppColors.darkYellow,
+                                            size: 16,
+                                          ),
+                                          const Icon(
+                                            Icons.star_rounded,
+                                            color: AppColors.darkYellow,
+                                            size: 16,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8.0),
+                                      Text(
+                                        "Kathmandu, Nepal",
+                                        style: smallStyle,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 8.0),
+                                      Text(
+                                        "\$500.00",
+                                        style: smallStyle.copyWith(
+                                          color: Colors.red,
+                                          decoration: TextDecoration.lineThrough,
+                                          decorationColor: Colors.red,
                                         ),
-                                        Text(
-                                          "\$400.00",
-                                          style: smallStyle.copyWith(color: Colors.green, fontWeight: FontWeight.bold),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        Wrap(
-                                          spacing: 4.0,
-                                          runSpacing: 4.0,
-                                          children: [
-                                            Container(
-                                              decoration:
-                                                  BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                                                child: Text("Pool",
-                                                    style: miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
-                                              ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        "\$400.00",
+                                        style: smallStyle.copyWith(color: Colors.green, fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 8.0),
+                                      Wrap(
+                                        spacing: 4.0,
+                                        runSpacing: 4.0,
+                                        children: [
+                                          Container(
+                                            decoration:
+                                                BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+                                              child: Text("Pool",
+                                                  style: miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
                                             ),
-                                            Container(
-                                              decoration:
-                                                  BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                                                child: Text("Safari",
-                                                    style: miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
-                                              ),
+                                          ),
+                                          Container(
+                                            decoration:
+                                                BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+                                              child: Text("Safari",
+                                                  style: miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
                                             ),
-                                            Container(
-                                              decoration:
-                                                  BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                                                child: Text("Snooker",
-                                                    style: miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
-                                              ),
+                                          ),
+                                          Container(
+                                            decoration:
+                                                BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+                                              child: Text("Snooker",
+                                                  style: miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
                                             ),
-                                            Container(
-                                              decoration:
-                                                  BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                                                child:
-                                                    Text("Spa", style: miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
-                                              ),
+                                          ),
+                                          Container(
+                                            decoration:
+                                                BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+                                              child:
+                                                  Text("Spa", style: miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
