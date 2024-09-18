@@ -31,36 +31,61 @@ class BottomNavView extends GetView<BottomNavController> {
         ],
       ),
       bottomNavigationBar: Obx(
-        () => DotNavigationBar(
-          // margin: const EdgeInsets.only(left: 10, right: 10),
-          curve : Curves.easeIn,
-          currentIndex: controller.selectedTabIndex,
-          backgroundColor: AppColors.primary,
-          dotIndicatorColor: AppColors.transparent,
-          unselectedItemColor: AppColors.black,
-          marginR: const EdgeInsets.only(left: 10, right: 10),
-          itemPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-          // splashBorderRadius: 50,
-          onTap: (index) => controller.changePage(index),
-          items: [
-            DotNavigationBarItem(
-              icon: const Icon(Icons.home),
-              selectedColor: AppColors.white,
+        () => NavigationBar(
+          onDestinationSelected: (index) => controller.changePage(index),
+          indicatorColor: Colors.cyan.shade50,
+          backgroundColor: Colors.white,
+          selectedIndex: controller.selectedTabIndex,
+          destinations:const [
+            NavigationDestination(
+              selectedIcon: Icon(Icons.home,size: 24,),
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
             ),
-            DotNavigationBarItem(
-              icon: const Icon(Icons.favorite),
-              selectedColor: AppColors.white,
+            NavigationDestination(
+              icon: Icon(Icons.favorite,size: 24),
+              label: 'Favorites',
             ),
-            DotNavigationBarItem(
-              icon: const Icon(Icons.location_on),
-              selectedColor: AppColors.white,
+            NavigationDestination(
+              icon:  Icon(Icons.location_on,size: 24),
+              label: 'Location',
             ),
-            DotNavigationBarItem(
-              icon: const Icon(Icons.person),
-              selectedColor:AppColors.white,
+            NavigationDestination(
+              icon:  Icon(Icons.person,size: 24),
+              label: 'Profile',
             ),
           ],
         ),
+        //     DotNavigationBar(
+        //   // margin: const EdgeInsets.only(left: 10, right: 10),
+        //   // curve : Curves.easeIn,
+        //   currentIndex: controller.selectedTabIndex,
+        //   backgroundColor: AppColors.primary,
+        //   dotIndicatorColor: AppColors.transparent,
+        //   unselectedItemColor: AppColors.black,
+        //   marginR: const EdgeInsets.only(left: 10, right: 10),
+        //   // itemPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+        //   // splashBorderRadius: 50,
+        //   onTap: (index) => controller.changePage(index),
+        //   items: [
+        //     DotNavigationBarItem(
+        //       icon: const Icon(Icons.home,size: 24,),
+        //       selectedColor: AppColors.white,
+        //     ),
+        //     DotNavigationBarItem(
+        //       icon: const Icon(Icons.favorite,size: 24),
+        //       selectedColor: AppColors.white,
+        //     ),
+        //     DotNavigationBarItem(
+        //       icon: const Icon(Icons.location_on,size: 24),
+        //       selectedColor: AppColors.white,
+        //     ),
+        //     DotNavigationBarItem(
+        //       icon: const Icon(Icons.person,size: 24),
+        //       selectedColor:AppColors.white,
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

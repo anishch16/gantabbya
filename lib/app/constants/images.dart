@@ -7,7 +7,7 @@ class AssetImages {
   // static const String defaultImage = 'assets/icons/png/default_image.jpg';
 }
 class AppIcons {
-  // static const certificate ="assets/icons/certificate.svg";
+  static const nepalFlag ="assets/icons/Flag_of_Nepal.svg";
   // static const certificateFilled ="assets/icons/certificate_filled.svg";
   // static const training ="assets/icons/training.svg";
   // static const trainingFilled ="assets/icons/training_filled.svg";
