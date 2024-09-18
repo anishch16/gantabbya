@@ -8,9 +8,11 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
-  );
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),);
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  //   statusBarColor: Colors.transparent,
+  //     systemNavigationBarContrastEnforced:false
+  // ));
   await GetStorage.init();
 
   runApp(ResponsiveSizer(builder: (context, orientation, screenType) {
