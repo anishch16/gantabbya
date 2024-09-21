@@ -49,7 +49,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(12.0),
         ),
         hintText: widget.hint,
-        hintStyle: smallStyle.copyWith(color: AppColors.grey),
+        hintStyle: AppTextStyles.smallStyle.copyWith(color: AppColors.grey),
         prefixIcon: widget.icon,
         prefixIconColor: AppColors.grey,
         suffixIcon: widget.isPassword

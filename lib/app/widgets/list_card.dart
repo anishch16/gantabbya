@@ -37,7 +37,7 @@ class ListCard extends StatelessWidget {
                     title,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: smallStyle.copyWith(
+                    style: AppTextStyles.smallStyle.copyWith(
                       fontWeight: FontWeight.bold,
                         color: AppColors.primary),
                   ),
@@ -54,7 +54,7 @@ class ListCard extends StatelessWidget {
                 // }),
                 const SizedBox(height: 4.0),
                 Text("Published : ${TimeUtils().calculateTimeDifference(subtitle)}",
-                  style: miniStyle.copyWith(fontWeight: FontWeight.w500,color: AppColors.grey),
+                  style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.w500,color: AppColors.grey),
                 ),
               ],
             ),

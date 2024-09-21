@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../constants/colors.dart';
 import '../../favorite_trips/views/favorite_trips_view.dart';
 import '../../home/views/home_view.dart';
+import '../../location/views/location_view.dart';
 import '../../user_profile/views/user_profile_view.dart';
 import '../controllers/bottom_nav_controller.dart';
 
@@ -17,8 +18,8 @@ class BottomNavView extends GetView<BottomNavController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         onPageChanged: (index) {
           controller.changePage(index);
@@ -26,35 +27,41 @@ class BottomNavView extends GetView<BottomNavController> {
         children: <Widget>[
           HomeView(),
           const FavoriteTripsView(),
-          const Center(child: Text("Plan the trip")),
+           LocationView(),
           UserProfileView(),
         ],
       ),
       bottomNavigationBar: Obx(
-        () => NavigationBar(
-          onDestinationSelected: (index) => controller.changePage(index),
-          indicatorColor: Colors.cyan.shade50,
-          backgroundColor: Colors.white,
-          selectedIndex: controller.selectedTabIndex,
-          destinations:const [
-            NavigationDestination(
-              selectedIcon: Icon(Icons.home,size: 24,),
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.favorite,size: 24),
-              label: 'Favorites',
-            ),
-            NavigationDestination(
-              icon:  Icon(Icons.location_on,size: 24),
-              label: 'Location',
-            ),
-            NavigationDestination(
-              icon:  Icon(Icons.person,size: 24),
-              label: 'Profile',
-            ),
-          ],
+        () => Container(
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: Colors.grey.shade300, width: 1.0)),
+          ),
+          child: NavigationBar(
+            height: 65,
+            onDestinationSelected: (index) => controller.changePage(index),
+            indicatorColor: Colors.cyan.shade50,
+            backgroundColor: Colors.white,
+            selectedIndex: controller.selectedTabIndex,
+            destinations:const [
+              NavigationDestination(
+                selectedIcon: Icon(Icons.home,size: 24,),
+                icon: Icon(Icons.home_outlined),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.favorite,size: 24),
+                label: 'Favorites',
+              ),
+              NavigationDestination(
+                icon:  Icon(Icons.location_on,size: 24),
+                label: 'Location',
+              ),
+              NavigationDestination(
+                icon:  Icon(Icons.settings,size: 24),
+                label: 'Settings',
+              ),
+            ],
+          ),
         ),
         //     DotNavigationBar(
         //   // margin: const EdgeInsets.only(left: 10, right: 10),

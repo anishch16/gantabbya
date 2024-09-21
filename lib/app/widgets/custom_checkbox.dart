@@ -29,7 +29,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
       children: [
         Text(
           widget.title,
-          style: smallStyle.copyWith(
+          style: AppTextStyles.smallStyle.copyWith(
               color: AppColors.grey.shade600, fontWeight: FontWeight.bold),
         ),
         const SizedBox(

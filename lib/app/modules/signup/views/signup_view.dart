@@ -48,14 +48,14 @@ class SignupView extends GetView<SignupController> {
                   // Image.asset("assets/images/notice.png"),
                   Text(
                     "SignUp",
-                    style: largeStyle.copyWith(fontWeight: FontWeight.w700),
+                    style: AppTextStyles.largeStyle.copyWith(fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     "Enter your credentials to login to your account.",
-                    style: smallStyle.copyWith(color: AppColors.grey),
+                    style: AppTextStyles.smallStyle.copyWith(color: AppColors.grey),
                   ),
                   const SizedBox(
                     height: 40,

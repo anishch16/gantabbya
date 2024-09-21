@@ -34,12 +34,12 @@ class FacilityCard extends StatelessWidget {
                 children: [
                   Text(
                     no,
-                    style: mediumStyle.copyWith(fontWeight: FontWeight.w600),
+                    style: AppTextStyles.mediumStyle.copyWith(fontWeight: FontWeight.w600),
                   ),
                   Text(
                     title,
                     overflow: TextOverflow.ellipsis,
-                    style: miniStyle.copyWith(
+                    style: AppTextStyles.miniStyle.copyWith(
                       color: AppColors.grey,
                     ),
                   ),

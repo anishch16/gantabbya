@@ -38,7 +38,7 @@ class LoginView extends GetView<LoginController> {
           const SizedBox(height: 100),
           Text(
             "Login",
-            style: largeStyle.copyWith(
+            style: AppTextStyles.largeStyle.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 24.0),
@@ -60,7 +60,7 @@ class LoginView extends GetView<LoginController> {
                       ),
                       Text(
                         "Enter your credentials to login to your account.",
-                        style: smallStyle.copyWith(color: AppColors.grey),
+                        style: AppTextStyles.smallStyle.copyWith(color: AppColors.grey),
                       ),
                       const SizedBox(
                         height: 28,
@@ -136,7 +136,7 @@ class LoginView extends GetView<LoginController> {
                         children: [
                           Text(
                             "Don't have an account?",
-                            style: smallStyle.copyWith(color: AppColors.grey),
+                            style: AppTextStyles.smallStyle.copyWith(color: AppColors.grey),
                           ),
                           GestureDetector(
                             onTap: () {

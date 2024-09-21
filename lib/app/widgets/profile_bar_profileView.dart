@@ -12,7 +12,7 @@ class ProfileBarProfileView extends StatelessWidget {
     return AppBar(
       title: Text(
         title,
-        style: normalStyle.copyWith(color: AppColors.primary,fontWeight: FontWeight.w600),
+        style: AppTextStyles.normalStyle.copyWith(color: AppColors.primary,fontWeight: FontWeight.w600),
       ),
       // automaticallyImplyLeading: false,
       backgroundColor: AppColors.white,

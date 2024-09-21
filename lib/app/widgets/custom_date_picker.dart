@@ -45,7 +45,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         hintText: widget.title,
-        hintStyle: smallStyle.copyWith(color: AppColors.grey),
+        hintStyle: AppTextStyles.smallStyle.copyWith(color: AppColors.grey),
         prefixIcon: const Icon(Icons.calendar_today),
         prefixIconColor: AppColors.grey,
       ),

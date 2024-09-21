@@ -20,7 +20,7 @@ class LargeButton extends StatelessWidget {
       ),
       child: Center(
         child: Text(title,
-            style: normalStyle.copyWith(
+            style: AppTextStyles.normalStyle.copyWith(
                 color: Colors.white, fontWeight: FontWeight.w500)),
       ),
     );  }

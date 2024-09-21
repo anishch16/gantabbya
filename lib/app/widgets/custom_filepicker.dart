@@ -26,7 +26,7 @@ class _CustomFilePickerState extends State<CustomFilePicker> {
       children: [
         Text(
           widget.title,
-          style: smallStyle.copyWith(
+          style: AppTextStyles.smallStyle.copyWith(
               color: AppColors.grey.shade600, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 20.0),

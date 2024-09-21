@@ -1,11 +1,12 @@
 mixin AppDimens {
   static const tiny = 12.0;
   static const mini = 14.0;
-  static const small = 15.0;
-  static const normal = 17.0;
+  static const small = 16.0;
+  static const normal = 18.0;
   static const medium = 20.0;
   static const large = 22.0;
   static const big = 24.0;
+  static const veryBig = 26.0;
   // static const tinySizedBox = 0.5;
   // static const miniSizedBox = 1.0;
   // static const smallSizedBox = 2.0;
