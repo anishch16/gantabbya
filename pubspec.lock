@@ -201,6 +201,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  fluentui_system_icons:
+    dependency: "direct main"
+    description:
+      name: fluentui_system_icons
+      sha256: "681c1c83c7261d6e0b4010ac3a20448ddb2c4b8c82f796cd52ce759f006cc60e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.268"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -230,6 +238,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.22"
+  flutter_social_button:
+    dependency: "direct main"
+    description:
+      name: flutter_social_button
+      sha256: "9feee9f6304727f6a8d024aa7135bb6e4c97f10829c0ed84d85a3f2c4aa64cf7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.6+1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -248,6 +264,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      sha256: d3a89184101baec7f4600d58840a764d2ef760fe1c5a20ef9e6b0e9b24a07a3a
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.8.0"
   gap:
     dependency: transitive
     description:
@@ -296,6 +320,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  icon_icons:
+    dependency: "direct main"
+    description:
+      name: icon_icons
+      sha256: "6225095a3ece5099cad8086e0513858400e22dd9f3d060e2c9c48e108fe1e9e1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   intl:
     dependency: "direct main"
     description:

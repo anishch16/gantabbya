@@ -10,10 +10,7 @@ import '../../user_profile/views/user_profile_view.dart';
 import '../controllers/bottom_nav_controller.dart';
 
 class BottomNavView extends GetView<BottomNavController> {
-  BottomNavView({super.key});
-
-  @override
-  final controller = Get.put(BottomNavController());
+  const BottomNavView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +21,10 @@ class BottomNavView extends GetView<BottomNavController> {
         onPageChanged: (index) {
           controller.changePage(index);
         },
-        children: <Widget>[
+        children: [
           HomeView(),
           const FavoriteTripsView(),
-           LocationView(),
+          LocationView(),
           UserProfileView(),
         ],
       ),
@@ -42,22 +39,25 @@ class BottomNavView extends GetView<BottomNavController> {
             indicatorColor: Colors.cyan.shade50,
             backgroundColor: Colors.white,
             selectedIndex: controller.selectedTabIndex,
-            destinations:const [
+            destinations: const [
               NavigationDestination(
-                selectedIcon: Icon(Icons.home,size: 24,),
+                selectedIcon: Icon(
+                  Icons.home,
+                  size: 24,
+                ),
                 icon: Icon(Icons.home_outlined),
                 label: 'Home',
               ),
               NavigationDestination(
-                icon: Icon(Icons.favorite,size: 24),
+                icon: Icon(Icons.favorite, size: 24),
                 label: 'Favorites',
               ),
               NavigationDestination(
-                icon:  Icon(Icons.location_on,size: 24),
+                icon: Icon(Icons.location_on, size: 24),
                 label: 'Location',
               ),
               NavigationDestination(
-                icon:  Icon(Icons.settings,size: 24),
+                icon: Icon(Icons.settings, size: 24),
                 label: 'Settings',
               ),
             ],

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -6,21 +7,21 @@ import '../../../data/remote/api_client.dart';
 import '../../../data/remote/api_urls.dart';
 import '../../login/views/login_view.dart';
 
-
 class SignupController extends GetxController {
+  var isSigningIn = false.obs;
+  final fn = TextEditingController();
+  final ln = TextEditingController();
+  final email = TextEditingController();
+  final pn = TextEditingController();
 
+  final pw = TextEditingController();
+  final confirmPw = TextEditingController();
 
-  var isSigningIn=false.obs;
-
-
-  //TODO: Implement SignupController
+  final signUpFormKey = GlobalKey<FormState>();
 
   final count = 0.obs;
 
-
-
-  Future<void> signup(String fn, String ln, String pn, String email, String pw,
-      String cpw) async {
+  Future<void> signup(String fn, String ln, String pn, String email, String pw, String cpw) async {
     isSigningIn.value = true;
     Map<String, dynamic> requestBody = {
       "first_name": fn,
@@ -30,8 +31,7 @@ class SignupController extends GetxController {
       "password": pw,
       "confirm_password": cpw
     };
-    Future<http.Response> response = ApiClient().postRequestWithoutToken(
-        ApiUrls.BASE_URL + ApiUrls.SIGNUP, requestBody);
+    Future<http.Response> response = ApiClient().postRequestWithoutToken(ApiUrls.BASE_URL + ApiUrls.SIGNUP, requestBody);
     response.then((http.Response response) {
       if (response.statusCode == 200 || response.statusCode == 201) {
         isSigningIn.value = false;

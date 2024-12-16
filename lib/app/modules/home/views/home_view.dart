@@ -1,136 +1,158 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:gantabbya/app/data/remote/api_urls.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/colors.dart';
+import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
 import '../../../utils/greetings.dart';
 import '../../../utils/preview_image_card.dart';
 import '../controllers/home_controller.dart';
-import '../widgets/image_switcher.dart';
 
 class HomeView extends GetView<HomeController> {
-  @override
-  final controller = Get.put(HomeController());
-  var pageCounter = 0.obs;
-  final localData = GetStorage();
-
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Column(
-        children: [
-          SafeArea(
-            bottom: false,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Column(
+          children: [
+            SafeArea(
+              bottom: false,
+              child: Stack(
                 children: [
-                  Text("${getGreetingMessage()}, Anish", style: GoogleFonts.aBeeZee(textStyle: TextStyle(fontSize: 18.sp, color: Colors.black))),
-                  const SizedBox(width: 8),
-                  Icon(
-                    getGreetingIcon(),
-                    size: 16,
-                    color: getGreetingColor(),
+                  Image.asset(
+                    AppImages.planeBackground,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text("${getGreetingMessage()}, Anish", style: InRiaTextStyles.mediumStyle.copyWith(color: Colors.white)),
+                            const SizedBox(width: 8),
+                            Icon(
+                              getGreetingIcon(),
+                              size: 24,
+                              color: getGreetingColor(),
+                            ),
+                          ],
+                        ),
+                        const Row(
+                          children: [
+                            Icon(
+                              Icons.notifications,
+                              size: 24,
+                              color: Colors.white,
+                            ),
+                            SizedBox(width: 16),
+                            Icon(
+                              Icons.menu,
+                              size: 24,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ImageSwitcher(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text("Let's\nTravel\nThe World",
-                        textAlign: TextAlign.end,
-                        style: GoogleFonts.aBeeZee(
-                            textStyle: TextStyle(
-                          fontSize: 20.sp,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ))),
-                    SizedBox(
-                      width: 40.w,
-                      child: Text(
-                        "The beauty of new destinations awaits!",
-                        style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.grey),
-                        textAlign: TextAlign.end,
-                      ),
-                    )
-                  ],
-                ),
-                // const Row(
-                //   children: [
-                //     Column(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //       children: [
-                //         PreviewCardImage(
-                //           height: 60,
-                //           width: 80,
-                //           url: ApiUrls.dummyDestinationImage,
-                //           errorImage: const AssetImage(ApiUrls.dummyImage),
-                //         ),
-                //         SizedBox(
-                //           height: 8.0,
-                //         ),
-                //         PreviewCardImage(
-                //           height: 60,
-                //           width: 80,
-                //           url: ApiUrls.dummyDestinationImage,
-                //           errorImage: const AssetImage(ApiUrls.dummyImage),
-                //         ),
-                //       ],
-                //     ),
-                //     SizedBox(
-                //       width: 8.0,
-                //     ),
-                //     Column(
-                //       children: [
-                //         PreviewCardImage(
-                //           height: 100,
-                //           width: 100,
-                //           url: ApiUrls.dummyDestinationImage,
-                //           errorImage: const AssetImage(ApiUrls.dummyImage),
-                //         ),
-                //       ],
-                //     ),
-                //   ],
-                // )
-              ],
+            Text("Plan Your Trip With Us!",
+                textAlign: TextAlign.end,
+                style: GoogleFonts.aBeeZee(
+                    textStyle: TextStyle(
+                  fontSize: 20.sp,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ))),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 50,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.black,
+                    ),
+                    child: Center(child: Text("Kathmandu", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward,
+                    size: 24,
+                    color: Colors.black,
+                  ),
+                  Container(
+                    height: 50,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.teal,
+                    ),
+                    child: Center(child: Text("Set Destination", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                decoration: const BoxDecoration(
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.cyan.withOpacity(0.15),
-                  //     offset: const Offset(0, -4),
-                  //     blurRadius: 6,
-                  //     spreadRadius: 2,
-                  //   ),
-                  // ],
-                  // color: Colors.white,
-                  // borderRadius: const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-                ),
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 50,
+              child: ListView.builder(
+                itemCount: 5,
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(35),
+                        bottomRight: Radius.circular(35),
+                        topLeft: Radius.circular(35),
+                        bottomLeft: Radius.circular(35),
+                      ),
+                      border: Border.all(color: Colors.teal.shade300, width: 2.0),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(35), color: Colors.teal),
+                          child: Icon(
+                            [Icons.water_drop, Icons.terrain, Icons.forest, Icons.table_bar, Icons.water][index],
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Text(
+                            ["Lakes", "Mountains", "Forest", "Hotels", "Rivers"][index],
+                            style: AppTextStyles.smallStyle,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -148,435 +170,124 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
                     SizedBox(
-                      height: 190,
+                      height: 270,
                       child: ListView.builder(
                         itemCount: 10,
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
+                          return Row(
+                            children: [
+                              index == 0 ? const SizedBox(width: 8) : const SizedBox(),
+                              Container(
+                                width: 170,
+                                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
-                                  child: const PreviewCardImage(
-                                    height: 185,
-                                    width: 300,
-                                    url: ApiUrls.dummyDestinationImage,
-                                    // radius: 16,
-                                    errorImage: AssetImage(
-                                      ApiUrls.dummyDestinationImage,
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 0.2,
+                                      blurRadius: 0.2,
+                                      offset: const Offset(0, 1),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Positioned(
-                                  right: 0,
-                                  child: Container(
-                                    width: 150,
-                                    height: 185,
-                                    padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(topRight: Radius.circular(16), bottomRight: Radius.circular(16)),
-                                      color: Colors.white.withOpacity(0.9),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Pashupatinath",
-                                          style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 4.0),
-                                        Text(
-                                          "Kathmandu, Nepal",
-                                          style: AppTextStyles.miniStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 4.0),
-                                        Wrap(
-                                          spacing: 0,
-                                          runSpacing: 0,
-                                          children: [
-                                            Text(
-                                              '\u2022 Sacred Temple',
-                                              style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '\u2022 Spiritual place',
-                                              style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '\u2022 Cultural Heritage',
-                                              style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              '\u2022 Religious',
-                                              style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        const Row(
-                                          children: [
-                                            Icon(
-                                              Icons.flight,
-                                              color: AppColors.black,
-                                              size: 20,
-                                            ),
-                                            SizedBox(width: 4),
-                                            Icon(
-                                              Icons.directions_bus,
-                                              color: AppColors.black,
-                                              size: 20,
-                                            ),
-                                            SizedBox(width: 4),
-                                            Icon(
-                                              Icons.pedal_bike_rounded,
-                                              color: AppColors.black,
-                                              size: 20,
-                                            ),
-                                            SizedBox(width: 4),
-                                            Icon(
-                                              Icons.directions_train_rounded,
-                                              color: AppColors.grey,
-                                              size: 20,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Popular Hotels",
-                            style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 190,
-                      child: ListView.builder(
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(16),
-                                  child: const PreviewCardImage(
-                                    height: 185,
-                                    width: 300,
-                                    url: ApiUrls.dummyHotelImage,
-                                    // radius: 16,
-                                    errorImage: AssetImage(
-                                      ApiUrls.dummyImage,
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  right: 0,
-                                  child: Container(
-                                    width: 150,
-                                    height: 185,
-                                    padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(topRight: Radius.circular(16), bottomRight: Radius.circular(16)),
-                                      color: Colors.white.withOpacity(0.9),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Hotel Siddartha",
-                                          style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "5.0",
-                                              style: AppTextStyles.smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
-                                            ),
-                                            const SizedBox(width: 4.0),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                            const Icon(
-                                              Icons.star_rounded,
-                                              color: AppColors.darkYellow,
-                                              size: 16,
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        Text(
-                                          "Kathmandu, Nepal",
-                                          style: AppTextStyles.miniStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        Text(
-                                          "\$500.00",
-                                          style: AppTextStyles.miniStyle.copyWith(
-                                            color: Colors.red,
-                                            decoration: TextDecoration.lineThrough,
-                                            decorationColor: Colors.red,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.all(8.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: const PreviewCardImage(
+                                          height: 110,
+                                          width: 170,
+                                          url: ApiUrls.dummyDestinationImage,
+                                          // radius: 16,
+                                          errorImage: AssetImage(
+                                            ApiUrls.dummyDestinationImage,
                                           ),
-                                          textAlign: TextAlign.center,
                                         ),
-                                        Text(
-                                          "\$400.00",
-                                          style: AppTextStyles.miniStyle.copyWith(color: Colors.green, fontWeight: FontWeight.bold),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 8.0),
-                                        Wrap(
-                                          spacing: 4.0,
-                                          runSpacing: 4.0,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                                                child: Text("Pool",
-                                                    style: AppTextStyles.miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
-                                              ),
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                                                child: Text("Safari",
-                                                    style: AppTextStyles.miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
-                                              ),
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                                                child: Text("Snooker",
-                                                    style: AppTextStyles.miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
-                                              ),
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.0), color: AppColors.lightYellow),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                                                child: Text("Spa",
-                                                    style: AppTextStyles.miniStyle.copyWith(color: AppColors.black), textAlign: TextAlign.center),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "Pashupatinath Temple",
+                                            style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                          const SizedBox(height: 8.0),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const Icon(
+                                                Icons.location_on,
+                                              ),
+                                              Text(
+                                                "Nepal",
+                                                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                                textAlign: TextAlign.start,
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8.0),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "5.0",
+                                                    style:
+                                                        AppTextStyles.smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
+                                                  ),
+                                                  const SizedBox(width: 4.0),
+                                                  const Icon(
+                                                    Icons.star_rounded,
+                                                    color: AppColors.darkYellow,
+                                                    size: 16,
+                                                  ),
+                                                ],
+                                              ),
+                                              const Icon(
+                                                Icons.favorite,
+                                                color: Colors.teal,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           );
                         },
                       ),
                     ),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "See All",
+                          style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.w600, color: Colors.teal),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
-    // Obx(() => profileController.isProfileDataLoading.value
-    //         ? const HomeShimmer()
-    //         :
-    // SingleChildScrollView(
-    //             child: Column(
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 Padding(
-    //                   padding: const EdgeInsets.only(
-    //                       right: 16.0, left: 16.0, top: 16),
-    //                   child: GestureDetector(
-    //                     onTap: () {
-    //                       // Get.to(() => CalendarView());
-    //                     },
-    //                     child: Material(
-    //                       elevation: 0.5,
-    //                       color: AppColors.white,
-    //                       borderRadius: BorderRadius.circular(20),
-    //                       child: Container(
-    //                         padding: const EdgeInsets.all(16.0),
-    //                         child: Row(
-    //                           mainAxisAlignment: MainAxisAlignment.center,
-    //                           children: [
-    //                             Text("$dayOfWeek,",
-    //                                 style: normalStyle.copyWith(
-    //                                     fontWeight: FontWeight.bold,
-    //                                     color: AppColors.appGrey)),
-    //                             Text(" $monthName ",
-    //                                 style: normalStyle.copyWith(
-    //                                     fontWeight: FontWeight.bold,
-    //                                     color: AppColors.primary)),
-    //                             Text(
-    //                               "$day, ",
-    //                               style: normalStyle.copyWith(
-    //                                   fontWeight: FontWeight.bold,
-    //                                   color: AppColors.primary),
-    //                             ),
-    //                             Text(year,
-    //                                 style: normalStyle.copyWith(
-    //                                     fontWeight: FontWeight.bold,
-    //                                     color: AppColors.primary)),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 Container(
-    //                   padding: const EdgeInsets.all(16.0),
-    //                   child: GridView.builder(
-    //                     physics: const NeverScrollableScrollPhysics(),
-    //                     shrinkWrap: true,
-    //                     // itemCount: profileController.isStaff
-    //                     //     ? controller.homeListAll.length
-    //                     //     : controller.homeListNormalUser.length,
-    //                     gridDelegate:
-    //                         const SliverGridDelegateWithMaxCrossAxisExtent(
-    //                             maxCrossAxisExtent: 200,
-    //                             mainAxisSpacing: 10,
-    //                             childAspectRatio: 1.2,
-    //                             crossAxisSpacing: 10),
-    //                     itemBuilder: (BuildContext context, index) =>
-    //                         GestureDetector(
-    //                             onTap: () {
-    //                               // profileController.isStaff
-    //                               //     ? navigationAll(index)
-    //                               //     : navigationFiltered(index);
-    //                             },
-    //                             child: HomeCardView(
-    //                                 icon:
-    //                                 // profileController.isStaff
-    //                                 //     ? controller.homeCardIcons[index]
-    //                                 //     :
-    //                                 controller
-    //                                         .homeCardIconsNormalUser[index],
-    //                                 title:
-    //                                 // profileController.isStaff
-    //                                 //     ? controller.homeListAll[index]
-    //                                 //     :
-    //                                 controller
-    //                                         .homeListNormalUser[index])),
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //           )
-    //
-    // Container(
-    //         padding: EdgeInsets.symmetric(horizontal: 16.0),
-    //         child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.start,
-    //           children: [
-    //             SizedBox(height: 16.0),
-    //             SizedBox(
-    //               height: 32,
-    //               child: ListView.builder(
-    //                 shrinkWrap: true,
-    //                 scrollDirection: Axis.horizontal,
-    //                 itemCount: profileController.isStaff
-    //                     ? homeListAll.length
-    //                     : homeListFiltered.length,
-    //                 itemBuilder: (BuildContext context, index) => Padding(
-    //                   padding: const EdgeInsets.only(right: 8.0),
-    //                   child: GestureDetector(
-    //                       onTap: () {
-    //                         pageCounter.value = index;
-    //                       },
-    //                       child: TabContainer(
-    //                           isClicked: pageCounter.value == index
-    //                               ? true
-    //                               : false,
-    //                           title: profileController.isStaff
-    //                               ? homeListAll[index]
-    //                               : homeListFiltered[index])),
-    //                 ),
-    //               ),
-    //             ),
-    //             profileController.isStaff
-    //                 ? changeViewAll()
-    //                 : changeViewFiltered()
-    //           ],
-    //         ),
-    //       ),
-    // );
-  }
-
-  // navigationAll(int index) {
-  //   // if (index == 0) {
-  //   //   Get.to(() => MyHospitalView());
-  //   // } else if (index == 1) {
-  //   //   Get.to(() => HospitalsView());
-  //   // } else if (index == 2) {
-  //   //   Get.to(() => VitalsView());
-  //   // } else if (index == 3) {
-  //   //   Get.to(() => MedicationsView());
-  //   // } else if (index == 4) {
-  //   //   Get.to(() => InventoryView());
-  //   // } else if (index == 5) {
-  //   //   Get.to(() => AddPartnerView());
-  //   // } else if (index == 6) {
-  //   //   Get.to(() => ServicesView());
-  //   // }
-  // }
-
-  navigationFiltered(int index) {
-    // if (index == 0) {
-    //   Get.to(() => HospitalsView());
-    // } else if (index == 1) {
-    //   Get.to(() => VitalsView());
-    // } else if (index == 2) {
-    //   Get.to(() => MedicationsView());
-    // } else if (index == 3) {
-    //   Get.to(() => InventoryView());
-    // } else if (index == 4) {
-    //   Get.to(() => AddPartnerView());
-    // } else if (index == 5) {
-    //   Get.to(() => ServicesView());
-    // }
   }
 }

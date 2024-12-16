@@ -15,8 +15,8 @@ class LargeButton extends StatelessWidget {
       height: 54,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(24),
+        color: AppColors.black,
       ),
       child: Center(
         child: Text(title,
