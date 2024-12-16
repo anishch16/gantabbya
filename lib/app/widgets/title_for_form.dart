@@ -16,7 +16,7 @@ class TitleOfForm extends StatelessWidget {
         children: [
           Text(
             title,
-            style: normalStyle.copyWith(
+            style: AppTextStyles.normalStyle.copyWith(
                 color: AppColors.black, fontWeight: FontWeight.w600),
           ),
           const Spacer(),

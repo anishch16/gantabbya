@@ -1,411 +1,293 @@
 import 'package:flutter/material.dart';
+import 'package:gantabbya/app/data/remote/api_urls.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
+import '../../../utils/greetings.dart';
 import '../../../utils/preview_image_card.dart';
 import '../controllers/home_controller.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeView extends GetView<HomeController> {
-  @override
-  final controller = Get.put(HomeController());
-  var pageCounter = 0.obs;
-  final localData = GetStorage();
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-        color: Colors.cyan.shade50.withOpacity(0.5),
-      ),
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(right: 16, left: 16, top: 24),
-            decoration: const BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: Image.asset(AppImages.logoPng)),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.menu),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Column(
+          children: [
+            SafeArea(
+              bottom: false,
+              child: Stack(
                 children: [
-                  CarouselSlider(
-                    carouselController: controller.carouselSliderController,
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      enableInfiniteScroll: true,
-                      height: 218,
-                      enlargeCenterPage: true,
-                      disableCenter: true,
-                      viewportFraction: 1.0,
-                      onPageChanged: (index, reason) {
-                        // context.read<PersonaCubit>().imageIndex(index);
-                      },
-                    ),
-                    items: controller.images
-                        .map((item) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Stack(
-                                children: [
-                                  PreviewCardImage(
-                                    height: 218,
-                                    width: double.infinity,
-                                    url: item,
-                                    radius: 16,
-                                    errorImage: const AssetImage(
-                                      'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-                                    ),
-                                  ),
-                                  Positioned(
-                                      bottom: 8,
-                                      left: 8,
-                                      child: Text(
-                                        "Test Text",
-                                        style: mediumStyle.copyWith(
-                                            color: AppColors.white),
-                                      ))
-                                ],
-                              ),
-                            ))
-                        .toList(),
+                  Image.asset(
+                    AppImages.planeBackground,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 24),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Popular Destination",
-                          style: normalStyle,
-                        ),
                         Row(
                           children: [
-                            Text(
-                              "View More",
-                              style:
-                                  normalStyle.copyWith(color: AppColors.blue),
+                            Text("${getGreetingMessage()}, Anish", style: InRiaTextStyles.mediumStyle.copyWith(color: Colors.white)),
+                            const SizedBox(width: 8),
+                            Icon(
+                              getGreetingIcon(),
+                              size: 24,
+                              color: getGreetingColor(),
                             ),
-                            const Icon(
-                              Icons.arrow_forward,
-                              color: AppColors.blue,
-                            )
                           ],
-                        )
+                        ),
+                        const Row(
+                          children: [
+                            Icon(
+                              Icons.notifications,
+                              size: 24,
+                              color: Colors.white,
+                            ),
+                            SizedBox(width: 16),
+                            Icon(
+                              Icons.menu,
+                              size: 24,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 300,
-                    child: Expanded(
-                      child: ListView.separated(
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(width: 16);
-                        },
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                                left: index == 0 ? 16 : 0,
-                                right: index == 9 ? 16 : 0),
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PreviewCardImage(
-                                  height: 218,
-                                  width: 218,
-                                  url:
-                                      'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-                                  radius: 16,
-                                  errorImage: AssetImage(
-                                    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Icon(Icons.flag),
-                                    Text("Nepal"),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on_outlined),
-                                    Text("Kathmandu"),
-                                  ],
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 24),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Popular Hotels",
-                          style: normalStyle,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "View More",
-                              style:
-                                  normalStyle.copyWith(color: AppColors.blue),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward,
-                              color: AppColors.blue,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 300,
-                    child: Expanded(
-                      child: ListView.separated(
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(width: 16);
-                        },
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                                left: index == 0 ? 16 : 0,
-                                right: index == 9 ? 16 : 0),
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PreviewCardImage(
-                                  height: 218,
-                                  width: 218,
-                                  url:
-                                      'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-                                  radius: 16,
-                                  errorImage: AssetImage(
-                                    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Icon(Icons.flag),
-                                    Text("Pokhara"),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on_outlined),
-                                    Text("Siddartha"),
-                                  ],
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 100)
                 ],
               ),
             ),
-          ),
-        ],
+            Text("Plan Your Trip With Us!",
+                textAlign: TextAlign.end,
+                style: GoogleFonts.aBeeZee(
+                    textStyle: TextStyle(
+                  fontSize: 20.sp,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ))),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 50,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.black,
+                    ),
+                    child: Center(child: Text("Kathmandu", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward,
+                    size: 24,
+                    color: Colors.black,
+                  ),
+                  Container(
+                    height: 50,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.teal,
+                    ),
+                    child: Center(child: Text("Set Destination", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 50,
+              child: ListView.builder(
+                itemCount: 5,
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(35),
+                        bottomRight: Radius.circular(35),
+                        topLeft: Radius.circular(35),
+                        bottomLeft: Radius.circular(35),
+                      ),
+                      border: Border.all(color: Colors.teal.shade300, width: 2.0),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(35), color: Colors.teal),
+                          child: Icon(
+                            [Icons.water_drop, Icons.terrain, Icons.forest, Icons.table_bar, Icons.water][index],
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Text(
+                            ["Lakes", "Mountains", "Forest", "Hotels", "Rivers"][index],
+                            style: AppTextStyles.smallStyle,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Popular Destination",
+                            style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(width: 12),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 270,
+                      child: ListView.builder(
+                        itemCount: 10,
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              index == 0 ? const SizedBox(width: 8) : const SizedBox(),
+                              Container(
+                                width: 170,
+                                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 0.2,
+                                      blurRadius: 0.2,
+                                      offset: const Offset(0, 1),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.all(8.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: const PreviewCardImage(
+                                          height: 110,
+                                          width: 170,
+                                          url: ApiUrls.dummyDestinationImage,
+                                          // radius: 16,
+                                          errorImage: AssetImage(
+                                            ApiUrls.dummyDestinationImage,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "Pashupatinath Temple",
+                                            style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                          const SizedBox(height: 8.0),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              const Icon(
+                                                Icons.location_on,
+                                              ),
+                                              Text(
+                                                "Nepal",
+                                                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                                textAlign: TextAlign.start,
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8.0),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "5.0",
+                                                    style:
+                                                        AppTextStyles.smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
+                                                  ),
+                                                  const SizedBox(width: 4.0),
+                                                  const Icon(
+                                                    Icons.star_rounded,
+                                                    color: AppColors.darkYellow,
+                                                    size: 16,
+                                                  ),
+                                                ],
+                                              ),
+                                              const Icon(
+                                                Icons.favorite,
+                                                color: Colors.teal,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "See All",
+                          style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.w600, color: Colors.teal),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
-    // Obx(() => profileController.isProfileDataLoading.value
-    //         ? const HomeShimmer()
-    //         :
-    // SingleChildScrollView(
-    //             child: Column(
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 Padding(
-    //                   padding: const EdgeInsets.only(
-    //                       right: 16.0, left: 16.0, top: 16),
-    //                   child: GestureDetector(
-    //                     onTap: () {
-    //                       // Get.to(() => CalendarView());
-    //                     },
-    //                     child: Material(
-    //                       elevation: 0.5,
-    //                       color: AppColors.white,
-    //                       borderRadius: BorderRadius.circular(20),
-    //                       child: Container(
-    //                         padding: const EdgeInsets.all(16.0),
-    //                         child: Row(
-    //                           mainAxisAlignment: MainAxisAlignment.center,
-    //                           children: [
-    //                             Text("$dayOfWeek,",
-    //                                 style: normalStyle.copyWith(
-    //                                     fontWeight: FontWeight.bold,
-    //                                     color: AppColors.appGrey)),
-    //                             Text(" $monthName ",
-    //                                 style: normalStyle.copyWith(
-    //                                     fontWeight: FontWeight.bold,
-    //                                     color: AppColors.primary)),
-    //                             Text(
-    //                               "$day, ",
-    //                               style: normalStyle.copyWith(
-    //                                   fontWeight: FontWeight.bold,
-    //                                   color: AppColors.primary),
-    //                             ),
-    //                             Text(year,
-    //                                 style: normalStyle.copyWith(
-    //                                     fontWeight: FontWeight.bold,
-    //                                     color: AppColors.primary)),
-    //                           ],
-    //                         ),
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 Container(
-    //                   padding: const EdgeInsets.all(16.0),
-    //                   child: GridView.builder(
-    //                     physics: const NeverScrollableScrollPhysics(),
-    //                     shrinkWrap: true,
-    //                     // itemCount: profileController.isStaff
-    //                     //     ? controller.homeListAll.length
-    //                     //     : controller.homeListNormalUser.length,
-    //                     gridDelegate:
-    //                         const SliverGridDelegateWithMaxCrossAxisExtent(
-    //                             maxCrossAxisExtent: 200,
-    //                             mainAxisSpacing: 10,
-    //                             childAspectRatio: 1.2,
-    //                             crossAxisSpacing: 10),
-    //                     itemBuilder: (BuildContext context, index) =>
-    //                         GestureDetector(
-    //                             onTap: () {
-    //                               // profileController.isStaff
-    //                               //     ? navigationAll(index)
-    //                               //     : navigationFiltered(index);
-    //                             },
-    //                             child: HomeCardView(
-    //                                 icon:
-    //                                 // profileController.isStaff
-    //                                 //     ? controller.homeCardIcons[index]
-    //                                 //     :
-    //                                 controller
-    //                                         .homeCardIconsNormalUser[index],
-    //                                 title:
-    //                                 // profileController.isStaff
-    //                                 //     ? controller.homeListAll[index]
-    //                                 //     :
-    //                                 controller
-    //                                         .homeListNormalUser[index])),
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //           )
-    //
-    // Container(
-    //         padding: EdgeInsets.symmetric(horizontal: 16.0),
-    //         child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.start,
-    //           children: [
-    //             SizedBox(height: 16.0),
-    //             SizedBox(
-    //               height: 32,
-    //               child: ListView.builder(
-    //                 shrinkWrap: true,
-    //                 scrollDirection: Axis.horizontal,
-    //                 itemCount: profileController.isStaff
-    //                     ? homeListAll.length
-    //                     : homeListFiltered.length,
-    //                 itemBuilder: (BuildContext context, index) => Padding(
-    //                   padding: const EdgeInsets.only(right: 8.0),
-    //                   child: GestureDetector(
-    //                       onTap: () {
-    //                         pageCounter.value = index;
-    //                       },
-    //                       child: TabContainer(
-    //                           isClicked: pageCounter.value == index
-    //                               ? true
-    //                               : false,
-    //                           title: profileController.isStaff
-    //                               ? homeListAll[index]
-    //                               : homeListFiltered[index])),
-    //                 ),
-    //               ),
-    //             ),
-    //             profileController.isStaff
-    //                 ? changeViewAll()
-    //                 : changeViewFiltered()
-    //           ],
-    //         ),
-    //       ),
-    // );
-  }
-
-  // navigationAll(int index) {
-  //   // if (index == 0) {
-  //   //   Get.to(() => MyHospitalView());
-  //   // } else if (index == 1) {
-  //   //   Get.to(() => HospitalsView());
-  //   // } else if (index == 2) {
-  //   //   Get.to(() => VitalsView());
-  //   // } else if (index == 3) {
-  //   //   Get.to(() => MedicationsView());
-  //   // } else if (index == 4) {
-  //   //   Get.to(() => InventoryView());
-  //   // } else if (index == 5) {
-  //   //   Get.to(() => AddPartnerView());
-  //   // } else if (index == 6) {
-  //   //   Get.to(() => ServicesView());
-  //   // }
-  // }
-
-  navigationFiltered(int index) {
-    // if (index == 0) {
-    //   Get.to(() => HospitalsView());
-    // } else if (index == 1) {
-    //   Get.to(() => VitalsView());
-    // } else if (index == 2) {
-    //   Get.to(() => MedicationsView());
-    // } else if (index == 3) {
-    //   Get.to(() => InventoryView());
-    // } else if (index == 4) {
-    //   Get.to(() => AddPartnerView());
-    // } else if (index == 5) {
-    //   Get.to(() => ServicesView());
-    // }
+    );
   }
 }

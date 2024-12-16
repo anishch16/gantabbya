@@ -38,7 +38,7 @@ class ContainerForForm extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0,left: 4.0),
                   child: Text(
                     title!,
-                      style: normalStyle.copyWith(
+                      style: AppTextStyles.normalStyle.copyWith(
     color: AppColors.black, fontWeight: FontWeight.w600),
                   ),
                 ),

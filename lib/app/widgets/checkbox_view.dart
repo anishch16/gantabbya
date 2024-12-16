@@ -14,7 +14,7 @@ class CheckboxView extends StatelessWidget {
       children: [
         Icon(clicked?Icons.check_box:Icons.check_box_outline_blank_outlined,color: AppColors.primary,),
         const SizedBox(width: 8.0,),
-        Text(title,style: smallStyle)
+        Text(title,style: AppTextStyles.smallStyle)
       ],
     );
   }

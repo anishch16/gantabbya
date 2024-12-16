@@ -18,7 +18,7 @@ class UserProfileView extends GetView<UserProfileController> {
       body: Container(
         padding: const EdgeInsets.only(right: 16, left: 16, top: 24),
         decoration: BoxDecoration(
-          color: Colors.cyan.shade50.withOpacity(0.5),
+          color: Colors.white,
         ),
         child: Column(
           children: [
@@ -80,17 +80,17 @@ class UserProfileView extends GetView<UserProfileController> {
                               children: [
                                 Text(
                                   "Anish Chaulagain",
-                                  style: normalStyle,
+                                  style: AppTextStyles.normalStyle,
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   "Panchkhal, kavre",
-                                  style: normalStyle,
+                                  style: AppTextStyles.normalStyle,
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   "Flutter Developer",
-                                  style: normalStyle,
+                                  style: AppTextStyles.normalStyle,
                                 ),
                               ],
                             )
@@ -104,7 +104,7 @@ class UserProfileView extends GetView<UserProfileController> {
                       children: [
                         Text(
                           "All Planned Trips",
-                          style: normalStyle,
+                          style: AppTextStyles.normalStyle,
                         ),
                         Obx(() {
                           return GestureDetector(
@@ -117,7 +117,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                       children: [
                                         Text(
                                           "Grid View",
-                                          style: normalStyle.copyWith(color: AppColors.blue),
+                                          style: AppTextStyles.normalStyle.copyWith(color: AppColors.blue),
                                         ),
                                         const SizedBox(width: 8),
                                         const Icon(Icons.grid_on,color: AppColors.blue),
@@ -127,7 +127,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                       children: [
                                         Text(
                                           "List View",
-                                          style: normalStyle.copyWith(
+                                          style: AppTextStyles.normalStyle.copyWith(
                                               color: AppColors.blue
                                           ),
                                         ),
@@ -187,11 +187,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                                   children: [
                                                     Text(
                                                       "Point 1: ",
-                                                      style: smallStyle,
+                                                      style: AppTextStyles.smallStyle,
                                                     ),
                                                     Text(
                                                       "Kathmandu",
-                                                      style: smallStyle,
+                                                      style: AppTextStyles.smallStyle,
                                                     ),
                                                   ],
                                                 ),
@@ -199,11 +199,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                                   children: [
                                                     Text(
                                                       "Point 2: ",
-                                                      style: smallStyle,
+                                                      style: AppTextStyles.smallStyle,
                                                     ),
                                                     Text(
                                                       "Pokhara",
-                                                      style: smallStyle,
+                                                      style: AppTextStyles.smallStyle,
                                                     ),
                                                   ],
                                                 ),
@@ -211,11 +211,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                                   children: [
                                                     Text(
                                                       "Point 3: ",
-                                                      style: smallStyle,
+                                                      style: AppTextStyles.smallStyle,
                                                     ),
                                                     Text(
                                                       "Mustang",
-                                                      style: smallStyle,
+                                                      style: AppTextStyles.smallStyle,
                                                     ),
                                                   ],
                                                 ),
@@ -223,12 +223,12 @@ class UserProfileView extends GetView<UserProfileController> {
                                                   children: [
                                                     Text(
                                                       "Point 4: ",
-                                                      style: smallStyle,
+                                                      style: AppTextStyles.smallStyle,
                                                     ),
                                                     Flexible(
                                                       child: Text(
                                                         "Upper Mustang",
-                                                        style: smallStyle,
+                                                        style: AppTextStyles.smallStyle,
                                                         maxLines: 1,
                                                       ),
                                                     ),
@@ -288,11 +288,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                               children: [
                                                 Text(
                                                   "Checkpoint 1: ",
-                                                  style: smallStyle,
+                                                  style: AppTextStyles.smallStyle,
                                                 ),
                                                 Text(
                                                   "Kathmandu",
-                                                  style: smallStyle,
+                                                  style: AppTextStyles.smallStyle,
                                                 ),
                                               ],
                                             ),
@@ -300,11 +300,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                               children: [
                                                 Text(
                                                   "Checkpoint 2: ",
-                                                  style: smallStyle,
+                                                  style: AppTextStyles.smallStyle,
                                                 ),
                                                 Text(
                                                   "Pokhara",
-                                                  style: smallStyle,
+                                                  style: AppTextStyles.smallStyle,
                                                 ),
                                               ],
                                             ),
@@ -312,11 +312,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                               children: [
                                                 Text(
                                                   "Checkpoint 3: ",
-                                                  style: smallStyle,
+                                                  style: AppTextStyles.smallStyle,
                                                 ),
                                                 Text(
                                                   "Mustang",
-                                                  style: smallStyle,
+                                                  style: AppTextStyles.smallStyle,
                                                 ),
                                               ],
                                             ),
@@ -324,11 +324,11 @@ class UserProfileView extends GetView<UserProfileController> {
                                               children: [
                                                 Text(
                                                   "Checkpoint 4: ",
-                                                  style: smallStyle,
+                                                  style: AppTextStyles.smallStyle,
                                                 ),
                                                 Text(
                                                   "Upper Mustang",
-                                                  style: smallStyle,
+                                                  style: AppTextStyles.smallStyle,
                                                 ),
                                               ],
                                             )

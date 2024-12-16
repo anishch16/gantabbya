@@ -29,6 +29,11 @@ dependencies:
   nepali_date_picker: ^6.0.1
   clean_nepali_calendar: ^2.0.1
   carousel_slider: ^5.0.0
+  super_bullet_list: ^0.0.3
+  lottie: ^3.1.2
+  flutter_social_button: ^1.1.6+1
+  icon_icons: ^1.0.4
+  fluentui_system_icons: ^1.1.268
 
 dev_dependencies:
   flutter_test:
@@ -40,3 +45,4 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/lottie/

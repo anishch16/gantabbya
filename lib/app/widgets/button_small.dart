@@ -18,7 +18,7 @@ class SmallButton extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: miniStyle.copyWith(
+          style: AppTextStyles.miniStyle.copyWith(
               fontWeight: FontWeight.w500, color: Colors.white),
         ),
       ),

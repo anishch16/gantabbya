@@ -18,7 +18,7 @@ class TransparentButton extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: normalStyle.copyWith(
+          style: AppTextStyles.normalStyle.copyWith(
               fontWeight: FontWeight.w500, color: AppColors.primary),
         ),
       ),

@@ -23,7 +23,7 @@ class HomeCardView extends StatelessWidget {
           children: [
             SvgPicture.asset(icon),
             const SizedBox(height: 10.0),
-            Text(title,style: smallStyle.copyWith(fontWeight: FontWeight.bold))
+            Text(title,style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold))
           ],
         ),
 

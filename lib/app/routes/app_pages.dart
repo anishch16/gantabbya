@@ -4,8 +4,12 @@ import '../modules/bottomNav/bindings/bottom_nav_binding.dart';
 import '../modules/bottomNav/views/bottom_nav_view.dart';
 import '../modules/favorite_trips/bindings/favorite_trips_binding.dart';
 import '../modules/favorite_trips/views/favorite_trips_view.dart';
+import '../modules/forget_password/bindings/forget_password_binding.dart';
+import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/location/bindings/location_binding.dart';
+import '../modules/location/views/location_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
@@ -25,31 +29,49 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.BOTTOM_NAV,
       page: () => BottomNavView(),
       binding: BottomNavBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginView(),
+      page: () => const LoginView(),
       binding: LoginBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.FAVORITE_TRIPS,
       page: () => const FavoriteTripsView(),
       binding: FavoriteTripsBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.USER_PROFILE,
       page: () => UserProfileView(),
       binding: UserProfileBinding(),
+      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.SIGNUP,
-      page: () => SignupView(),
+      page: () => const SignupView(),
       binding: SignupBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.LOCATION,
+      page: () => LocationView(),
+      binding: LocationBinding(),
+      transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.FORGET_PASSWORD,
+      page: () => const ForgetPasswordView(),
+      binding: ForgetPasswordBinding(),
+      transition: Transition.fade,
     ),
   ];
 }

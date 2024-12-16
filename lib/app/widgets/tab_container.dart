@@ -25,7 +25,7 @@ class TabContainer extends StatelessWidget {
         const EdgeInsets.symmetric(horizontal: 18.0),
         child: Text(
           title,
-          style: smallStyle.copyWith(
+          style: AppTextStyles.smallStyle.copyWith(
               fontWeight: isClicked
                   ? FontWeight.w700
                   : FontWeight.w400,

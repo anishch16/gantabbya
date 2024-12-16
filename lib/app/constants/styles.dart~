@@ -82,31 +82,31 @@ class InRiaTextStyles {
     textStyle: TextStyle(fontSize: AppDimens.tiny.sp, color: Colors.black),
   );
 
-  static final TextStyle miniStyle = GoogleFonts.inriaSerif(
+  static final TextStyle miniStyle = GoogleFonts.poppins(
     textStyle: TextStyle(fontSize: AppDimens.mini.sp, color: Colors.black),
   );
 
-  static final TextStyle smallStyle = GoogleFonts.inriaSerif(
+  static final TextStyle smallStyle = GoogleFonts.poppins(
     textStyle: TextStyle(fontSize: AppDimens.small.sp, color: Colors.black),
   );
 
-  static final TextStyle normalStyle = GoogleFonts.inriaSerif(
+  static final TextStyle normalStyle = GoogleFonts.poppins(
     textStyle: TextStyle(fontSize: AppDimens.normal.sp, color: Colors.black),
   );
 
-  static final TextStyle mediumStyle = GoogleFonts.inriaSerif(
+  static final TextStyle mediumStyle = GoogleFonts.poppins(
     textStyle: TextStyle(fontSize: AppDimens.medium.sp, color: Colors.black),
   );
 
-  static final TextStyle largeStyle = GoogleFonts.inriaSerif(
+  static final TextStyle largeStyle = GoogleFonts.poppins(
     textStyle: TextStyle(fontSize: AppDimens.large.sp, color: Colors.black),
   );
 
-  static final TextStyle bigStyle = GoogleFonts.inriaSerif(
+  static final TextStyle bigStyle = GoogleFonts.poppins(
     textStyle: TextStyle(fontSize: AppDimens.big.sp, color: Colors.black),
   );
 
-  static final TextStyle veryBigStyle = GoogleFonts.inriaSerif(
+  static final TextStyle veryBigStyle = GoogleFonts.poppins(
     textStyle: TextStyle(fontSize: AppDimens.veryBig.sp, color: Colors.black),
   );
 }

@@ -28,14 +28,14 @@ class ForgotPassword extends StatelessWidget {
               Image.asset("assets/images/notice.png"),
               Text(
                 "Forgot Password",
-                style: largeStyle.copyWith(fontWeight: FontWeight.w700),
+                style: AppTextStyles.largeStyle.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
                 "Enter your email address to get verification code",
-                style: smallStyle.copyWith(color: AppColors.gray),
+                style: AppTextStyles.smallStyle.copyWith(color: AppColors.gray),
               ),
               const SizedBox(
                 height: 40,
@@ -44,7 +44,7 @@ class ForgotPassword extends StatelessWidget {
               const SizedBox(
                 height: 26,
               ),
-              LargeButton(title: "Send Verification Code"),
+              const LargeButton(title: "Send Verification Code"),
             ]),
           ),
         ),

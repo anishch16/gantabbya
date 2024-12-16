@@ -20,7 +20,7 @@ class InputField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: smallStyle.copyWith(color: AppColors.grey.shade600,fontWeight: FontWeight.bold),
+          style: AppTextStyles.smallStyle.copyWith(color: AppColors.grey.shade600,fontWeight: FontWeight.bold),
         ),
         const SizedBox(
           height: 10,
