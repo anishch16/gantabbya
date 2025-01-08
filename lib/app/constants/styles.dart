@@ -46,67 +46,68 @@ mixin AppDimens {
 
 class AppTextStyles {
   static final TextStyle tinyStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(fontSize: AppDimens.tiny.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.tiny.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle miniStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(fontSize: AppDimens.mini.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.mini.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle smallStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(fontSize: AppDimens.small.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.small.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle normalStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(fontSize: AppDimens.normal.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.normal.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle mediumStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(fontSize: AppDimens.medium.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.medium.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle largeStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(fontSize: AppDimens.large.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.large.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle bigStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(fontSize: AppDimens.big.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.big.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle veryBigStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(fontSize: AppDimens.veryBig.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.veryBig.sp, color: Colors.black, letterSpacing: 1),
   );
 }
+
 class InRiaTextStyles {
   static final TextStyle tinyStyle = GoogleFonts.inriaSerif(
-    textStyle: TextStyle(fontSize: AppDimens.tiny.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.tiny.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle miniStyle = GoogleFonts.inriaSerif(
-    textStyle: TextStyle(fontSize: AppDimens.mini.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.mini.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle smallStyle = GoogleFonts.inriaSerif(
-    textStyle: TextStyle(fontSize: AppDimens.small.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.small.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle normalStyle = GoogleFonts.inriaSerif(
-    textStyle: TextStyle(fontSize: AppDimens.normal.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.normal.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle mediumStyle = GoogleFonts.inriaSerif(
-    textStyle: TextStyle(fontSize: AppDimens.medium.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.medium.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle largeStyle = GoogleFonts.inriaSerif(
-    textStyle: TextStyle(fontSize: AppDimens.large.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.large.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle bigStyle = GoogleFonts.inriaSerif(
-    textStyle: TextStyle(fontSize: AppDimens.big.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.big.sp, color: Colors.black, letterSpacing: 1),
   );
 
   static final TextStyle veryBigStyle = GoogleFonts.inriaSerif(
-    textStyle: TextStyle(fontSize: AppDimens.veryBig.sp, color: Colors.black),
+    textStyle: TextStyle(fontSize: AppDimens.veryBig.sp, color: Colors.black, letterSpacing: 1),
   );
 }

@@ -7,6 +7,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
+import '../../../routes/app_pages.dart';
 import '../../../utils/greetings.dart';
 import '../../../utils/preview_image_card.dart';
 import '../controllers/home_controller.dart';
@@ -71,10 +72,10 @@ class HomeView extends GetView<HomeController> {
                 textAlign: TextAlign.end,
                 style: GoogleFonts.aBeeZee(
                     textStyle: TextStyle(
-                  fontSize: 20.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ))),
+                      fontSize: 20.sp,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ))),
             const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -179,91 +180,96 @@ class HomeView extends GetView<HomeController> {
                           return Row(
                             children: [
                               index == 0 ? const SizedBox(width: 8) : const SizedBox(),
-                              Container(
-                                width: 170,
-                                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 0.2,
-                                      blurRadius: 0.2,
-                                      offset: const Offset(0, 1),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.all(8.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(16),
-                                        child: const PreviewCardImage(
-                                          height: 110,
-                                          width: 170,
-                                          url: ApiUrls.dummyDestinationImage,
-                                          // radius: 16,
-                                          errorImage: AssetImage(
-                                            ApiUrls.dummyDestinationImage,
+                              GestureDetector(
+                                onTap: (){
+                                  Get.toNamed(Routes.DETAIL_DESTINATION);
+                                },
+                                child: Container(
+                                  width: 170,
+                                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 0.2,
+                                        blurRadius: 0.2,
+                                        offset: const Offset(0, 1),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.all(8.0),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(16),
+                                          child: const PreviewCardImage(
+                                            height: 110,
+                                            width: 170,
+                                            url: ApiUrls.dummyDestinationImage,
+                                            // radius: 16,
+                                            errorImage: AssetImage(
+                                              ApiUrls.dummyDestinationImage,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "Pashupatinath Temple",
-                                            style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.start,
-                                          ),
-                                          const SizedBox(height: 8.0),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              const Icon(
-                                                Icons.location_on,
-                                              ),
-                                              Text(
-                                                "Nepal",
-                                                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
-                                                textAlign: TextAlign.start,
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 8.0),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "5.0",
-                                                    style:
-                                                        AppTextStyles.smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
-                                                  ),
-                                                  const SizedBox(width: 4.0),
-                                                  const Icon(
-                                                    Icons.star_rounded,
-                                                    color: AppColors.darkYellow,
-                                                    size: 16,
-                                                  ),
-                                                ],
-                                              ),
-                                              const Icon(
-                                                Icons.favorite,
-                                                color: Colors.teal,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              "Pashupatinath Temple",
+                                              style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                              textAlign: TextAlign.start,
+                                            ),
+                                            const SizedBox(height: 8.0),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                const Icon(
+                                                  Icons.location_on,
+                                                ),
+                                                Text(
+                                                  "Nepal",
+                                                  style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 8.0),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "5.0",
+                                                      style:
+                                                      AppTextStyles.smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
+                                                    ),
+                                                    const SizedBox(width: 4.0),
+                                                    const Icon(
+                                                      Icons.star_rounded,
+                                                      color: AppColors.darkYellow,
+                                                      size: 16,
+                                                    ),
+                                                  ],
+                                                ),
+                                                const Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.teal,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -275,9 +281,14 @@ class HomeView extends GetView<HomeController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "See All",
-                          style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.w600, color: Colors.teal),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(Routes.ALL_DESTINATION);
+                          },
+                          child: Text(
+                            "See All",
+                            style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.w600, color: Colors.teal),
+                          ),
                         ),
                       ],
                     )

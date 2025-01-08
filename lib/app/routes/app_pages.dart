@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/all_destination/bindings/all_destination_binding.dart';
+import '../modules/all_destination/views/all_destination_view.dart';
 import '../modules/bottomNav/bindings/bottom_nav_binding.dart';
 import '../modules/bottomNav/views/bottom_nav_view.dart';
+import '../modules/detail_destination/bindings/detail_destination_binding.dart';
+import '../modules/detail_destination/views/detail_destination_view.dart';
 import '../modules/favorite_trips/bindings/favorite_trips_binding.dart';
 import '../modules/favorite_trips/views/favorite_trips_view.dart';
 import '../modules/forget_password/bindings/forget_password_binding.dart';
@@ -72,6 +76,16 @@ class AppPages {
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: _Paths.ALL_DESTINATION,
+      page: () => const AllDestinationView(),
+      binding: AllDestinationBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_DESTINATION,
+      page: () => const DetailDestinationView(),
+      binding: DetailDestinationBinding(),
     ),
   ];
 }

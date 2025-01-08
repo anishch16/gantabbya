@@ -11,6 +11,8 @@ abstract class Routes {
   static const SIGNUP = _Paths.SIGNUP;
   static const LOCATION = _Paths.LOCATION;
   static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
+  static const ALL_DESTINATION = _Paths.ALL_DESTINATION;
+  static const DETAIL_DESTINATION = _Paths.DETAIL_DESTINATION;
 }
 
 abstract class _Paths {
@@ -23,4 +25,6 @@ abstract class _Paths {
   static const SIGNUP = '/signup';
   static const LOCATION = '/location';
   static const FORGET_PASSWORD = '/forget-password';
+  static const ALL_DESTINATION = '/all-destination';
+  static const DETAIL_DESTINATION = '/detail-destination';
 }
