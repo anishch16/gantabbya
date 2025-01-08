@@ -85,7 +85,7 @@ class AllDestinationView extends GetView<AllDestinationController> {
                           borderRadius: BorderRadius.circular(16),
                           child: const PreviewCardImage(
                             height: 110,
-                            width: 170,
+                            width: double.infinity,
                             url: ApiUrls.dummyDestinationImage,
                             // radius: 16,
                             errorImage: AssetImage(
@@ -97,6 +97,7 @@ class AllDestinationView extends GetView<AllDestinationController> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "Pashupatinath Temple",

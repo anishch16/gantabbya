@@ -139,7 +139,9 @@ class SetDestinationView extends GetView<SetDestinationController> {
                 style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-              CustomDatePicker(title: 'End Date', date: controller.endDate)
+              CustomDatePicker(title: 'End Date', date: controller.endDate),
+              const SizedBox(height: 100),
+
             ],
           ),
         ),
