@@ -13,14 +13,22 @@ class CustomDatePicker extends StatefulWidget {
   final String? Function(String?)? validator;
   final Function(String)? onChanged;
 
-  const CustomDatePicker({super.key,required this.title, required this.date,this.validator,this.onChanged, this.firstDate, this.lastDateYear, this.lastDateMonth,this.lastDateDay});
+  const CustomDatePicker(
+      {super.key,
+      required this.title,
+      required this.date,
+      this.validator,
+      this.onChanged,
+      this.firstDate,
+      this.lastDateYear,
+      this.lastDateMonth,
+      this.lastDateDay});
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
 }
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -56,9 +64,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           DateTime? pickedDate = await showDatePicker(
               context: context,
               initialDate: DateTime.now(),
-              firstDate: DateTime(widget.firstDate ?? 1900 ),
-              lastDate: DateTime((widget.lastDateYear ?? 2100), (widget.lastDateMonth ?? 1), (widget.lastDateDay ?? 1))
-          );
+              firstDate: DateTime(widget.firstDate ?? 1900),
+              lastDate: DateTime((widget.lastDateYear ?? 2100), (widget.lastDateMonth ?? 1), (widget.lastDateDay ?? 1)));
           if (pickedDate != null) {
             String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
             setState(() {

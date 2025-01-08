@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gantabbya/app/constants/styles.dart';
 import 'package:get/get.dart';
 import '../../../constants/colors.dart';
+import '../../../routes/app_pages.dart';
 import '../../../widgets/custom_date_picker.dart';
 import '../../../widgets/custom_dropdown2.dart';
 import '../controllers/set_destination_controller.dart';
@@ -16,7 +17,7 @@ class SetDestinationView extends GetView<SetDestinationController> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: GestureDetector(
         onTap: () {
-          // Get.toNamed(Routes.SET_DESTINATION);
+          Get.toNamed(Routes.COST_DETAILS);
         },
         child: Container(
           height: 50,
@@ -38,110 +39,108 @@ class SetDestinationView extends GetView<SetDestinationController> {
         backgroundColor: AppColors.white,
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Obx(() {
-                  return CustomDropdownButton2(
-                    title: "Select Destination",
-                    hint: 'Select an option',
-                    value: controller.selectedDestination.value,
-                    dropdownItems: controller.destinations,
-                    onChanged: (value) {
-                      controller.selectedDestination.value = value ?? "";
-                    },
-                    hintAlignment: Alignment.centerLeft,
-                    valueAlignment: Alignment.centerLeft,
-                    buttonHeight: 50,
-                    buttonWidth: (MediaQuery.of(context).size.width - 32),
-                    iconEnabledColor: Colors.black,
-                    dropdownHeight: 200,
-                    dropdownWidth: (MediaQuery.of(context).size.width - 32),
-                  );
-                }),
-                const SizedBox(height: 20),
-                Obx(() {
-                  return CustomDropdownButton2(
-                    title: "Select Food Type",
-                    hint: 'Select an option',
-                    value: controller.selectedFoodType.value,
-                    dropdownItems: controller.foodType,
-                    onChanged: (value) {
-                      controller.selectedFoodType.value = value ?? "";
-                    },
-                    hintAlignment: Alignment.centerLeft,
-                    valueAlignment: Alignment.centerLeft,
-                    buttonHeight: 50,
-                    buttonWidth: (MediaQuery.of(context).size.width - 32),
-                    iconEnabledColor: Colors.black,
-                    dropdownHeight: 200,
-                    dropdownWidth: (MediaQuery.of(context).size.width - 32),
-                  );
-                }),
-                const SizedBox(height: 20),
-                Obx(() {
-                  return CustomDropdownButton2(
-                    title: "Select Stay Type",
-                    hint: 'Select an option',
-                    value: controller.selectedLodgingType.value,
-                    dropdownItems: controller.lodgingType,
-                    onChanged: (value) {
-                      controller.selectedLodgingType.value = value ?? "";
-                    },
-                    hintAlignment: Alignment.centerLeft,
-                    valueAlignment: Alignment.centerLeft,
-                    buttonHeight: 50,
-                    buttonWidth: (MediaQuery.of(context).size.width - 32),
-                    iconEnabledColor: Colors.black,
-                    dropdownHeight: 200,
-                    dropdownWidth: (MediaQuery.of(context).size.width - 32),
-                  );
-                }),
-                const SizedBox(height: 20),
-                Text(
-                  "Total Individuals",
-                  style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Obx(() {
+                return CustomDropdownButton2(
+                  title: "Select Destination",
+                  hint: 'Select an option',
+                  value: controller.selectedDestination.value,
+                  dropdownItems: controller.destinations,
+                  onChanged: (value) {
+                    controller.selectedDestination.value = value ?? "";
+                  },
+                  hintAlignment: Alignment.centerLeft,
+                  valueAlignment: Alignment.centerLeft,
+                  buttonHeight: 50,
+                  buttonWidth: (MediaQuery.of(context).size.width - 32),
+                  iconEnabledColor: Colors.black,
+                  dropdownHeight: 200,
+                  dropdownWidth: (MediaQuery.of(context).size.width - 32),
+                );
+              }),
+              const SizedBox(height: 20),
+              Obx(() {
+                return CustomDropdownButton2(
+                  title: "Select Food Type",
+                  hint: 'Select an option',
+                  value: controller.selectedFoodType.value,
+                  dropdownItems: controller.foodType,
+                  onChanged: (value) {
+                    controller.selectedFoodType.value = value ?? "";
+                  },
+                  hintAlignment: Alignment.centerLeft,
+                  valueAlignment: Alignment.centerLeft,
+                  buttonHeight: 50,
+                  buttonWidth: (MediaQuery.of(context).size.width - 32),
+                  iconEnabledColor: Colors.black,
+                  dropdownHeight: 200,
+                  dropdownWidth: (MediaQuery.of(context).size.width - 32),
+                );
+              }),
+              const SizedBox(height: 20),
+              Obx(() {
+                return CustomDropdownButton2(
+                  title: "Select Stay Type",
+                  hint: 'Select an option',
+                  value: controller.selectedLodgingType.value,
+                  dropdownItems: controller.lodgingType,
+                  onChanged: (value) {
+                    controller.selectedLodgingType.value = value ?? "";
+                  },
+                  hintAlignment: Alignment.centerLeft,
+                  valueAlignment: Alignment.centerLeft,
+                  buttonHeight: 50,
+                  buttonWidth: (MediaQuery.of(context).size.width - 32),
+                  iconEnabledColor: Colors.black,
+                  dropdownHeight: 200,
+                  dropdownWidth: (MediaQuery.of(context).size.width - 32),
+                );
+              }),
+              const SizedBox(height: 20),
+              Text(
+                "Total Individuals",
+                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                height: 50,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(left: 12.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.black),
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  height: 50,
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.only(left: 12.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.black),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: TextFormField(
-                    style: AppTextStyles.smallStyle,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "For eg: 5",
-                      hintStyle: AppTextStyles.smallStyle.copyWith(color: AppColors.grey.shade500),
-                    ),
+                child: TextFormField(
+                  style: AppTextStyles.smallStyle,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "For eg: 5",
+                    hintStyle: AppTextStyles.smallStyle.copyWith(color: AppColors.grey.shade500),
                   ),
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  "Start Date",
-                  style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                CustomDatePicker(title: 'Start Date', date: controller.startDate),
-                const SizedBox(height: 20),
-                Text(
-                  "End Date",
-                  style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                CustomDatePicker(title: 'End Date', date: controller.endDate)
-              ],
-            ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                "Start Date",
+                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              CustomDatePicker(title: 'Start Date', date: controller.startDate),
+              const SizedBox(height: 20),
+              Text(
+                "End Date",
+                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              CustomDatePicker(title: 'End Date', date: controller.endDate)
+            ],
           ),
         ),
       ),

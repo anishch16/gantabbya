@@ -4,6 +4,8 @@ import '../modules/all_destination/bindings/all_destination_binding.dart';
 import '../modules/all_destination/views/all_destination_view.dart';
 import '../modules/bottomNav/bindings/bottom_nav_binding.dart';
 import '../modules/bottomNav/views/bottom_nav_view.dart';
+import '../modules/cost_details/bindings/cost_details_binding.dart';
+import '../modules/cost_details/views/cost_details_view.dart';
 import '../modules/detail_destination/bindings/detail_destination_binding.dart';
 import '../modules/detail_destination/views/detail_destination_view.dart';
 import '../modules/favorite_trips/bindings/favorite_trips_binding.dart';
@@ -93,6 +95,11 @@ class AppPages {
       name: _Paths.SET_DESTINATION,
       page: () => const SetDestinationView(),
       binding: SetDestinationBinding(),
+    ),
+    GetPage(
+      name: _Paths.COST_DETAILS,
+      page: () => const CostDetailsView(),
+      binding: CostDetailsBinding(),
     ),
   ];
 }
