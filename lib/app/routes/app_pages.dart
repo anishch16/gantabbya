@@ -16,6 +16,8 @@ import '../modules/location/bindings/location_binding.dart';
 import '../modules/location/views/location_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/set_destination/bindings/set_destination_binding.dart';
+import '../modules/set_destination/views/set_destination_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
@@ -86,6 +88,11 @@ class AppPages {
       name: _Paths.DETAIL_DESTINATION,
       page: () => const DetailDestinationView(),
       binding: DetailDestinationBinding(),
+    ),
+    GetPage(
+      name: _Paths.SET_DESTINATION,
+      page: () => const SetDestinationView(),
+      binding: SetDestinationBinding(),
     ),
   ];
 }

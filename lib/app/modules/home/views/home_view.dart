@@ -96,14 +96,19 @@ class HomeView extends GetView<HomeController> {
                     size: 24,
                     color: Colors.black,
                   ),
-                  Container(
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.teal,
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(Routes.SET_DESTINATION);
+                    },
+                    child: Container(
+                      height: 50,
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.teal,
+                      ),
+                      child: Center(child: Text("Set journey's Info", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
                     ),
-                    child: Center(child: Text("Set Destination", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
                   ),
                 ],
               ),

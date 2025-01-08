@@ -10,6 +10,7 @@ import '../../../constants/styles.dart';
 import '../../../data/remote/api_urls.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utils/preview_image_card.dart';
+import '../../set_destination/views/set_destination_view.dart';
 import '../controllers/all_destination_controller.dart';
 
 class AllDestinationView extends GetView<AllDestinationController> {
@@ -20,9 +21,30 @@ class AllDestinationView extends GetView<AllDestinationController> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text(
-            'All Destination',
-            style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+          title: Form(
+            child: TextFormField(
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                filled: true,
+                hintStyle: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold, color: const Color(0xFF757575)),
+                fillColor: const Color(0xFF979797).withOpacity(0.1),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderSide: BorderSide.none,
+                ),
+                hintText: "Search destination",
+                prefixIcon: const Icon(Icons.search),
+              ),
+            ),
           ),
           scrolledUnderElevation: 0,
           elevation: 0,
@@ -30,7 +52,7 @@ class AllDestinationView extends GetView<AllDestinationController> {
           centerTitle: true,
         ),
         body: Container(
-          margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+          margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: AlignedGridView.count(
             crossAxisCount: 2,
             mainAxisSpacing: 20,

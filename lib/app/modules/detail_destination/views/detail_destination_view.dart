@@ -8,6 +8,7 @@ import 'package:readmore/readmore.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/styles.dart';
 import '../../../data/remote/api_urls.dart';
+import '../../../routes/app_pages.dart';
 import '../../../utils/preview_image_card.dart';
 import '../controllers/detail_destination_controller.dart';
 
@@ -33,14 +34,19 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
         centerTitle: true,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
-        height: 50,
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.teal,
+      floatingActionButton: GestureDetector(
+        onTap: (){
+          Get.toNamed(Routes.SET_DESTINATION);
+        },
+        child: Container(
+          height: 50,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.teal,
+          ),
+          child: Center(child: Text("Let's make a plan", style: AppTextStyles.miniStyle.copyWith(fontSize: 16, color: Colors.white))),
         ),
-        child: Center(child: Text("Let's make a plan", style: AppTextStyles.miniStyle.copyWith(fontSize: 16, color: Colors.white))),
       ),
       body: SingleChildScrollView(
         child: Column(
