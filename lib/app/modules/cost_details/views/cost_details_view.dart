@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/styles.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/cost_details_controller.dart';
 
 class CostDetailsView extends GetView<CostDetailsController> {
@@ -60,7 +61,7 @@ class CostDetailsView extends GetView<CostDetailsController> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: GestureDetector(
         onTap: () {
-          // Get.toNamed(Routes.COST_DETAILS);
+          Get.toNamed(Routes.ESTIMATED_COST);
         },
         child: Container(
           height: 50,

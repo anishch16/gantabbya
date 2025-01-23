@@ -8,6 +8,8 @@ import '../modules/cost_details/bindings/cost_details_binding.dart';
 import '../modules/cost_details/views/cost_details_view.dart';
 import '../modules/detail_destination/bindings/detail_destination_binding.dart';
 import '../modules/detail_destination/views/detail_destination_view.dart';
+import '../modules/estimated_cost/bindings/estimated_cost_binding.dart';
+import '../modules/estimated_cost/views/estimated_cost_view.dart';
 import '../modules/favorite_trips/bindings/favorite_trips_binding.dart';
 import '../modules/favorite_trips/views/favorite_trips_view.dart';
 import '../modules/forget_password/bindings/forget_password_binding.dart';
@@ -100,6 +102,11 @@ class AppPages {
       name: _Paths.COST_DETAILS,
       page: () => const CostDetailsView(),
       binding: CostDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ESTIMATED_COST,
+      page: () => const EstimatedCostView(),
+      binding: EstimatedCostBinding(),
     ),
   ];
 }

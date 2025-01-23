@@ -15,6 +15,7 @@ abstract class Routes {
   static const DETAIL_DESTINATION = _Paths.DETAIL_DESTINATION;
   static const SET_DESTINATION = _Paths.SET_DESTINATION;
   static const COST_DETAILS = _Paths.COST_DETAILS;
+  static const ESTIMATED_COST = _Paths.ESTIMATED_COST;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const DETAIL_DESTINATION = '/detail-destination';
   static const SET_DESTINATION = '/set-destination';
   static const COST_DETAILS = '/cost-details';
+  static const ESTIMATED_COST = '/estimated-cost';
 }
