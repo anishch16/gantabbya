@@ -22,8 +22,6 @@ class DetailDestinationController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    print(Get.arguments["latitude"]);
-    print(Get.arguments["longitude"]);
     getWeather(
       latitude: Get.arguments["latitude"].toString(),
       longitude: Get.arguments["longitude"].toString(),
@@ -38,8 +36,6 @@ class DetailDestinationController extends GetxController {
  Future<void> getWeather({required String latitude, required String longitude}) async {
   weatherLoading.value = true;
   final String url = "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&past_days=10&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"; // Replace with your weather API endpoint
-
-  print(url);
   try {
    final response = await http.get(Uri.parse(url));
    if (response.statusCode == 200) {

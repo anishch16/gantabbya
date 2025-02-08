@@ -1,12 +1,9 @@
-import 'dart:developer';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gantabbya/app/data/remote/api_urls.dart';
-
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/images.dart';
@@ -15,6 +12,7 @@ import '../../../routes/app_pages.dart';
 import '../../../utils/greetings.dart';
 import '../../../utils/preview_image_card.dart';
 import '../controllers/home_controller.dart';
+import 'image_shimmer.dart';
 import 'loading_list.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -22,8 +20,91 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, List<Map<String, dynamic>>> nepalData = {
+      "Lakes": [
+        {"image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/murma-viewpoint.jpg", "text": "Rara Lake"},
+        {"image": "https://www.footprintadventure.com/uploads/media/Gokyo/gokyo-viewpoint.jpg", "text": "GOKYO LAKE"},
+        {"image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/tilicho-lake.jpg", "text": "TILICHO LAKE"},
+        {"image": "https://www.nepalhightrek.com/wp-content/uploads/2023/10/goshaikunda-lake-trek-1024x416.jpg", "text": "GOSAIKUNDA LAKE"},
+        {
+          "image":
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Beeshazari_Lake_of_Chitwan%2C_Nepal.jpg/396px-Beeshazari_Lake_of_Chitwan%2C_Nepal.jpg",
+          "text": "BISH HAZARI LAKE"
+        },
+        {"image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/tal-barahi.jpg", "text": "PHEWA TAL/LAKE"},
+        {"image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/panch-pokhari.jpg", "text": "PANCH POKHARI"},
+      ],
+      "Mountains": [
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Everest-2.jpg.webp", "text": "Mount Everest"},
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Kanchenjunga.jpg.webp", "text": "Kanchenjunga"},
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Lhotse-1.jpg.webp", "text": "Lhotse"},
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Makalu_CU.jpg.webp", "text": "Makalu"},
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Cho-Oyu-Expedition.jpg.webp", "text": "Cho Oyu"},
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Dhaulagiri.jpg.webp", "text": "Dhaulagiri"},
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Manaslu-2.jpg.webp", "text": "Manaslu"},
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Gyachung-Khang.jpg.webp", "text": "Gyachung Khang"},
+        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Annapurna-2.jpg.webp", "text": "Annapurna II"},
+      ],
+      "Temples": [
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_627150563_20190822130709_20190822154343.jpg",
+          "text": "Pashupatinath Temple"
+        },
+        {"image": "https://www.holidify.com/images/cmsuploads/compressed/BRP_Lumbini_Mayadevi_temple_20191003132624.jpg", "text": "Maya Devi Temple"},
+        {
+          "image":
+              "https://www.holidify.com/images/cmsuploads/compressed/800px-Swayambhunath_Monkey_Temple_Nepal_IMG_8153_2018_32_20190822225416.jpg",
+          "text": "Swayambhunath Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/21983642252_a40fdfb7f5_b_20180927122417_20180927122432.jpg",
+          "text": "Dakshinkali Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/8568905000_b259fb2088_b_20190503201520.jpg",
+          "text": "Changu Narayan Temple"
+        },
+        {"image": "https://www.holidify.com/images/cmsuploads/compressed/budhanilkanthatemple_20180710135252.JPG", "text": "Budhanilkantha Temple"},
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/saswatdham-banner-1_20181013153753_20181013153840.jpg",
+          "text": "Shashwat Dham Temple"
+        },
+        {"image": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_647026006_20190822122032.jpg", "text": "Boudhanath Stupa"},
+      ],
+      "Treks": [
+        {"image": "https://basecampadventure.com/wp-content/uploads/2018/04/Annapurna-Circuit-Trek-Map.jpg", "text": "Annapurna Circuit Trek"},
+      ],
+      "Rivers": [
+        {"image": "https://www.mytripnepal.com/wp-content/uploads/2019/10/Karnali-River.jpg", "text": "Karnali River"},
+      ],
+    };
+
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.SET_DESTINATION, arguments: {
+                  "destination": "",
+                });
+              },
+              child: Container(
+                height: 50,
+                margin: const EdgeInsets.symmetric(horizontal: 24),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.teal,
+                ),
+                child: Center(child: Text("Let's plan a travel", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
+              ))
+          .animate(
+            delay: 2000.ms,
+            onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5)),
+          )
+          .shimmer(
+            duration: const Duration(seconds: 2),
+            curve: Curves.easeInOut,
+          ),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -121,100 +202,108 @@ class HomeView extends GetView<HomeController> {
                       fontWeight: FontWeight.bold,
                     ))),
                 const SizedBox(height: 16),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          final localData = GetStorage();
-                          log("Access token: ${localData.read('access_token')}");
-                        },
-                        child: Container(
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black,
-                          ),
-                          child: Center(child: Text("Kathmandu", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
-                        ),
-                      ),
-                      const Icon(
-                        Icons.arrow_forward,
-                        size: 24,
-                        color: Colors.black,
-                      ),
-                      GestureDetector(
-                              onTap: () {
-                                Get.toNamed(Routes.SET_DESTINATION);
-                              },
-                              child: Container(
-                                height: 50,
-                                padding: const EdgeInsets.symmetric(horizontal: 24),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.teal,
-                                ),
-                                child: Center(
-                                    child: Text("Set journey's Info", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
-                              ))
-                          .animate(
-                            delay: 2000.ms,
-                            onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5)),
-                          )
-                          .shimmer(
-                            duration: const Duration(seconds: 2),
-                            curve: Curves.easeInOut,
-                          )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
                 SizedBox(
                   height: 50,
-                  child: ListView.builder(
+                  child: ListView.separated(
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     shrinkWrap: true,
+                    separatorBuilder: (context, index) => const SizedBox(width: 16),
                     itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(right: 16, left: index == 0 ? 16 : 0),
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(35),
-                            bottomRight: Radius.circular(35),
-                            topLeft: Radius.circular(35),
-                            bottomLeft: Radius.circular(35),
-                          ),
-                          border: Border.all(color: Colors.teal.shade300, width: 2.0),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(35), color: Colors.teal),
-                              child: Icon(
-                                [Icons.water_drop, Icons.terrain, Icons.forest, Icons.table_bar, Icons.water][index],
-                                color: Colors.white,
-                                size: 30,
-                              ),
+                      return Obx(() {
+                        return ElevatedButton(
+                          onPressed: () {
+                            controller.imageIndex.value = index;
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(56, 40),
+                            backgroundColor: controller.imageIndex.value == index ? Colors.teal : Colors.grey,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Text(
-                                ["Lakes", "Mountains", "Forest", "Hotels", "Rivers"][index],
-                                style: AppTextStyles.smallStyle,
-                              ),
-                            )
-                          ],
-                        ),
-                      );
+                          ),
+                          child: Text(
+                            ["Lakes", "Mountains", "Temples", "Treks", "Rivers"][index],
+                            style: AppTextStyles.smallStyle.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      });
                     },
                   ),
                 ),
+                const SizedBox(height: 20),
+                Obx(() {
+                  if (controller.isImageLoading.value) {
+                    return const ImageShimmer();
+                  } else {
+                    final selectedCategory = ["Lakes", "Mountains", "Temples", "Treks", "Rivers"][controller.imageIndex.value];
+                    final List images = controller.nepalNatureData.value.data
+                            ?.where((item) => item.category == selectedCategory)
+                            .expand((item) => item.places ?? [])
+                            .map((place) => place.image ?? "")
+                            .where((image) => image.isNotEmpty)
+                            .toList() ??
+                        <String>[];
+
+                    final List text = controller.nepalNatureData.value.data
+                            ?.where((item) => item.category == selectedCategory)
+                            .expand((item) => item.places ?? [])
+                            .map((place) => place.name ?? "")
+                            .where((name) => name.isNotEmpty)
+                            .toList() ??
+                        [];
+
+                    return CarouselSlider(
+                      carouselController: controller.carouselController,
+                      options: CarouselOptions(
+                        height: 200.0,
+                        enlargeCenterPage: true,
+                        autoPlay: true,
+                        aspectRatio: 16 / 9,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enableInfiniteScroll: true,
+                        autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                        viewportFraction: 0.8,
+                      ),
+                      items: images
+                          .asMap()
+                          .map((index, imageUrl) {
+                            return MapEntry(
+                              index,
+                              Stack(
+                                children: [
+                                  PreviewCardImage(
+                                    radius: 16,
+                                    height: 200.0,
+                                    width: double.infinity,
+                                    url: imageUrl,
+                                    errorImage: const AssetImage(ApiUrls.dummyDestinationImage),
+                                  ),
+                                  Positioned(
+                                    bottom: 8.0,
+                                    left: 16.0,
+                                    child: Text(
+                                      text[index] ?? "",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          })
+                          .values
+                          .toList(),
+                    );
+                  }
+                }),
+                const SizedBox(height: 20),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -245,8 +334,7 @@ class HomeView extends GetView<HomeController> {
                                     index == 0 ? const SizedBox(width: 8) : const SizedBox(),
                                     GestureDetector(
                                       onTap: () {
-                                        Get.toNamed(Routes.DETAIL_DESTINATION,
-                                        arguments: {
+                                        Get.toNamed(Routes.DETAIL_DESTINATION, arguments: {
                                           "name": controller.destinationData.value.data?[index].name ?? "",
                                           "description": controller.destinationData.value.data?[index].description ?? "",
                                           "destinationType": controller.destinationData.value.data?[index].destinationType ?? "",
@@ -255,8 +343,7 @@ class HomeView extends GetView<HomeController> {
                                           "latitude": controller.destinationData.value.data?[index].latitude ?? 0.0,
                                           "longitude": controller.destinationData.value.data?[index].longitude ?? 0.0,
                                           "popularity": controller.destinationData.value.data?[index].popularity ?? "",
-                                        }
-                                        );
+                                        });
                                       },
                                       child: Container(
                                         width: 170,
@@ -337,7 +424,8 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    const SizedBox(height: 100),
                   ],
                 ),
               ],

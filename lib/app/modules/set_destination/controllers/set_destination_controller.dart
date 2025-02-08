@@ -10,6 +10,9 @@ class SetDestinationController extends GetxController {
   final lodgingType = const ['Hotel', 'Guesthouse', 'Resort', 'Homestay'];
   final selectedLodgingType = "Hotel".obs;
   final count = 0.obs;
+  final selectedFood = 0.obs;
+  final selectedLodge = 0.obs;
+  final selectedTravel = 0.obs;
   final individualController = TextEditingController();
   final startDate = TextEditingController();
   final endDate = TextEditingController();
