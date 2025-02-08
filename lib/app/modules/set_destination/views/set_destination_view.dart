@@ -47,6 +47,7 @@ class SetDestinationView extends GetView<SetDestinationController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Obx(() {
+                controller.selectedDestination.value = Get.arguments["destination"];
                 return CustomDropdownButton2(
                   title: "Select Destination",
                   hint: 'Select an option',

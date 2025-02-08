@@ -24,9 +24,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
   Widget build(BuildContext context) {
     const minTemp = 20;
     const maxTemp = 20;
-    final size = MediaQuery
-        .of(context)
-        .size;
+    final size = MediaQuery.of(context).size;
     print(List<String>.from(arguments["image"] ?? []));
     // controller.imgList.assignAll(List<String>.from(arguments["images"] ?? []));
 
@@ -45,7 +43,12 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: GestureDetector(
         onTap: () {
-          Get.toNamed(Routes.SET_DESTINATION);
+          Get.toNamed(
+            Routes.SET_DESTINATION,
+            arguments: {
+              "destination": arguments["name"],
+            },
+          );
         },
         child: Container(
           height: 50,
@@ -76,8 +79,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                   }),
               items: List<String>.from(arguments["image"] ?? [])
                   .map(
-                    (item) =>
-                    PreviewCardImage(
+                    (item) => PreviewCardImage(
                       radius: 16,
                       height: 200.0,
                       width: double.infinity,
@@ -86,7 +88,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                         ApiUrls.dummyDestinationImage,
                       ),
                     ),
-              )
+                  )
                   .toList(),
             ),
             const SizedBox(height: 20),
@@ -95,7 +97,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   controller.imgList.length,
-                      (index) {
+                  (index) {
                     bool isSelected = controller.imageIndex.value == index;
                     return GestureDetector(
                       onTap: () {
@@ -167,7 +169,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                   ),
                   const SizedBox(height: 20),
                   Obx(() {
-                    if(controller.weatherLoading.value) {
+                    if (controller.weatherLoading.value) {
                       return const WeatherShimmer();
                     } else {
                       return buildSevenDayForecastList(controller.weatherData.value, size);
@@ -183,8 +185,8 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
     );
   }
 }
-Widget buildSevenDayForecast(
-    String day, int minTemp, int maxTemp, IconData weatherIcon, Size size) {
+
+Widget buildSevenDayForecast(String day, int minTemp, int maxTemp, IconData weatherIcon, Size size) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
