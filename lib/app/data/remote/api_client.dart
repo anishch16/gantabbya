@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -141,10 +142,10 @@ class ApiClient {
   Future<http.Response> postRequestWithoutToken(
       String url, Map<String, dynamic> body) async {
     try {
-      var jsonData = body; // Convert the data to a JSON string
+      var jsonData = body;
       var response = await http.post(Uri.parse(url),
-          body: jsonData); // Use the JSON string as the request body
-      print("Response:${response.body}");
+          body: jsonData);
+      log("Response:${response.body}");
       if (response.statusCode >= 400) {
         var errorMap = jsonDecode(response.body);
         var errorMessage = extractErrorMessage(errorMap);
@@ -152,7 +153,7 @@ class ApiClient {
       }
       return response;
     } catch (error) {
-      print('An error occurred: $error');
+      log('An error occurred: $error');
       throw error; // Rethrow the error to propagate it to the caller
     }
   }

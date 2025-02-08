@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../modules/all_destination/bindings/all_destination_binding.dart';
 import '../modules/all_destination/views/all_destination_view.dart';
@@ -8,6 +9,8 @@ import '../modules/cost_details/bindings/cost_details_binding.dart';
 import '../modules/cost_details/views/cost_details_view.dart';
 import '../modules/detail_destination/bindings/detail_destination_binding.dart';
 import '../modules/detail_destination/views/detail_destination_view.dart';
+import '../modules/estimated_cost/bindings/estimated_cost_binding.dart';
+import '../modules/estimated_cost/views/estimated_cost_view.dart';
 import '../modules/favorite_trips/bindings/favorite_trips_binding.dart';
 import '../modules/favorite_trips/views/favorite_trips_view.dart';
 import '../modules/forget_password/bindings/forget_password_binding.dart';
@@ -22,6 +25,8 @@ import '../modules/set_destination/bindings/set_destination_binding.dart';
 import '../modules/set_destination/views/set_destination_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/splash/bindings/splash_binding.dart';
+import '../modules/splash/views/splash_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
 import '../modules/user_profile/views/user_profile_view.dart';
 
@@ -29,8 +34,7 @@ part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
-
-  static const INITIAL = Routes.LOGIN;
+  static String initial = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -100,6 +104,16 @@ class AppPages {
       name: _Paths.COST_DETAILS,
       page: () => const CostDetailsView(),
       binding: CostDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ESTIMATED_COST,
+      page: () => const EstimatedCostView(),
+      binding: EstimatedCostBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH,
+      page: () => SplashView(),
+      binding: SplashBinding(),
     ),
   ];
 }

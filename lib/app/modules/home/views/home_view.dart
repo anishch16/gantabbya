@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gantabbya/app/data/remote/api_urls.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
@@ -12,6 +17,7 @@ import '../../../routes/app_pages.dart';
 import '../../../utils/greetings.dart';
 import '../../../utils/preview_image_card.dart';
 import '../controllers/home_controller.dart';
+import 'loading_list.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -42,7 +48,7 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             Row(
                               children: [
-                                Text("${getGreetingMessage()}, Anish", style: InRiaTextStyles.mediumStyle.copyWith(color: Colors.white)),
+                                Text("${getGreetingMessage()} ${controller.localData.read("user") ?? ""}", style: InRiaTextStyles.mediumStyle.copyWith(color: Colors.white)),
                                 const SizedBox(width: 8),
                                 Icon(
                                   getGreetingIcon(),
@@ -51,18 +57,25 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ],
                             ),
-                            const Row(
+                            Row(
                               children: [
-                                Icon(
-                                  Icons.notifications,
-                                  size: 24,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(width: 16),
-                                Icon(
-                                  Icons.menu,
-                                  size: 24,
-                                  color: Colors.white,
+                                // const Icon(
+                                //   Icons.notifications,
+                                //   size: 24,
+                                //   color: Colors.white,
+                                // ),
+                                // SizedBox(width: 16),
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.localData.write("isLoggedIn", true);
+                                    controller.localData.write("access_token", null);
+                                    Get.offAllNamed(Routes.LOGIN);
+                                  },
+                                  child: const Icon(
+                                    Icons.logout,
+                                    size: 24,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ],
                             ),
@@ -86,14 +99,20 @@ class HomeView extends GetView<HomeController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        height: 50,
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.black,
+                      GestureDetector(
+                        onTap: () {
+                          final localData = GetStorage();
+                          log("Access token: ${localData.read('access_token')}");
+                        },
+                        child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.black,
+                          ),
+                          child: Center(child: Text("Kathmandu", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
                         ),
-                        child: Center(child: Text("Kathmandu", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
                       ),
                       const Icon(
                         Icons.arrow_forward,
@@ -115,13 +134,13 @@ class HomeView extends GetView<HomeController> {
                                     child: Text("Set journey's Info", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
                               ))
                           .animate(
-                        delay: 2000.ms,
-                        onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5)),
-                      )
+                            delay: 2000.ms,
+                            onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5)),
+                          )
                           .shimmer(
-                        duration: const Duration(seconds: 2),
-                        curve: Curves.easeInOut,
-                      )
+                            duration: const Duration(seconds: 2),
+                            curve: Curves.easeInOut,
+                          )
                     ],
                   ),
                 ),
@@ -185,61 +204,58 @@ class HomeView extends GetView<HomeController> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 270,
-                      child: ListView.builder(
-                        itemCount: 10,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              index == 0 ? const SizedBox(width: 8) : const SizedBox(),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(Routes.DETAIL_DESTINATION);
-                                },
-                                child: Container(
-                                  width: 170,
-                                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 0.2,
-                                        blurRadius: 0.2,
-                                        offset: const Offset(0, 1),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.all(8.0),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(16),
-                                          child: const PreviewCardImage(
-                                            height: 110,
-                                            width: 170,
-                                            url: ApiUrls.dummyDestinationImage,
-                                            // radius: 16,
-                                            errorImage: AssetImage(
-                                              ApiUrls.dummyDestinationImage,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
+                    Obx(() => controller.isLoading.value
+                        ? const LoadingList()
+                        : SizedBox(
+                            height: 250,
+                            child: ListView.builder(
+                              itemCount: 5,
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Row(
+                                  children: [
+                                    index == 0 ? const SizedBox(width: 8) : const SizedBox(),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(Routes.DETAIL_DESTINATION);
+                                      },
+                                      child: Container(
+                                        width: 170,
+                                        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                                         padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(16),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 0.2,
+                                              blurRadius: 0.2,
+                                              offset: const Offset(0, 1),
+                                            ),
+                                          ],
+                                        ),
                                         child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(16),
+                                              child: PreviewCardImage(
+                                                height: 110,
+                                                width: 170,
+                                                url: controller.destinationData.value.data?[index].image ?? "",
+                                                errorImage: const AssetImage(
+                                                  ApiUrls.dummyDestinationImage,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8.0),
                                             Text(
-                                              "Pashupatinath Temple",
-                                              style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                              controller.destinationData.value.data?[index].name ?? "",
+                                              style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.bold),
                                               textAlign: TextAlign.start,
+                                              maxLines: 1,
                                             ),
                                             const SizedBox(height: 8.0),
                                             Row(
@@ -247,51 +263,28 @@ class HomeView extends GetView<HomeController> {
                                               children: [
                                                 const Icon(
                                                   Icons.location_on,
+                                                  size: 16,
                                                 ),
                                                 Text(
                                                   "Nepal",
-                                                  style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                                                  style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.bold),
                                                   textAlign: TextAlign.start,
                                                 ),
                                               ],
                                             ),
                                             const SizedBox(height: 8.0),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "5.0",
-                                                      style:
-                                                          AppTextStyles.smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
-                                                    ),
-                                                    const SizedBox(width: 4.0),
-                                                    const Icon(
-                                                      Icons.star_rounded,
-                                                      color: AppColors.darkYellow,
-                                                      size: 16,
-                                                    ),
-                                                  ],
-                                                ),
-                                                const Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.teal,
-                                                ),
-                                              ],
-                                            ),
+                                            StarRating(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                color: Colors.amber,
+                                                rating: double.parse(controller.destinationData.value.data?[index].popularity.toString() ?? "0")),
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ))),
                     const SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

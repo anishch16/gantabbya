@@ -35,6 +35,18 @@ class LoginView extends GetView<LoginController> {
                   key: controller.logInFormKey,
                   child: Column(
                     children: [
+
+                      CustomTextField(
+                        hint: "Username",
+                        enabled: true,
+                        icon: const Icon(Icons.person),
+                        textEditingController: controller.username,
+                        // validator: (string) =>
+                        //     Validator.validateIsEmpty(string: string ?? ""),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       CustomTextField(
                         hint: "Email",
                         enabled: true,
@@ -103,7 +115,11 @@ class LoginView extends GetView<LoginController> {
                             : GestureDetector(
                                 onTap: () {
                                   if (controller.logInFormKey.currentState!.validate()) {
-                                    Get.offAllNamed(Routes.HOME);
+                                    controller.login(
+                                      username: controller.username.text,
+                                      email: controller.email.text,
+                                      pw: controller.password.text,
+                                    );
                                   } else {
                                     SnackBarUtil.showSnackBar(
                                       message: "Please fill-up required fields",
