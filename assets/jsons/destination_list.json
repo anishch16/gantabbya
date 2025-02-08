@@ -1,0 +1,76 @@
+{
+  "error": 0,
+  "message": "Locations Fetched Successfully",
+  "data": [
+    {
+      "id": 1,
+      "name": "Mustang",
+      "description": "Mustang is a remote and mystical region in Nepal, known for its ancient monasteries, rugged landscapes, and the famous Muktinath Temple, a sacred site for both Hindus and Buddhists. The region is divided into Lower Mustang and Upper Mustang, the latter requiring special permits to visit. Mustang's barren yet mesmerizing terrain, influenced by Tibetan culture, offers breathtaking views of the Himalayas and attracts adventurers, trekkers, and spiritual seekers alike.",
+      "destination_type": "Local",
+      "location": "Gandaki Province",
+      "image": "https://media.istockphoto.com/id/483146188/photo/rural-life-in-front-of-incredible-himalayas.jpg?s=612x612&w=0&k=20&c=uyjMW6JoAz86tghJer7tAY6OyauPhlIIB__wUzYJeSA=",
+      "created_at": "2025-02-08T06:40:00.000000Z",
+      "popularity": "5.0"
+    },
+    {
+      "id": 2,
+      "name": "Pashupatinath",
+      "description": "Pashupatinath Temple is one of the most sacred Hindu temples dedicated to Lord Shiva, located on the banks of the Bagmati River in Kathmandu, Nepal. It is a UNESCO World Heritage Site and a major pilgrimage destination for Hindus, especially during the Maha Shivaratri festival, when thousands of devotees from Nepal and India gather to offer prayers. The temple's pagoda-style architecture, with its golden roof and intricately carved silver doors, showcases Nepalese craftsmanship. Non-Hindus are not allowed inside the main temple, but they can view it from across the river. The temple complex also includes numerous smaller shrines, ashrams, and ghats (cremation sites), where traditional Hindu funeral rites are performed.",
+      "destination_type": "Local",
+      "location": "Bagmati Province",
+      "image": "https://www.holidaystonepal.in/media/files/Blogs/Pashupatinath-Temple-Photos/Pashupatinath-Temple.png",
+      "created_at": "2025-02-08T06:41:00.000000Z",
+      "popularity": "3.5"
+    },
+    {
+      "id": 3,
+      "name": "Lumbini",
+      "description": "Lumbini is the birthplace of Gautama Buddha, located in the Rupandehi District of Nepal. It is one of the holiest pilgrimage sites for Buddhists and a UNESCO World Heritage Site. Lumbini is believed to be the place where Queen Maya Devi gave birth to Siddhartha Gautama in 623 BCE, who later became the Buddha and founded Buddhism. The site features the Maya Devi Temple, which enshrines ancient ruins and a marker stone indicating Buddha’s exact birthplace. Nearby, the Ashoka Pillar, erected by Emperor Ashoka of India in the 3rd century BCE, stands as historical evidence of the site's significance. The area also includes various monasteries built by Buddhist communities from different countries, symbolizing global reverence for the Buddha’s teachings.",
+      "destination_type": "Local",
+      "location": "Lumbini Province",
+      "image": "https://lumbinidevtrust.gov.np/upload_file/images/slider/1721894939_276597348_lumbini.jpg",
+      "created_at": "2025-02-08T06:42:00.000000Z",
+      "popularity": "4.5"
+    },
+    {
+      "id": 4,
+      "name": "Kalinchowk",
+      "description": "Kalinchowk is a popular pilgrimage and trekking destination in Nepal, known for the Kalinchowk Bhagwati Temple, situated at an altitude of 3,842 meters. The temple, dedicated to Goddess Kali, offers panoramic views of the Himalayas, including Everest, Langtang, and Gaurishankar ranges. During winter, Kalinchowk transforms into a snowy paradise, attracting visitors for snowfall and cable car rides. It is also a gateway to the Rolwaling region, offering adventurous trekking experiences.",
+      "destination_type": "Local",
+      "location": "Bagmati Province",
+      "image": "https://media.istockphoto.com/id/1690228774/photo/view-of-the-beautiful-kuri-village-of-kalinchowk-nepal-from-the-top-of-a-mountain-with-the.jpg?s=612x612&w=0&k=20&c=2PUcW1Wasve5XvOxf85r9MOqtg8dziUeaBa5vMfna5s=",
+      "created_at": "2025-02-08T06:43:00.000000Z",
+      "popularity": "4.0"
+    },
+    {
+      "id": 5,
+      "name": "Pokhara",
+      "description": "Pokhara, the tourism capital of Nepal, is a picturesque city known for its serene lakes, adventure sports, and breathtaking mountain views. It serves as the gateway to the Annapurna trekking region and offers activities such as paragliding, boating on Phewa Lake, and exploring caves and waterfalls. The city is also home to cultural sites like the Tal Barahi Temple, Bindhyabasini Temple, and the Peace Pagoda. Pokhara’s vibrant lakeside area is a favorite among tourists for its restaurants, nightlife, and relaxing atmosphere.",
+      "destination_type": "Local",
+      "location": "Gandaki Province",
+      "image": "https://media.istockphoto.com/id/687611810/photo/view-at-annapurna-mountain-range-and-its-reflection-in-phewa-lake-in-pokhara-nepal.jpg?s=612x612&w=0&k=20&c=r1uza8OoSQeGGTrnnaHyq7HSxHG9DyvjHxxm4vqgDsc=",
+      "created_at": "2025-02-08T06:44:00.000000Z",
+      "popularity": "5.0"
+    },
+    {
+      "id": 6,
+      "name": "Manakamana",
+      "description": "Manakamana Temple, located in the Gorkha District, is a revered Hindu temple dedicated to the Goddess Bhagwati. The temple is believed to fulfill the wishes of devotees and is accessible via a scenic cable car ride from Kurintar. The temple’s history dates back to the 17th century, and it attracts thousands of pilgrims annually. The journey offers stunning views of lush hills, the Trishuli River, and distant snow-capped peaks.",
+      "destination_type": "Local",
+      "location": "Gandaki Province",
+      "image": "https://media.istockphoto.com/id/1478302417/photo/manakamana-mai-temple-nepali-architecture-tradition-in-kalupande-hills-indrasthan-kathmandu.jpg?s=612x612&w=0&k=20&c=F5Wd8FpkffUi7ldallcwMlT0Dm2OG-84rTKjw2D4eHg=",
+      "created_at": "2025-02-08T06:45:00.000000Z",
+      "popularity": "4.5"
+    },
+    {
+      "id": 7,
+      "name": "Janakpur Temple",
+      "description": "Janaki Temple, located in Janakpur, is a grand Hindu temple dedicated to Goddess Sita, the consort of Lord Rama. The temple is a significant pilgrimage site for Hindus and a masterpiece of Rajput and Mughal architecture. Janakpur is believed to be the birthplace of Sita and the venue of her marriage to Rama. The temple’s vibrant celebrations during festivals like Ram Navami and Vivah Panchami attract thousands of devotees from Nepal and India.",
+      "destination_type": "Local",
+      "location": "Madhesh Province",
+      "image": "https://media.istockphoto.com/id/1349580486/photo/janaki-hindu-temple-in-janakpur-nepal.jpg?s=612x612&w=0&k=20&c=bvWcpGRAxm-pDoUHRTkGj5xfyowoixL45R7yHT5LCBk=",
+      "created_at": "2025-02-08T06:46:00.000000Z",
+      "popularity": "3.5"
+    }
+  ]
+}

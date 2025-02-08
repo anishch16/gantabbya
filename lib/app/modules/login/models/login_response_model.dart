@@ -1,23 +1,18 @@
 class LoginResponseModel {
   String? refresh;
   String? access;
-  User? user;
 
-  LoginResponseModel({this.refresh, this.access, this.user});
+  LoginResponseModel({this.refresh, this.access});
 
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
     refresh = json['refresh'];
     access = json['access'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['refresh'] = refresh;
     data['access'] = access;
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
     return data;
   }
 }

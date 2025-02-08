@@ -40,7 +40,7 @@ class SignupView extends GetView<SignupController> {
                   child: Column(
                     children: [
                       CustomTextField(
-                        hint: "Full Name",
+                        hint: "User Name",
                         icon: const Icon(Icons.person),
                         textEditingController: controller.fn,
                         validator: (string) => Validator.validateIsEmpty(string: string ?? ""),
@@ -57,16 +57,6 @@ class SignupView extends GetView<SignupController> {
                       const SizedBox(
                         height: 16,
                       ),
-                      CustomTextField(
-                        hint: "Phone Number",
-                        icon: const Icon(Icons.phone),
-                        textEditingController: controller.pn,
-                        validator: (string) => Validator.validatePhone(string: string ?? ""),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-
                       CustomTextField(
                         hint: "Password",
                         icon: const Icon(Icons.lock),
@@ -86,16 +76,24 @@ class SignupView extends GetView<SignupController> {
                         height: 24,
                       ),
                       Obx(
-                        () => controller.isSigningIn.value
+                        () => controller.isSigningUp.value
                             ? const CircularProgressIndicator(color: AppColors.primary, strokeWidth: 3)
                             : GestureDetector(
                                 onTap: () {
                                   if (controller.signUpFormKey.currentState!.validate()) {
-                                    controller.signup(controller.fn.text, controller.ln.text, controller.pn.text, controller.email.text,
-                                        controller.pw.text, controller.confirmPw.text);
-                                  } else {}
-
-                                  // Get.to(() => UserDetailFormView());
+                                    controller.signup(
+                                      email: controller.email.text,
+                                      pw: controller.pw.text,
+                                      username: controller.fn.text,
+                                    );
+                                  } else {
+                                    Get.rawSnackbar(
+                                        message: "Invalid Input",
+                                        backgroundColor: AppColors.red,
+                                        duration: const Duration(seconds: 2),
+                                        animationDuration: const Duration(milliseconds: 100),
+                                        snackPosition: SnackPosition.BOTTOM);
+                                  }
                                 },
                                 child: const LargeButton(title: "Signup"),
                               ),
