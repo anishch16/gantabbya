@@ -36,7 +36,6 @@ class CustomTextField extends StatelessWidget {
       autovalidateMode: autoValidateMode ?? AutovalidateMode.disabled,
       maxLength: maxLength,
       decoration: InputDecoration(
-        counterText: "",
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: AppColors.primary),
             borderRadius: BorderRadius.circular(12.0),

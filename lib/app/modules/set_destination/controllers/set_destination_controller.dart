@@ -3,13 +3,16 @@ import 'package:get/get.dart';
 
 class SetDestinationController extends GetxController {
   //TODO: Implement SetDestinationController
-  final destinations = const ['Pashupatinath', 'Mustang', 'Lumbini', 'Taplejung', 'Karnali', 'Annapurna'];
+  final destinations = const ['Pashupatinath', 'Mustang', 'Lumbini', 'Kalinchowk', 'Manakamana', 'Janakpur Temple', 'Pokhara'];
   final selectedDestination = "Pashupatinath".obs;
   final foodType = const ['Veg', 'Non-Veg', 'Vegan', 'Gluten-Free'];
   final selectedFoodType = "Veg".obs;
   final lodgingType = const ['Hotel', 'Guesthouse', 'Resort', 'Homestay'];
   final selectedLodgingType = "Hotel".obs;
   final count = 0.obs;
+  final selectedFood = 0.obs;
+  final selectedLodge = 0.obs;
+  final selectedTravel = 0.obs;
   final individualController = TextEditingController();
   final startDate = TextEditingController();
   final endDate = TextEditingController();

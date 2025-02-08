@@ -216,7 +216,7 @@ class TransportationCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        margin: const EdgeInsets.symmetric(horizontal: 16),
+        // margin: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
             border: Border.all(color: isSelected ? Colors.teal : Colors.transparent),
             borderRadius: BorderRadius.circular(16),

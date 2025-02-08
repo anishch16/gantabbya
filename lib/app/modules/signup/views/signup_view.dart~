@@ -54,7 +54,6 @@ class SignupView extends GetView<SignupController> {
                         hint: "Email",
                         enabled: true,
                         icon: const Icon(Icons.mail),
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         textEditingController: controller.email,
                         validator: (string) => Validator.validateEmail(string: string ?? ""),
                       ),

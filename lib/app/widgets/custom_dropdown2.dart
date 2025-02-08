@@ -82,7 +82,7 @@ class CustomDropdownButton2 extends StatelessWidget {
               alignment: hintAlignment,
               child: Text(hint, overflow: TextOverflow.ellipsis, maxLines: 1, style: AppTextStyles.smallStyle),
             ),
-            value: value,
+            value: (value ?? "").isEmpty ? null : value,
             items: dropdownItems
                 .map((String item) => DropdownMenuItem<String>(
                       value: item,

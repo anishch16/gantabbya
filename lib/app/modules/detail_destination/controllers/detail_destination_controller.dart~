@@ -22,6 +22,8 @@ class DetailDestinationController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    log(Get.arguments["latitude"]);
+    log(Get.arguments["longitude"]);
     getWeather(
       latitude: Get.arguments["latitude"].toString(),
       longitude: Get.arguments["longitude"].toString(),

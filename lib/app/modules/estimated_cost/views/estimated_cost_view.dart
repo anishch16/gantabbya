@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/estimated_cost_controller.dart';
 
 class EstimatedCostView extends GetView<EstimatedCostController> {
@@ -30,6 +31,22 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
             scrolledUnderElevation: 0,
             elevation: 0,
             centerTitle: true,
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButton:
+          GestureDetector(
+            onTap: () {
+              Get.offAllNamed(Routes.HOME);
+            },
+            child: Container(
+              height: 50,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.teal,
+              ),
+              child: Center(child: Text("Back to Home", style: AppTextStyles.miniStyle.copyWith(fontSize: 16, color: Colors.white))),
+            ),
           ),
           body: Container(
             margin: const EdgeInsets.all(8),
@@ -70,7 +87,7 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
                               ),
                               const SizedBox(width: 16),
                               Text(
-                                "Transportation Choices",
+                                "Travel Choices",
                                 style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.bold, color: AppColors.white),
                               ),
                             ],
@@ -257,7 +274,8 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
                               ),
                             ],
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 100),
                       ],
                     ),
                   ),

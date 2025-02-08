@@ -1,0 +1,195 @@
+{
+  "error": 0,
+  "message": "Success",
+  "data": [
+    {
+      "category": "Lakes",
+      "places": [
+        {
+          "image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/murma-viewpoint.jpg",
+          "text": "Rara Lake"
+        },
+        {
+          "image": "https://www.footprintadventure.com/uploads/media/Gokyo/gokyo-viewpoint.jpg",
+          "text": "Gokyo Lake"
+        },
+        {
+          "image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/tilicho-lake.jpg",
+          "text": "Tilicho Lake"
+        },
+        {
+          "image": "https://www.nepalhightrek.com/wp-content/uploads/2023/10/goshaikunda-lake-trek-1024x416.jpg",
+          "text": "Gosaikunda Lake"
+        },
+        {
+          "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Beeshazari_Lake_of_Chitwan%2C_Nepal.jpg/396px-Beeshazari_Lake_of_Chitwan%2C_Nepal.jpg",
+          "text": "Bish Hazari Lake"
+        },
+        {
+          "image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/tal-barahi.jpg",
+          "text": "Phewa Tal/Lake"
+        },
+        {
+          "image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/panch-pokhari.jpg",
+          "text": "Panch Pokhari"
+        }
+      ]
+    },
+    {
+      "category": "Mountains",
+      "places": [
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Everest-2.jpg.webp",
+          "text": "Mount Everest"
+        },
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Kanchenjunga.jpg.webp",
+          "text": "Kanchenjunga"
+        },
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Lhotse-1.jpg.webp",
+          "text": "Lhotse"
+        },
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Makalu_CU.jpg.webp",
+          "text": "Makalu"
+        },
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Cho-Oyu-Expedition.jpg.webp",
+          "text": "Cho Oyu"
+        },
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Dhaulagiri.jpg.webp",
+          "text": "Dhaulagiri"
+        },
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Manaslu-2.jpg.webp",
+          "text": "Manaslu"
+        },
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Gyachung-Khang.jpg.webp",
+          "text": "Gyachung Khang"
+        },
+        {
+          "image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Annapurna-2.jpg.webp",
+          "text": "Annapurna II"
+        }
+      ]
+    },
+    {
+      "category": "Temples",
+      "places": [
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_627150563_20190822130709_20190822154343.jpg",
+          "text": "Pashupatinath Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/BRP_Lumbini_Mayadevi_temple_20191003132624.jpg",
+          "text": "Maya Devi Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/800px-Swayambhunath_Monkey_Temple_Nepal_IMG_8153_2018_32_20190822225416.jpg",
+          "text": "Swayambhunath Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/21983642252_a40fdfb7f5_b_20180927122417_20180927122432.jpg",
+          "text": "Dakshinkali Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/8568905000_b259fb2088_b_20190503201520.jpg",
+          "text": "Changu Narayan Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/budhanilkanthatemple_20180710135252.JPG",
+          "text": "Budhanilkantha Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/saswatdham-banner-1_20181013153753_20181013153840.jpg",
+          "text": "Shashwat Dham Temple"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_647026006_20190822122032.jpg",
+          "text": "Boudhanath Stupa"
+        }
+      ]
+    },
+    {
+      "category": "Treks",
+      "places": [
+        {
+          "image": "https://nht-api.nepalhikingteam.com/media/attachments/Annapurna-base-Camp-kendre-1.jpg",
+          "text": "Annapurna Base Camp Trek"
+        },
+        {
+          "image": "https://nht-api.nepalhikingteam.com/media/attachments/everest-base-camp-trek-0.jpg",
+          "text": "Everest Base Camp Trek"
+        },
+        {
+          "image": "https://nht-api.nepalhikingteam.com/media/attachments/upper-mustang-trek-0.jpg",
+          "text": "Upper Mustang Trek"
+        },
+        {
+          "image": "https://nht-api.nepalhikingteam.com/media/attachments/Manaslu-2.jpg",
+          "text": "Manaslu Circuit Trek"
+        },
+        {
+          "image": "https://nht-api.nepalhikingteam.com/media/attachments/Annapurna-Circuit-Trek-0.JPG",
+          "text": "Annapurna Circuit Trek"
+        },
+        {
+          "image": "https://nht-api.nepalhikingteam.com/media/attachments/Annapurna-panorama-trek.jpg",
+          "text": "Annapurna Panorama Trek"
+        },
+        {
+          "image": "https://nht-api.nepalhikingteam.com/media/attachments/mardi-himal-trek-0.jpg",
+          "text": "Mardi Himal Trek"
+        },
+        {
+          "image": "https://nht-api.nepalhikingteam.com/media/attachments/langtang-valley-trek-0.jpg",
+          "text": "Langtang Valley Trek"
+        }
+      ]
+    },
+    {
+      "category": "Rivers",
+      "places": [
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/Karnali_river_in_Kailali_20190718164409.jpg",
+          "text": "The Karnali"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/34806234584_41ed8a69b8_o_20190718164624.jpg",
+          "text": "Kosi or Koshi"
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/33899888988_256e29ddf8_o_20190718165426.jpg",
+          "text": "Gandaki "
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/Domukha_kankai_river_jhapa_nepal_20190718165558.jpg",
+          "text": "Kankai  "
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/Bagmati_River2C_1950_-_1955_20190718165739.jpg",
+          "text": "Bagmati   "
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/32276209323_82fb002872_o_20190718165858.jpg",
+          "text": "Rapti    "
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/Tamur_River_20191119161650.jpg",
+          "text": "Tamur River    "
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/1280px-Marsyangdi_River_Nepal-WLV-2068_20191119161904.jpg",
+          "text": "Marshyangdi    "
+        },
+        {
+          "image": "https://www.holidify.com/images/cmsuploads/compressed/1024px-Sharda_or_Mahakali_River_AJTJ_P1020802_20191119162126.jpg",
+          "text": "Sharda    "
+        }
+      ]
+    }
+  ]
+}

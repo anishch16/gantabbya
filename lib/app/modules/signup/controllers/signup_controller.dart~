@@ -33,7 +33,6 @@ class SignupController extends GetxController {
         isSigningUp.value = false;
       } else {
         isSigningUp.value = false;
-        Get.rawSnackbar(message: jsonDecode(response.body)["message"]);
       }
     });
   }
