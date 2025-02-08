@@ -92,7 +92,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_DESTINATION,
-      page: () => const DetailDestinationView(),
+      page: () => DetailDestinationView(),
       binding: DetailDestinationBinding(),
     ),
     GetPage(

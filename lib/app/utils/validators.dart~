@@ -21,21 +21,6 @@ class Validator {
     return null;
   }
 
-  static String? validateUsername({required String string}) {
-    if (string.isEmpty) {
-      return "* Required";
-    } else if (string.length < 4) {
-      return "Username should be at least 4 characters";
-    } else if (string.length > 20) {
-      return "Username should not be greater than 20 characters";
-    } else if (!RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(string)) {
-      return "Username can only contain letters, numbers, and underscores";
-    } else if (RegExp(r'^\d').hasMatch(string)) {
-      return "Username cannot start with a number";
-    }
-    return null;
-  }
-
 
   static String? confirmPassword(
       {required String password, required String cPassword}) {

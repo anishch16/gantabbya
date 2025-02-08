@@ -42,7 +42,6 @@ class LoginController extends GetxController {
         storeData();
       } else {
         isLogging.value = false;
-        Get.rawSnackbar(message: "Please input the correct credentials.");
       }
     });
   }

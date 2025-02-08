@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:flutter_social_button/flutter_social_button.dart';
-import 'package:gantabbya/app/modules/detail_destination/views/weather_shimmer.dart';
 
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
@@ -166,9 +165,10 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                     textAlign: TextAlign.start,
                   ),
                   const SizedBox(height: 20),
+
                   Obx(() {
                     if(controller.weatherLoading.value) {
-                      return const WeatherShimmer();
+                      return const Center(child: CircularProgressIndicator());
                     } else {
                       return buildSevenDayForecastList(controller.weatherData.value, size);
                     }

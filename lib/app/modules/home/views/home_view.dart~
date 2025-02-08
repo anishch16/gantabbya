@@ -252,8 +252,8 @@ class HomeView extends GetView<HomeController> {
                                           "destinationType": controller.destinationData.value.data?[index].destinationType ?? "",
                                           "location": controller.destinationData.value.data?[index].location ?? "",
                                           "image": controller.destinationData.value.data?[index].image ?? [],
-                                          "latitude": controller.destinationData.value.data?[index].latitude ?? 0.0,
-                                          "longitude": controller.destinationData.value.data?[index].longitude ?? 0.0,
+                                          "latitude": controller.destinationData.value.data?[index].latitude ?? "",
+                                          "longitude": controller.destinationData.value.data?[index].longitude ?? "",
                                           "popularity": controller.destinationData.value.data?[index].popularity ?? "",
                                         }
                                         );

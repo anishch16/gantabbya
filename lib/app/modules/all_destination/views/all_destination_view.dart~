@@ -9,7 +9,6 @@ import '../../../data/remote/api_urls.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utils/preview_image_card.dart';
 import '../controllers/all_destination_controller.dart';
-import 'all_destination_shimmer.dart';
 
 class AllDestinationView extends GetView<AllDestinationController> {
   const AllDestinationView({super.key});
@@ -54,7 +53,7 @@ class AllDestinationView extends GetView<AllDestinationController> {
           margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: Obx(() {
             if (controller.isLoading.value) {
-              return  const AllDestinationShimmer();
+              return const Center(child: CircularProgressIndicator());
             } else if (controller.filteredDestinations.isEmpty) {
               return const Center(child: Text('No destinations found'));
             } else {
