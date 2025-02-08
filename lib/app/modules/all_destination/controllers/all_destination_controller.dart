@@ -46,7 +46,6 @@ class AllDestinationController extends GetxController {
       log("Error loading destinations: $e");
     } finally {
       isLoading.value = false;
-      log("Loading completed ${destinationData.value.data}");
     }
   }
 
