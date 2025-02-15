@@ -20,65 +20,6 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, List<Map<String, dynamic>>> nepalData = {
-      "Lakes": [
-        {"image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/murma-viewpoint.jpg", "text": "Rara Lake"},
-        {"image": "https://www.footprintadventure.com/uploads/media/Gokyo/gokyo-viewpoint.jpg", "text": "GOKYO LAKE"},
-        {"image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/tilicho-lake.jpg", "text": "TILICHO LAKE"},
-        {"image": "https://www.nepalhightrek.com/wp-content/uploads/2023/10/goshaikunda-lake-trek-1024x416.jpg", "text": "GOSAIKUNDA LAKE"},
-        {
-          "image":
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Beeshazari_Lake_of_Chitwan%2C_Nepal.jpg/396px-Beeshazari_Lake_of_Chitwan%2C_Nepal.jpg",
-          "text": "BISH HAZARI LAKE"
-        },
-        {"image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/tal-barahi.jpg", "text": "PHEWA TAL/LAKE"},
-        {"image": "https://www.footprintadventure.com/uploads/media/Lakes%20in%20Nepal/panch-pokhari.jpg", "text": "PANCH POKHARI"},
-      ],
-      "Mountains": [
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Everest-2.jpg.webp", "text": "Mount Everest"},
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Kanchenjunga.jpg.webp", "text": "Kanchenjunga"},
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Lhotse-1.jpg.webp", "text": "Lhotse"},
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Makalu_CU.jpg.webp", "text": "Makalu"},
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Cho-Oyu-Expedition.jpg.webp", "text": "Cho Oyu"},
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Dhaulagiri.jpg.webp", "text": "Dhaulagiri"},
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Manaslu-2.jpg.webp", "text": "Manaslu"},
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Gyachung-Khang.jpg.webp", "text": "Gyachung Khang"},
-        {"image": "https://highlandexpeditions.com/wp-content/uploads/2024/08/Annapurna-2.jpg.webp", "text": "Annapurna II"},
-      ],
-      "Temples": [
-        {
-          "image": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_627150563_20190822130709_20190822154343.jpg",
-          "text": "Pashupatinath Temple"
-        },
-        {"image": "https://www.holidify.com/images/cmsuploads/compressed/BRP_Lumbini_Mayadevi_temple_20191003132624.jpg", "text": "Maya Devi Temple"},
-        {
-          "image":
-              "https://www.holidify.com/images/cmsuploads/compressed/800px-Swayambhunath_Monkey_Temple_Nepal_IMG_8153_2018_32_20190822225416.jpg",
-          "text": "Swayambhunath Temple"
-        },
-        {
-          "image": "https://www.holidify.com/images/cmsuploads/compressed/21983642252_a40fdfb7f5_b_20180927122417_20180927122432.jpg",
-          "text": "Dakshinkali Temple"
-        },
-        {
-          "image": "https://www.holidify.com/images/cmsuploads/compressed/8568905000_b259fb2088_b_20190503201520.jpg",
-          "text": "Changu Narayan Temple"
-        },
-        {"image": "https://www.holidify.com/images/cmsuploads/compressed/budhanilkanthatemple_20180710135252.JPG", "text": "Budhanilkantha Temple"},
-        {
-          "image": "https://www.holidify.com/images/cmsuploads/compressed/saswatdham-banner-1_20181013153753_20181013153840.jpg",
-          "text": "Shashwat Dham Temple"
-        },
-        {"image": "https://www.holidify.com/images/cmsuploads/compressed/shutterstock_647026006_20190822122032.jpg", "text": "Boudhanath Stupa"},
-      ],
-      "Treks": [
-        {"image": "https://basecampadventure.com/wp-content/uploads/2018/04/Annapurna-Circuit-Trek-Map.jpg", "text": "Annapurna Circuit Trek"},
-      ],
-      "Rivers": [
-        {"image": "https://www.mytripnepal.com/wp-content/uploads/2019/10/Karnali-River.jpg", "text": "Karnali River"},
-      ],
-    };
-
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -205,7 +146,7 @@ class HomeView extends GetView<HomeController> {
                 SizedBox(
                   height: 50,
                   child: ListView.separated(
-                    itemCount: 5,
+                    itemCount: 4,
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     shrinkWrap: true,
@@ -224,7 +165,7 @@ class HomeView extends GetView<HomeController> {
                             ),
                           ),
                           child: Text(
-                            ["Lakes", "Mountains", "Temples", "Treks", "Rivers"][index],
+                            ["Lakes", "Mountains", "Temples", "Rivers"][index],
                             style: AppTextStyles.smallStyle.copyWith(
                               color: Colors.white,
                             ),
@@ -239,7 +180,7 @@ class HomeView extends GetView<HomeController> {
                   if (controller.isImageLoading.value) {
                     return const ImageShimmer();
                   } else {
-                    final selectedCategory = ["lake", "mountain", "temple", "trek", "river"][controller.imageIndex.value];
+                    final selectedCategory = ["lake", "mountain", "temple", "river"][controller.imageIndex.value];
                     final List images = controller.nepalNatureData.value.data?.where((item) => item.slug == selectedCategory).toList().map((item) => item.url ?? "").toList() ?? [];
                     final List text = controller.nepalNatureData.value.data?.where((item) => item.slug == selectedCategory).toList().map((item) => item.name ?? "").toList() ?? [];
                     return CarouselSlider(

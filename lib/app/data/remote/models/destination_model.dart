@@ -33,8 +33,8 @@ class Destination {
       destinationType: json['destination_type'] as String?,
       location: json['location'] as String?,
       image: json['image'] as String?,
-      latitude: (json['Latitude'] as num?)?.toDouble(),
-      longitude: (json['Longitude'] as num?)?.toDouble(),
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
       createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
       popularity: (json['popularity'] as num?)?.toDouble(),
     );
@@ -48,8 +48,8 @@ class Destination {
       'destination_type': destinationType,
       'location': location,
       'image': image,
-      'Latitude': latitude,
-      'Longitude': longitude,
+      'latitude': latitude,
+      'longitude': longitude,
       'created_at': createdAt?.toIso8601String(),
       'popularity': popularity,
     };

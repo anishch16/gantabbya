@@ -16,7 +16,7 @@ class DetailDestinationController extends GetxController {
   final PageController pageController = PageController();
   var weatherLoading = false.obs;
   var weatherData = WeatherData().obs;
- final Destination destination = Get.arguments;
+  final Destination data = Get.arguments;
 
  @override
   void onInit() {
@@ -26,8 +26,8 @@ class DetailDestinationController extends GetxController {
   void onReady() {
     super.onReady();
     getWeather(
-      latitude: destination.latitude.toString(),
-      longitude: destination.longitude.toString(),
+      latitude: data.latitude.toString(),
+      longitude: data.longitude.toString(),
     );
 
   }

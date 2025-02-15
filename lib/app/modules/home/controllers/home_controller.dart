@@ -43,11 +43,7 @@ class HomeController extends GetxController {
       if (response.statusCode == 200) {
         DestinationResponse destinationResponse = DestinationResponse.fromJson(jsonDecode(response.body));
         destinationData.value = destinationResponse;
-        destinationData.value = DestinationResponse(
-          error: destinationResponse.error,
-          message: destinationResponse.message,
-          data: destinationResponse.data,
-        );
+        log("Destination: ${response.body}");
         isLoading.value = false;
       } else {
         isLoading.value = false;
@@ -63,6 +59,7 @@ class HomeController extends GetxController {
         NepalNatureResponse nepalNature = NepalNatureResponse.fromJson(jsonDecode(response.body));
         nepalNatureData.value = nepalNature;
         isImageLoading.value = false;
+        log("Images: ${response.body}");
       } else {
         isImageLoading.value = false;
         Get.rawSnackbar(message: "Please input the correct credentials.");

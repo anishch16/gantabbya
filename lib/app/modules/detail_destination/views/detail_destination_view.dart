@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
@@ -18,18 +20,14 @@ import '../controllers/detail_destination_controller.dart';
 
 class DetailDestinationView extends GetView<DetailDestinationController> {
   DetailDestinationView({super.key});
-
-  final Destination destination = Get.arguments;
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; // controller.imgList.assignAll(List<String>.from(arguments["images"] ?? []));
-
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         title: Text(
-          destination.name ?? "",
+          controller.data.name ?? "",
           style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         scrolledUnderElevation: 0,
@@ -74,7 +72,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                   onPageChanged: (index, reason) {
                     controller.imageIndex.value = index;
                   }),
-              items: List<String>.from([destination.image] ?? [])
+              items: List<String>.from([controller.data.image] ?? [])
                   .map(
                     (item) => PreviewCardImage(
                       radius: 16,
@@ -135,19 +133,19 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            destination.location ?? "",
+                            controller.data.location ?? "",
                             style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.start,
                           ),
                         ],
                       ),
                       StarRating(
-                          mainAxisAlignment: MainAxisAlignment.start, color: Colors.amber, rating: destination.popularity?? 0.0),
+                          mainAxisAlignment: MainAxisAlignment.start, color: Colors.amber, rating: controller.data.popularity?? 0.0),
                     ],
                   ),
                   const SizedBox(height: 20),
                   ReadMoreText(
-                    destination.description ?? "",
+                    controller.data.description ?? "",
                     trimLines: 5,
                     style: AppTextStyles.smallStyle.copyWith(),
                     colorClickableText: AppColors.redAccent,

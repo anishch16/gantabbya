@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../data/remote/api_client.dart';
 import '../../../data/remote/api_urls.dart';
@@ -11,17 +12,17 @@ import 'package:http/http.dart' as http;
 
 class SetDestinationController extends GetxController {
   //TODO: Implement SethotelController
-  final destinations = const ['Pashupatinath', 'Mustang', 'Lumbini', 'Kalinchowk', 'Manakamana', 'Janakpur Temple', 'Pokhara'];
-  final selectedDestination = "Pashupatinath".obs;
-  final foodType = const ['Veg', 'Non-Veg', 'Vegan', 'Gluten-Free'];
-  final selectedFoodType = "Veg".obs;
-  final lodgingType = const ['Hotel', 'Guesthouse', 'Resort', 'Homestay'];
-  final selectedLodgingType = "Hotel".obs;
-  final count = 0.obs;
+  // final destinations = const ['Pashupatinath', 'Mustang', 'Lumbini', 'Kalinchowk', 'Manakamana', 'Janakpur Temple', 'Pokhara'];
+  // final selectedDestination = "Pashupatinath".obs;
+  // final foodType = const ['Veg', 'Non-Veg', 'Vegan', 'Gluten-Free'];
+  // final selectedFoodType = "Veg".obs;
+  // final lodgingType = const ['Hotel', 'Guesthouse', 'Resort', 'Homestay'];
+  // final selectedLodgingType = "Hotel".obs;
+  // final count = 0.obs;
   final selectedFood = 0.obs;
   final selectedLodge = 0.obs;
   final selectedTravel = 0.obs;
-  final individualController = TextEditingController();
+  // final individualController = TextEditingController();
   final startDate = TextEditingController();
   final endDate = TextEditingController();
   var hotelData = BusAirHotelModel().obs;
@@ -30,6 +31,7 @@ class SetDestinationController extends GetxController {
   var hotelLoading = false.obs;
   var airlinesLoading = false.obs;
   var busesLoading = false.obs;
+  var useId = GetStorage().read("user_id");
 
   @override
   void onReady() {
