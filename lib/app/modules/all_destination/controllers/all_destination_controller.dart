@@ -1,9 +1,11 @@
-import 'dart:developer';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
+
+import '../../../data/remote/api_client.dart';
+import '../../../data/remote/api_urls.dart';
 import '../../../data/remote/models/destination_model.dart';
 
 class AllDestinationController extends GetxController {
@@ -33,22 +35,26 @@ class AllDestinationController extends GetxController {
     searchController.dispose();
     super.onClose();
   }
-
   Future<void> loadPopularDestinations() async {
-    try {
-      isLoading.value = true;
-      await Future.delayed(const Duration(seconds: 2));
-      final String jsonString = await rootBundle.loadString('assets/jsons/destination_list.json');
-      DestinationResponse destinationResponse = DestinationResponse.fromJson(jsonString);
-      destinationData.value = destinationResponse;
-      filteredDestinations.value = destinationData.value.data ?? [];
-    } catch (e) {
-      log("Error loading destinations: $e");
-    } finally {
-      isLoading.value = false;
-    }
+    isLoading.value = true;
+    Future<http.Response> response = ApiClient().getRequest(ApiUrls.DESTINATIONS);
+    response.then((http.Response response) {
+      if (response.statusCode == 200) {
+        DestinationResponse destinationResponse = DestinationResponse.fromJson(jsonDecode(response.body));
+        destinationData.value = destinationResponse;
+        destinationData.value = DestinationResponse(
+          error: destinationResponse.error,
+          message: destinationResponse.message,
+          data: destinationResponse.data,
+        );
+        filteredDestinations.value = destinationData.value.data ?? [];
+        isLoading.value = false;
+      } else {
+        isLoading.value = false;
+        Get.rawSnackbar(message: "Please input the correct credentials.");
+      }
+    });
   }
-
   void _filterDestinations() {
     final query = searchController.text.toLowerCase();
     if (query.isEmpty) {

@@ -22,55 +22,59 @@ class ApiClient {
   //get method
   Future<http.Response> getRequest(String url) async {
     try {
+      String? accessToken = localData.read('access_token');
+      if (accessToken == null || accessToken.isEmpty) {
+        Get.offAll(() => const LoginView());
+        Get.rawSnackbar(
+          message: 'Session Expired. Please Login Again',
+          backgroundColor: AppColors.grey.shade600,
+          duration: const Duration(seconds: 2),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        throw Exception("Access token is missing.");
+      }
       var response = await http.get(
         Uri.parse(url),
         headers: {
-          HttpHeaders.authorizationHeader:
-              'Bearer ' + localData.read('access_token'),
+          HttpHeaders.authorizationHeader: "Bearer $accessToken",
+          HttpHeaders.contentTypeHeader: "application/json",
         },
       );
-      print("Response::::::::${response.body}");
-      print("Response statusCode ::::::::${response.statusCode}");
+
+      // Handle 401 (Unauthorized) - Token expired
       if (response.statusCode == 401) {
         localData.erase();
-        Get.offAll(() => LoginView());
+        Get.offAll(() => const LoginView());
         Get.rawSnackbar(
-          message: 'Token Expired Please Login Again',
+          message: 'Token Expired. Please Login Again',
           backgroundColor: AppColors.grey.shade600,
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 2),
           snackPosition: SnackPosition.BOTTOM,
         );
+        throw Exception("Unauthorized - Token expired.");
       }
-      // else if (response.statusCode == 204) {
-      //   print('No Content returned::::::::::::::::::');
-      //   Get.back();
-      //   Get.rawSnackbar(
-      //     message: 'No data found',
-      //     backgroundColor: AppColors.grey.shade600,
-      //     duration: Duration(seconds: 1),
-      //     snackPosition: SnackPosition.BOTTOM,
-      //   );
-      // }
 
-      else if (response.statusCode != 200) {
-        print("gg");
-        print("Response we get:::::::::::" + response.body);
-        if(response.body.isNotEmpty){
+      // Handle other errors (non-200 responses)
+      if (response.statusCode != 200) {
+        log("Error Response: ${response.body}");
+
+        if (response.body.isNotEmpty) {
           var errorMap = jsonDecode(response.body);
           var errorMessage = extractErrorMessage(errorMap);
           showErrorMessage(errorMessage);
         } else {
-          Get.back();
-          showErrorMessage("Empty Data");
+          showErrorMessage("No Data Received from Server.");
         }
       }
+
       return response;
     } catch (error, stackTrace) {
-      print('An error occurred: $error');
-      print('Stack trace: $stackTrace');
-      throw error; // Rethrow the error to propagate it to the caller
+      log('An error occurred: $error');
+      log('Stack trace: $stackTrace');
+      throw Exception("Network error: $error");
     }
   }
+
 
   //post method
   Future<http.Response> postRequest(

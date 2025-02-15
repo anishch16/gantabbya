@@ -100,7 +100,7 @@ class AllDestinationView extends GetView<AllDestinationController> {
                               child: PreviewCardImage(
                                 height: 110,
                                 width: double.infinity,
-                                url: controller.filteredDestinations[index].image?.firstOrNull ?? "",
+                                url: controller.filteredDestinations[index].image ?? "",
                                 // radius: 16,
                                 errorImage: const AssetImage(
                                   ApiUrls.dummyDestinationImage,
@@ -139,7 +139,7 @@ class AllDestinationView extends GetView<AllDestinationController> {
                                     Row(
                                       children: [
                                         Text(
-                                          controller.filteredDestinations[index].popularity ?? "0.0",
+                                          controller.filteredDestinations[index].popularity.toString() ?? "0.0",
                                           style: AppTextStyles.smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
                                         ),
                                         const SizedBox(width: 4.0),

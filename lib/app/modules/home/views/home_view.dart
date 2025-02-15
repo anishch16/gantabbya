@@ -325,7 +325,7 @@ class HomeView extends GetView<HomeController> {
                         : SizedBox(
                             height: 250,
                             child: ListView.builder(
-                              itemCount: 5,
+                              itemCount: controller.destinationData.value.data?.length ?? 0,
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
@@ -369,7 +369,7 @@ class HomeView extends GetView<HomeController> {
                                               child: PreviewCardImage(
                                                 height: 110,
                                                 width: 170,
-                                                url: controller.destinationData.value.data?[index].image?.firstOrNull ?? "",
+                                                url: controller.destinationData.value.data?[index].image ?? "",
                                                 errorImage: const AssetImage(
                                                   ApiUrls.dummyDestinationImage,
                                                 ),
