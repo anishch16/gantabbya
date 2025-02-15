@@ -239,23 +239,9 @@ class HomeView extends GetView<HomeController> {
                   if (controller.isImageLoading.value) {
                     return const ImageShimmer();
                   } else {
-                    final selectedCategory = ["Lakes", "Mountains", "Temples", "Treks", "Rivers"][controller.imageIndex.value];
-                    final List images = controller.nepalNatureData.value.data
-                            ?.where((item) => item.category == selectedCategory)
-                            .expand((item) => item.places ?? [])
-                            .map((place) => place.image ?? "")
-                            .where((image) => image.isNotEmpty)
-                            .toList() ??
-                        <String>[];
-
-                    final List text = controller.nepalNatureData.value.data
-                            ?.where((item) => item.category == selectedCategory)
-                            .expand((item) => item.places ?? [])
-                            .map((place) => place.name ?? "")
-                            .where((name) => name.isNotEmpty)
-                            .toList() ??
-                        [];
-
+                    final selectedCategory = ["lake", "mountain", "temple", "trek", "river"][controller.imageIndex.value];
+                    final List images = controller.nepalNatureData.value.data?.where((item) => item.slug == selectedCategory).toList().map((item) => item.url ?? "").toList() ?? [];
+                    final List text = controller.nepalNatureData.value.data?.where((item) => item.slug == selectedCategory).toList().map((item) => item.name ?? "").toList() ?? [];
                     return CarouselSlider(
                       carouselController: controller.carouselController,
                       options: CarouselOptions(

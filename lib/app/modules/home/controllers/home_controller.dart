@@ -55,32 +55,18 @@ class HomeController extends GetxController {
       }
     });
   }
-  // Future<void> loadPopularDestinations() async {
-  //   try {
-  //     isLoading.value = true;
-  //     await Future.delayed(const Duration(seconds: 2));
-  //     final String jsonString = await rootBundle.loadString('assets/jsons/destination_list.json');
-  //     DestinationResponse destinationResponse = DestinationResponse.fromJson(jsonString);
-  //     destinationData.value = destinationResponse;
-  //   } catch (e) {
-  //     log("Error loading destinations: $e");
-  //   } finally {
-  //     isLoading.value = false;
-  //     log("Loading completed ${destinationData.value.data}");
-  //   }
-  // }
   Future<void> loadImages() async {
-    try {
-      isImageLoading.value = true;
-      await Future.delayed(const Duration(seconds: 2));
-      final String jsonString = await rootBundle.loadString('assets/jsons/images.json');
-      NepalNatureResponse nepalNature = NepalNatureResponse.fromJson(jsonString);
-      nepalNatureData.value = nepalNature;
-    } catch (e) {
-      log("Error loading destinations: $e");
-    } finally {
-      isImageLoading.value = false;
-      log("Loading completed ${nepalNatureData.value}");
-    }
+    isImageLoading.value = true;
+    Future<http.Response> response = ApiClient().getRequest(ApiUrls.IMAGES);
+    response.then((http.Response response) {
+      if (response.statusCode == 200) {
+        NepalNatureResponse nepalNature = NepalNatureResponse.fromJson(jsonDecode(response.body));
+        nepalNatureData.value = nepalNature;
+        isImageLoading.value = false;
+      } else {
+        isImageLoading.value = false;
+        Get.rawSnackbar(message: "Please input the correct credentials.");
+      }
+    });
   }
 }
