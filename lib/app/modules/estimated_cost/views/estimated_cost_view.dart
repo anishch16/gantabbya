@@ -1,9 +1,5 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gantabbya/app/modules/home/views/home_view.dart';
-
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
@@ -18,12 +14,12 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/login_bg.png"), fit: BoxFit.cover)),
+      decoration: const BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/background.jpg"), fit: BoxFit.cover)),
       child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            leading: GestureDetector(onTap: () => Get.back(), child: const Icon(Icons.arrow_back, color: AppColors.white)),
+            automaticallyImplyLeading: false,
             title: Text(
               "Plan your trip with us",
               style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold, color: AppColors.white),

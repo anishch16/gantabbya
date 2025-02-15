@@ -6,6 +6,7 @@ import 'package:gantabbya/app/data/remote/api_urls.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../../constants/colors.dart';
 import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
 import '../../../routes/app_pages.dart';
@@ -20,56 +21,53 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: GestureDetector(
-              onTap: () {
-                Get.toNamed(Routes.SET_DESTINATION, arguments: {
-                  "destination": "",
-                });
-              },
-              child: Container(
-                height: 50,
-                margin: const EdgeInsets.symmetric(horizontal: 24),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.teal,
-                ),
-                child: Center(child: Text("Let's plan a travel", style: AppTextStyles.miniStyle.copyWith(fontSize: 16.sp, color: Colors.white))),
-              ))
-          .animate(
-            delay: 2000.ms,
-            onPlay: (controller) => controller.repeat(period: const Duration(seconds: 5)),
-          )
-          .shimmer(
-            duration: const Duration(seconds: 2),
-            curve: Curves.easeInOut,
-          ),
-      body: SafeArea(
-        child: Container(
+    return Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/background.jpg"),
+              fit: BoxFit.cover)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: Container(
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: Colors.transparent,
           ),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SafeArea(
-                  bottom: false,
-                  child: Stack(
-                    children: [
-                      Image.asset(
+                Stack(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              right: BorderSide(
+                                color: Colors.teal,
+                                width: 2.0,
+                              ),
+                              left: BorderSide(
+                                color: Colors.teal,
+                                width: 2.0,
+                              ))),
+                      child: Image.asset(
                         AppImages.planeBackground,
+                        fit: BoxFit.fill,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                    ),
+                    SafeArea(
+                      bottom: false,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
-                                Text("${getGreetingMessage()} ${controller.localData.read("user") ?? ""}",
-                                    style: InRiaTextStyles.mediumStyle.copyWith(color: Colors.white)),
+                                Text(
+                                    "${getGreetingMessage()} ${controller.localData.read("user") ?? ""}",
+                                    style: InRiaTextStyles.mediumStyle
+                                        .copyWith(color: Colors.white)),
                                 const SizedBox(width: 8),
                                 Icon(
                                   getGreetingIcon(),
@@ -90,20 +88,24 @@ class HomeView extends GetView<HomeController> {
                                   onTap: () {
                                     Get.defaultDialog(
                                       title: "Logout",
-                                      middleText: "Are you sure you want to logout?",
+                                      middleText:
+                                          "Are you sure you want to logout?",
                                       confirm: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.teal,
                                         ),
                                         onPressed: () {
-                                          controller.localData.write("isLoggedIn", false);
-                                          controller.localData.write("access_token", null);
+                                          controller.localData
+                                              .write("isLoggedIn", false);
+                                          controller.localData
+                                              .write("access_token", null);
                                           Get.offAllNamed(Routes.LOGIN);
                                           Get.back();
                                         },
                                         child: Text(
                                           "Yes",
-                                          style: AppTextStyles.smallStyle.copyWith(color: Colors.white),
+                                          style: AppTextStyles.smallStyle
+                                              .copyWith(color: Colors.white),
                                         ),
                                       ),
                                       cancel: ElevatedButton(
@@ -115,7 +117,8 @@ class HomeView extends GetView<HomeController> {
                                         },
                                         child: Text(
                                           "No",
-                                          style: AppTextStyles.smallStyle.copyWith(color: Colors.white),
+                                          style: AppTextStyles.smallStyle
+                                              .copyWith(color: Colors.white),
                                         ),
                                       ),
                                     );
@@ -131,15 +134,15 @@ class HomeView extends GetView<HomeController> {
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 Text("Plan Your Trip With Us!",
                     textAlign: TextAlign.end,
                     style: GoogleFonts.aBeeZee(
                         textStyle: TextStyle(
                       fontSize: 20.sp,
-                      color: Colors.black,
+                      color: AppColors.white,
                       fontWeight: FontWeight.bold,
                     ))),
                 const SizedBox(height: 16),
@@ -150,7 +153,8 @@ class HomeView extends GetView<HomeController> {
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     shrinkWrap: true,
-                    separatorBuilder: (context, index) => const SizedBox(width: 16),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 16),
                     itemBuilder: (context, index) {
                       return Obx(() {
                         return ElevatedButton(
@@ -159,7 +163,10 @@ class HomeView extends GetView<HomeController> {
                           },
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(56, 40),
-                            backgroundColor: controller.imageIndex.value == index ? Colors.teal : Colors.grey,
+                            backgroundColor:
+                                controller.imageIndex.value == index
+                                    ? Colors.teal
+                                    : const Color(0xFF979797).withOpacity(0.3),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -180,9 +187,24 @@ class HomeView extends GetView<HomeController> {
                   if (controller.isImageLoading.value) {
                     return const ImageShimmer();
                   } else {
-                    final selectedCategory = ["lake", "mountain", "temple", "river"][controller.imageIndex.value];
-                    final List images = controller.nepalNatureData.value.data?.where((item) => item.slug == selectedCategory).toList().map((item) => item.url ?? "").toList() ?? [];
-                    final List text = controller.nepalNatureData.value.data?.where((item) => item.slug == selectedCategory).toList().map((item) => item.name ?? "").toList() ?? [];
+                    final selectedCategory = [
+                      "lake",
+                      "mountain",
+                      "temple",
+                      "river"
+                    ][controller.imageIndex.value];
+                    final List images = controller.nepalNatureData.value.data
+                            ?.where((item) => item.slug == selectedCategory)
+                            .toList()
+                            .map((item) => item.url ?? "")
+                            .toList() ??
+                        [];
+                    final List text = controller.nepalNatureData.value.data
+                            ?.where((item) => item.slug == selectedCategory)
+                            .toList()
+                            .map((item) => item.name ?? "")
+                            .toList() ??
+                        [];
                     return CarouselSlider(
                       carouselController: controller.carouselController,
                       options: CarouselOptions(
@@ -192,7 +214,8 @@ class HomeView extends GetView<HomeController> {
                         aspectRatio: 16 / 9,
                         autoPlayCurve: Curves.fastOutSlowIn,
                         enableInfiniteScroll: true,
-                        autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 800),
                         viewportFraction: 0.8,
                       ),
                       items: images
@@ -207,7 +230,8 @@ class HomeView extends GetView<HomeController> {
                                     height: 200.0,
                                     width: double.infinity,
                                     url: imageUrl,
-                                    errorImage: const AssetImage(ApiUrls.dummyDestinationImage),
+                                    errorImage: const AssetImage(
+                                        ApiUrls.dummyDestinationImage),
                                   ),
                                   Positioned(
                                     bottom: 8.0,
@@ -235,15 +259,28 @@ class HomeView extends GetView<HomeController> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 24),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             "Popular Destination",
-                            style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.w600),
+                            style: AppTextStyles.normalStyle.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.white),
                           ),
-                          const SizedBox(width: 12),
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.ALL_DESTINATION);
+                            },
+                            child: Text(
+                              "See All",
+                              style: AppTextStyles.normalStyle.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.teal),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -252,43 +289,52 @@ class HomeView extends GetView<HomeController> {
                         : SizedBox(
                             height: 250,
                             child: ListView.builder(
-                              itemCount: controller.destinationData.value.data?.length ?? 0,
+                              itemCount: controller
+                                      .destinationData.value.data?.length ??
+                                  0,
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Row(
                                   children: [
-                                    index == 0 ? const SizedBox(width: 8) : const SizedBox(),
+                                    index == 0
+                                        ? const SizedBox(width: 8)
+                                        : const SizedBox(),
                                     GestureDetector(
                                       onTap: () {
-                                        Get.toNamed(Routes.DETAIL_DESTINATION, arguments: controller.destinationData.value.data?[index]
-                                        );
+                                        Get.toNamed(Routes.DETAIL_DESTINATION,
+                                            arguments: controller
+                                                .destinationData
+                                                .value
+                                                .data?[index]);
                                       },
                                       child: Container(
                                         width: 170,
-                                        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 8),
                                         padding: const EdgeInsets.all(8.0),
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(16),
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.grey.withOpacity(0.5),
-                                              spreadRadius: 0.2,
-                                              blurRadius: 0.2,
-                                              offset: const Offset(0, 1),
-                                            ),
-                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          color: const Color(0xFF979797)
+                                              .withOpacity(0.3),
                                         ),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             ClipRRect(
-                                              borderRadius: BorderRadius.circular(16),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
                                               child: PreviewCardImage(
                                                 height: 110,
                                                 width: 170,
-                                                url: controller.destinationData.value.data?[index].image ?? "",
+                                                url: controller
+                                                        .destinationData
+                                                        .value
+                                                        .data?[index]
+                                                        .image ??
+                                                    "",
                                                 errorImage: const AssetImage(
                                                   ApiUrls.dummyDestinationImage,
                                                 ),
@@ -296,31 +342,51 @@ class HomeView extends GetView<HomeController> {
                                             ),
                                             const SizedBox(height: 8.0),
                                             Text(
-                                              controller.destinationData.value.data?[index].name ?? "",
-                                              style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.bold),
+                                              controller.destinationData.value
+                                                      .data?[index].name ??
+                                                  "",
+                                              style: AppTextStyles.miniStyle
+                                                  .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
                                               textAlign: TextAlign.start,
                                               maxLines: 1,
                                             ),
                                             const SizedBox(height: 8.0),
                                             Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 const Icon(
                                                   Icons.location_on,
                                                   size: 16,
+                                                  color: Colors.white,
                                                 ),
                                                 Text(
                                                   "Nepal",
-                                                  style: AppTextStyles.miniStyle.copyWith(fontWeight: FontWeight.bold),
+                                                  style: AppTextStyles.miniStyle
+                                                      .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
                                                   textAlign: TextAlign.start,
                                                 ),
                                               ],
                                             ),
                                             const SizedBox(height: 8.0),
                                             StarRating(
-                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
                                                 color: Colors.amber,
-                                                rating: double.parse(controller.destinationData.value.data?[index].popularity.toString() ?? "0")),
+                                                borderColor: Colors.white,
+                                                rating: double.parse(controller
+                                                        .destinationData
+                                                        .value
+                                                        .data?[index]
+                                                        .popularity
+                                                        .toString() ??
+                                                    "0")),
                                           ],
                                         ),
                                       ),
@@ -329,21 +395,6 @@ class HomeView extends GetView<HomeController> {
                                 );
                               },
                             ))),
-                    const SizedBox(height: 24),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed(Routes.ALL_DESTINATION);
-                          },
-                          child: Text(
-                            "See All",
-                            style: AppTextStyles.normalStyle.copyWith(fontWeight: FontWeight.w600, color: Colors.teal),
-                          ),
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 100),
                   ],
                 ),
