@@ -24,7 +24,7 @@ class SignupController extends GetxController {
   Future<void> signup({required String email, required String pw, required String username}) async {
     isSigningUp.value = true;
     Map<String, dynamic> requestBody = {"email": email, "password": pw, "username": username};
-    Future<http.Response> response = ApiClient().postRequestWithoutToken(ApiUrls.BASE_URL + ApiUrls.SIGNUP, requestBody);
+    Future<http.Response> response = ApiClient().postRequestWithoutToken(ApiUrls.SIGNUP, requestBody);
     response.then((http.Response response) {
       if (response.statusCode == 200 || response.statusCode == 201) {
         SignupResponseModel signupResponseModel = SignupResponseModel.fromJson(jsonDecode(response.body));

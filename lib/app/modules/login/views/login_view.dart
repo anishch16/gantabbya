@@ -94,15 +94,15 @@ class LoginView extends GetView<LoginController> {
                                 clicked: controller.isRememberMe.value,
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                // Get.to(() => ForgotPassword());
-                              },
-                              child: const Text(
-                                "Forgot Password?",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     // Get.to(() => ForgotPassword());
+                            //   },
+                            //   child: const Text(
+                            //     "Forgot Password?",
+                            //     style: TextStyle(color: Colors.red),
+                            //   ),
+                            // ),
                           ],
                         );
                       }),

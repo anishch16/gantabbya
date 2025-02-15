@@ -142,21 +142,33 @@ class ApiClient {
   Future<http.Response> postRequestWithoutToken(
       String url, Map<String, dynamic> body) async {
     try {
-      var jsonData = body;
-      var response = await http.post(Uri.parse(url),
-          body: jsonData);
-      log("Response:${response.body}");
+      var jsonData = jsonEncode(body);
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: jsonData,
+      );
+
+      log("Response: ${response.body}");
+
       if (response.statusCode >= 400) {
         var errorMap = jsonDecode(response.body);
         var errorMessage = extractErrorMessage(errorMap);
         showErrorMessage(errorMessage);
       }
+
       return response;
     } catch (error) {
-      log('An error occurred: $error');
-      throw error; // Rethrow the error to propagate it to the caller
+      if (error is SocketException) {
+        log('Network error: $error');
+        throw Exception("Unable to connect to the server. Please check your internet or API server.");
+      } else {
+        log('An unexpected error occurred: $error');
+        throw error;
+      }
     }
   }
+
 
   // patch method
   Future<http.Response> patchRequest(
