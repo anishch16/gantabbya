@@ -10,6 +10,7 @@ import 'package:readmore/readmore.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/styles.dart';
 import '../../../data/remote/api_urls.dart';
+import '../../../data/remote/models/destination_model.dart';
 import '../../../data/remote/models/weather_model.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utils/preview_image_card.dart';
@@ -18,21 +19,17 @@ import '../controllers/detail_destination_controller.dart';
 class DetailDestinationView extends GetView<DetailDestinationController> {
   DetailDestinationView({super.key});
 
-  final Map<String, dynamic> arguments = Get.arguments ?? {};
+  final Destination destination = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
-    const minTemp = 20;
-    const maxTemp = 20;
-    final size = MediaQuery.of(context).size;
-    print(List<String>.from(arguments["image"] ?? []));
-    // controller.imgList.assignAll(List<String>.from(arguments["images"] ?? []));
+    final size = MediaQuery.of(context).size; // controller.imgList.assignAll(List<String>.from(arguments["images"] ?? []));
 
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         title: Text(
-          arguments["name"],
+          destination.name ?? "",
           style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         scrolledUnderElevation: 0,
@@ -46,7 +43,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
           Get.toNamed(
             Routes.SET_DESTINATION,
             arguments: {
-              "destination": arguments["name"],
+              "destination": "Pokhara",
             },
           );
         },
@@ -77,7 +74,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                   onPageChanged: (index, reason) {
                     controller.imageIndex.value = index;
                   }),
-              items: List<String>.from(arguments["image"] ?? [])
+              items: List<String>.from([destination.image] ?? [])
                   .map(
                     (item) => PreviewCardImage(
                       radius: 16,
@@ -138,19 +135,19 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            arguments["location"],
+                            destination.location ?? "",
                             style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
                             textAlign: TextAlign.start,
                           ),
                         ],
                       ),
                       StarRating(
-                          mainAxisAlignment: MainAxisAlignment.start, color: Colors.amber, rating: double.parse(arguments["popularity"] ?? "0")),
+                          mainAxisAlignment: MainAxisAlignment.start, color: Colors.amber, rating: destination.popularity?? 0.0),
                     ],
                   ),
                   const SizedBox(height: 20),
                   ReadMoreText(
-                    arguments["description"],
+                    destination.description ?? "",
                     trimLines: 5,
                     style: AppTextStyles.smallStyle.copyWith(),
                     colorClickableText: AppColors.redAccent,

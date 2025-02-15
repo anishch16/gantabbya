@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../data/remote/models/destination_model.dart';
 import '../../../data/remote/models/weather_model.dart';
 
 class DetailDestinationController extends GetxController {
@@ -15,7 +16,9 @@ class DetailDestinationController extends GetxController {
   final PageController pageController = PageController();
   var weatherLoading = false.obs;
   var weatherData = WeatherData().obs;
-  @override
+ final Destination destination = Get.arguments;
+
+ @override
   void onInit() {
     super.onInit();
   }
@@ -23,8 +26,8 @@ class DetailDestinationController extends GetxController {
   void onReady() {
     super.onReady();
     getWeather(
-      latitude: Get.arguments["latitude"].toString(),
-      longitude: Get.arguments["longitude"].toString(),
+      latitude: destination.latitude.toString(),
+      longitude: destination.longitude.toString(),
     );
 
   }

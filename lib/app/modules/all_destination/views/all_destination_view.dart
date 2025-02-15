@@ -66,16 +66,7 @@ class AllDestinationView extends GetView<AllDestinationController> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      Get.toNamed(Routes.DETAIL_DESTINATION, arguments: {
-                        "name": controller.destinationData.value.data?[index].name ?? "",
-                        "description": controller.destinationData.value.data?[index].description ?? "",
-                        "destinationType": controller.destinationData.value.data?[index].destinationType ?? "",
-                        "location": controller.destinationData.value.data?[index].location ?? "",
-                        "image": controller.destinationData.value.data?[index].image ?? [],
-                        "latitude": controller.destinationData.value.data?[index].latitude ?? 0.0,
-                        "longitude": controller.destinationData.value.data?[index].longitude ?? 0.0,
-                        "popularity": controller.destinationData.value.data?[index].popularity ?? "",
-                      });
+                      Get.toNamed(Routes.DETAIL_DESTINATION, arguments: controller.destinationData.value.data?[index]);
                     },
                     child: Container(
                       margin: EdgeInsets.only(bottom: index == 10 ? 16 : 0),
@@ -139,7 +130,7 @@ class AllDestinationView extends GetView<AllDestinationController> {
                                     Row(
                                       children: [
                                         Text(
-                                          controller.filteredDestinations[index].popularity.toString() ?? "0.0",
+                                          controller.filteredDestinations[index].popularity.toString(),
                                           style: AppTextStyles.smallStyle.copyWith(color: AppColors.darkYellow, fontWeight: FontWeight.bold),
                                         ),
                                         const SizedBox(width: 4.0),

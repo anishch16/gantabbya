@@ -233,13 +233,13 @@ class TransportationCard extends StatelessWidget {
           children: [
             Text(title, style: AppTextStyles.smallStyle),
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(startTime, style: AppTextStyles.smallStyle),
-                Text(endTime, style: AppTextStyles.smallStyle),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(startTime, style: AppTextStyles.smallStyle),
+            //     Text(endTime, style: AppTextStyles.smallStyle),
+            //   ],
+            // ),
             Row(
               children: [
                 const Icon(
@@ -313,10 +313,10 @@ class FoodCard extends StatelessWidget {
             )
           ],
           borderRadius: BorderRadius.circular(12)),
-      width: width,
+      width: double.infinity,
       child: GestureDetector(
         onTap: onPress,
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const PreviewCardImage(
@@ -334,6 +334,66 @@ class FoodCard extends StatelessWidget {
               maxLines: 2,
             ),
             Text("\$${100}", style: AppTextStyles.smallStyle.copyWith(color: AppColors.redAccent, fontWeight: FontWeight.bold))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HotelCard extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  final bool isSelected;
+  final void Function() onTap;
+
+  const HotelCard({
+    super.key,
+    required this.title,
+    required this.subTitle,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        // margin: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+            border: Border.all(color: isSelected ? Colors.teal : Colors.transparent),
+            borderRadius: BorderRadius.circular(16),
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(0, 1),
+                blurRadius: 1,
+                color: AppColors.black.withOpacity(0.3),
+              )
+            ]),
+        child: Row(
+          children: [
+            const PreviewCardImage(
+              width: 100,
+              radius: 12,
+              url: ApiUrls.dummyHotelImage,
+              errorImage: AssetImage(
+                ApiUrls.dummyDestinationImage,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: AppTextStyles.smallStyle),
+                  const SizedBox(height: 10),
+                  Text(subTitle, style: AppTextStyles.smallStyle),
+                ],
+              ),
+            ),
           ],
         ),
       ),
