@@ -1,19 +1,14 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:flutter_social_button/flutter_social_button.dart';
 import 'package:gantabbya/app/modules/detail_destination/views/weather_shimmer.dart';
-
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
-
 import '../../../constants/colors.dart';
 import '../../../constants/styles.dart';
 import '../../../data/remote/api_urls.dart';
-import '../../../data/remote/models/destination_model.dart';
 import '../../../data/remote/models/weather_model.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utils/preview_image_card.dart';
@@ -189,7 +184,9 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                           fontWeight: FontWeight.bold,
                           color: AppColors.redAccent),
                       moreStyle: AppTextStyles.smallStyle
-                          .copyWith(fontWeight: FontWeight.bold),
+                          .copyWith(fontWeight: FontWeight.bold,
+                      color: Colors.teal
+                      ),
                     ),
                     const SizedBox(height: 20),
                     Text(

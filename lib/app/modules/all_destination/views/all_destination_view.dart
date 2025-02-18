@@ -30,6 +30,9 @@ class AllDestinationView extends GetView<AllDestinationController> {
             title: Form(
               child: TextFormField(
                 onChanged: (value) {},
+                style: AppTextStyles.smallStyle.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.white),
                 controller: controller.searchController,
                 onTapOutside: (event) {
                   FocusManager.instance.primaryFocus?.unfocus();
@@ -77,6 +80,9 @@ class AllDestinationView extends GetView<AllDestinationController> {
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 10,
                   itemCount: controller.filteredDestinations.length,
+                  padding: EdgeInsets.only(
+                    bottom: Get.height * 0.5
+                  ),
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {

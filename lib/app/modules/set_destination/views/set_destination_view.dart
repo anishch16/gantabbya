@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:gantabbya/app/constants/styles.dart';
 import 'package:get/get.dart';
@@ -24,31 +22,26 @@ class SetDestinationView extends GetView<SetDestinationController> {
       child: Obx(() {
         return Scaffold(
           backgroundColor: Colors.transparent,
-          floatingActionButtonLocation: FloatingActionButtonLocation
-              .centerFloat,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           floatingActionButton: GestureDetector(
-            onTap: (controller.startDate.value.text.isNotEmpty &&
-                controller.endDate.value.text.isNotEmpty)
+            onTap: controller.letsCalculateEnabled.value
                 ? () {
-              if (controller.busOrAirline.value) {
-                controller.postAirlineChoices();
-                controller.postLodgingChoices();
-              } else {
-                controller.postLodgingChoices();
-                controller.postBusChoices();
-              }
-            }
+                    if (controller.busOrAirline.value) {
+                      controller.postAirlineChoices();
+                      controller.postLodgingChoices();
+                    } else {
+                      controller.postLodgingChoices();
+                      controller.postBusChoices();
+                    }
+                  }
                 : null,
             child: Container(
               height: 50,
               margin: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: (controller.startDate.value.text.isNotEmpty &&
-                    controller.endDate.value.text.isNotEmpty &&
-                    (controller.selectedLodge.value != -1) &&
-                    ((controller.selectedBus.value != -1) ||
-                        (controller.selectedAirline.value != -1)))
+                color: controller.letsCalculateEnabled.value
                     ? Colors.teal
                     : Colors.grey,
               ),
@@ -61,8 +54,7 @@ class SetDestinationView extends GetView<SetDestinationController> {
           appBar: AppBar(
             title: Text(
               "Your Journey's Info",
-              style: AppTextStyles.smallStyle
-                  .copyWith(
+              style: AppTextStyles.smallStyle.copyWith(
                   fontWeight: FontWeight.bold, color: AppColors.white),
             ),
             scrolledUnderElevation: 0,
@@ -91,6 +83,7 @@ class SetDestinationView extends GetView<SetDestinationController> {
                       if (controller.startDate.value.text.isNotEmpty) {
                         controller.startDateFilled.value = true;
                       }
+                      controller.letsCalculate();
                     },
                   ),
                   const SizedBox(height: 20),
@@ -107,6 +100,7 @@ class SetDestinationView extends GetView<SetDestinationController> {
                       if (controller.endDate.value.text.isNotEmpty) {
                         controller.endDateFilled.value = true;
                       }
+                      controller.letsCalculate();
                     },
                   ),
                   const SizedBox(height: 20),
@@ -158,52 +152,54 @@ class SetDestinationView extends GetView<SetDestinationController> {
                                   color: AppColors.white),
                             ),
                             (controller.airlineData.value.data?.isNotEmpty ??
-                                false)
+                                    false)
                                 ? ListView.separated(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 16),
-                              itemCount: controller
-                                  .airlineData.value.data?.length ??
-                                  0,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return Obx(() {
-                                  return TransportationCard(
-                                    price: controller.airlineData.value
-                                        .data?[index].price
-                                        .toString() ??
-                                        "0",
-                                    remarks: controller.airlineData.value
-                                        .data?[index].remarks ??
-                                        "",
-                                    onTap: () {
-                                      controller.selectedAirline.value =
-                                          index;
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    itemCount: controller
+                                            .airlineData.value.data?.length ??
+                                        0,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return Obx(() {
+                                        return TransportationCard(
+                                          price: controller.airlineData.value
+                                                  .data?[index].price
+                                                  .toString() ??
+                                              "0",
+                                          remarks: controller.airlineData.value
+                                                  .data?[index].remarks ??
+                                              "",
+                                          onTap: () {
+                                            controller.selectedAirline.value =
+                                                index;
+                                            controller.letsCalculate();
+                                          },
+                                          isSelected: controller
+                                                  .selectedAirline.value ==
+                                              index,
+                                          startPoint: "Kathmandu",
+                                          endPoint: controller.airlineData.value
+                                                  .data?[index].name ??
+                                              "",
+                                          startTime: "",
+                                          endTime: "",
+                                          title: controller.airlineData.value
+                                                  .data?[index].name ??
+                                              "",
+                                          icon: const Icon(
+                                            Icons.flight,
+                                            color: Colors.teal,
+                                            size: 40,
+                                          ),
+                                        );
+                                      });
                                     },
-                                    isSelected:
-                                    controller.selectedAirline.value ==
-                                        index,
-                                    startPoint: "Kathmandu",
-                                    endPoint: controller.airlineData.value
-                                        .data?[index].name ??
-                                        "",
-                                    startTime: "",
-                                    endTime: "",
-                                    title: controller.airlineData.value
-                                        .data?[index].name ??
-                                        "",
-                                    icon: const Icon(
-                                      Icons.flight,
-                                      color: Colors.teal,
-                                      size: 40,
-                                    ),
-                                  );
-                                });
-                              },
-                              separatorBuilder: (context, index) =>
-                              const SizedBox(height: 10),
-                            )
+                                    separatorBuilder: (context, index) =>
+                                        const SizedBox(height: 10),
+                                  )
                                 : const NoDataView(title: "No Airlines Found"),
                           ],
                         );
@@ -222,68 +218,78 @@ class SetDestinationView extends GetView<SetDestinationController> {
                                   color: AppColors.white),
                             ),
                             (controller.busesData.value.data?.isNotEmpty ??
-                                false)
+                                    false)
                                 ? ListView.separated(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 10),
-                              itemCount:
-                              controller.busesData.value.data?.length ??
-                                  0,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return Obx(() {
-                                  return TransportationCard(
-                                    price: controller.busesData.value
-                                        .data?[index].price
-                                        .toString() ??
-                                        "0",
-                                    remarks: controller.busesData.value
-                                        .data?[index].remarks ??
-                                        "",
-                                    onTap: () {
-                                      controller.selectedBus.value = index;
-                                      controller.selectedBusesModel.value =
-                                          PostCostParams(
-                                              destinationID: controller
-                                                  .busesData
-                                                  .value
-                                                  .data?[index]
-                                                  .id,
-                                              userID: GetStorage()
-                                                  .read("user_id"),
-                                              title: controller.busesData
-                                                  .value.data?[index].name,
-                                              price: controller.busesData
-                                                  .value.data?[index].price,
-                                              startDate: DateTime.parse(
-                                                  controller.startDate.value
-                                                      .text),
-                                              endDate: DateTime.parse(
-                                                  controller
-                                                      .endDate.value.text));
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    itemCount: controller
+                                            .busesData.value.data?.length ??
+                                        0,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return Obx(() {
+                                        return TransportationCard(
+                                          price: controller.busesData.value
+                                                  .data?[index].price
+                                                  .toString() ??
+                                              "0",
+                                          remarks: controller.busesData.value
+                                                  .data?[index].remarks ??
+                                              "",
+                                          onTap: () {
+                                            controller.selectedBus.value =
+                                                index;
+                                            controller
+                                                    .selectedBusesModel.value =
+                                                PostCostParams(
+                                                    destinationID: controller
+                                                        .busesData
+                                                        .value
+                                                        .data?[index]
+                                                        .id,
+                                                    userID: GetStorage()
+                                                        .read("user_id"),
+                                                    title: controller
+                                                        .busesData
+                                                        .value
+                                                        .data?[index]
+                                                        .name,
+                                                    price: controller
+                                                        .busesData
+                                                        .value
+                                                        .data?[index]
+                                                        .price,
+                                                    startDate: DateTime.parse(
+                                                        controller.startDate
+                                                            .value.text),
+                                                    endDate: DateTime.parse(
+                                                        controller.endDate.value.text));
+                                            controller.letsCalculate();
+                                          },
+                                          isSelected:
+                                              controller.selectedBus.value ==
+                                                  index,
+                                          startPoint: "Kathmandu",
+                                          endPoint:
+                                              controller.arguments["name"],
+                                          startTime: "",
+                                          endTime: "",
+                                          title: controller.busesData.value
+                                                  .data?[index].name ??
+                                              "",
+                                          icon: const Icon(
+                                            Icons.directions_bus,
+                                            color: Colors.teal,
+                                            size: 40,
+                                          ),
+                                        );
+                                      });
                                     },
-                                    isSelected:
-                                    controller.selectedBus.value ==
-                                        index,
-                                    startPoint: "Kathmandu",
-                                    endPoint: controller.arguments["name"],
-                                    startTime: "",
-                                    endTime: "",
-                                    title: controller.busesData.value
-                                        .data?[index].name ??
-                                        "",
-                                    icon: const Icon(
-                                      Icons.directions_bus,
-                                      color: Colors.teal,
-                                      size: 40,
-                                    ),
-                                  );
-                                });
-                              },
-                              separatorBuilder: (context, index) =>
-                              const SizedBox(height: 16),
-                            )
+                                    separatorBuilder: (context, index) =>
+                                        const SizedBox(height: 16),
+                                  )
                                 : const NoDataView(title: "No Buses Found"),
                           ],
                         );
@@ -308,53 +314,55 @@ class SetDestinationView extends GetView<SetDestinationController> {
                           const SizedBox(height: 10),
                           (controller.hotelData.value.data?.isNotEmpty ?? false)
                               ? ListView.separated(
-                            shrinkWrap: true,
-                            itemCount:
-                            controller.hotelData.value.data?.length ??
-                                0,
-                            physics: const NeverScrollableScrollPhysics(),
-                            primary: false,
-                            separatorBuilder: (context, index) =>
-                            const SizedBox(height: 16),
-                            itemBuilder: (context, index) =>
-                                Obx(() {
-                                  return HotelCard(
-                                    price: controller
-                                        .hotelData.value.data?[index].price
-                                        .toString() ??
-                                        "0",
-                                    title: controller.hotelData.value
-                                        .data?[index].name ??
-                                        "",
-                                    subTitle: controller.hotelData.value
-                                        .data?[index].remarks ??
-                                        "",
-                                    isSelected:
-                                    controller.selectedLodge.value == index,
-                                    onTap: () {
-                                      controller.selectedLodge.value = index;
-                                      controller.selectedLodgeModel.value =
-                                          PostCostParams(
-                                              destinationID: controller
-                                                  .hotelData
-                                                  .value
-                                                  .data?[index]
-                                                  .id,
-                                              userID:
-                                              GetStorage().read("user_id"),
-                                              title: controller.hotelData.value
-                                                  .data?[index].name,
-                                              price: controller.hotelData.value
-                                                  .data?[index].price,
-                                              startDate: DateTime.parse(
-                                                  controller
-                                                      .startDate.value.text),
-                                              endDate: DateTime.parse(controller
-                                                  .endDate.value.text));
-                                    },
-                                  );
-                                }),
-                          )
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      controller.hotelData.value.data?.length ??
+                                          0,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  primary: false,
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(height: 16),
+                                  itemBuilder: (context, index) => Obx(() {
+                                    return HotelCard(
+                                      price: controller.hotelData.value
+                                              .data?[index].price
+                                              .toString() ??
+                                          "0",
+                                      title: controller.hotelData.value
+                                              .data?[index].name ??
+                                          "",
+                                      subTitle: controller.hotelData.value
+                                              .data?[index].remarks ??
+                                          "",
+                                      isSelected:
+                                          controller.selectedLodge.value ==
+                                              index,
+                                      onTap: () {
+                                        controller.selectedLodge.value = index;
+                                        controller.selectedLodgeModel.value =
+                                            PostCostParams(
+                                                destinationID: controller
+                                                    .hotelData
+                                                    .value
+                                                    .data?[index]
+                                                    .id,
+                                                userID: GetStorage()
+                                                    .read("user_id"),
+                                                title: controller.hotelData
+                                                    .value.data?[index].name,
+                                                price: controller.hotelData
+                                                    .value.data?[index].price,
+                                                startDate: DateTime.parse(
+                                                    controller
+                                                        .startDate.value.text),
+                                                endDate: DateTime.parse(
+                                                    controller
+                                                        .endDate.value.text));
+                                        controller.letsCalculate();
+                                      },
+                                    );
+                                  }),
+                                )
                               : const NoDataView(title: "No Lodging Found"),
                         ],
                       );

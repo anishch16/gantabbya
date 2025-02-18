@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gantabbya/app/data/remote/api_urls.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,7 +28,132 @@ class HomeView extends GetView<HomeController> {
               fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        key: controller.scaffoldKey,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        drawer: Container(
+          color: Colors.black54.withOpacity(0.8),
+          width: 300,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          height: Get.size.height,
+          child: SafeArea(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/gantabyaLogo.png',
+                            height: 40,
+                          ),
+                          const SizedBox(width: 16),
+                          Text(
+                            "Gantabya",
+                            style: AppTextStyles.smallStyle
+                                .copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 40),
+                          backgroundColor: const Color(0xFF979797).withOpacity(0.3),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.person, color: Colors.white),
+                            const SizedBox(width: 12),
+                            Text(
+                              "Profile",
+                              style: AppTextStyles.smallStyle.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.defaultDialog(
+                            title: "Logout",
+                            middleText:
+                                "Are you sure you want to logout?",
+                            confirm: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.teal,
+                              ),
+                              onPressed: () {
+                                controller.localData
+                                    .write("isLoggedIn", false);
+                                controller.localData
+                                    .write("access_token", null);
+                                Get.offAllNamed(Routes.LOGIN);
+                                Get.back();
+                              },
+                              child: Text(
+                                "Yes",
+                                style: AppTextStyles.smallStyle
+                                    .copyWith(color: Colors.white),
+                              ),
+                            ),
+                            cancel: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.teal,
+                              ),
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text(
+                                "No",
+                                style: AppTextStyles.smallStyle
+                                    .copyWith(color: Colors.white),
+                              ),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 40),
+                          backgroundColor: const Color(0xFF979797).withOpacity(0.3),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.logout, color: Colors.white),
+                            const SizedBox(width: 12),
+                            Text(
+                              "Log out",
+                              style: AppTextStyles.smallStyle.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ]
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text(
+                      "Developer: Team Gantabya",
+                      style: AppTextStyles.smallStyle.copyWith(
+                        color: Colors.white.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                ]),
+          ),
+        ),
         body: Container(
           decoration: const BoxDecoration(
             color: Colors.transparent,
@@ -60,8 +185,19 @@ class HomeView extends GetView<HomeController> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 16),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            GestureDetector(
+                              onTap: () {
+                                controller.openDrawer();
+                              },
+                              child: const Icon(
+                                Icons.menu,
+                                size: 24,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
                             Row(
                               children: [
                                 Text(
@@ -73,61 +209,6 @@ class HomeView extends GetView<HomeController> {
                                   getGreetingIcon(),
                                   size: 24,
                                   color: getGreetingColor(),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                // const Icon(
-                                //   Icons.notifications,
-                                //   size: 24,
-                                //   color: Colors.white,
-                                // ),
-                                // SizedBox(width: 16),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.defaultDialog(
-                                      title: "Logout",
-                                      middleText:
-                                          "Are you sure you want to logout?",
-                                      confirm: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.teal,
-                                        ),
-                                        onPressed: () {
-                                          controller.localData
-                                              .write("isLoggedIn", false);
-                                          controller.localData
-                                              .write("access_token", null);
-                                          Get.offAllNamed(Routes.LOGIN);
-                                          Get.back();
-                                        },
-                                        child: Text(
-                                          "Yes",
-                                          style: AppTextStyles.smallStyle
-                                              .copyWith(color: Colors.white),
-                                        ),
-                                      ),
-                                      cancel: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.teal,
-                                        ),
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: Text(
-                                          "No",
-                                          style: AppTextStyles.smallStyle
-                                              .copyWith(color: Colors.white),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: const Icon(
-                                    Icons.logout,
-                                    size: 24,
-                                    color: Colors.white,
-                                  ),
                                 ),
                               ],
                             ),

@@ -21,6 +21,8 @@ class SetDestinationController extends GetxController {
   final selectedBusesModel = PostCostParams().obs;
   var startDateFilled = false.obs;
   var endDateFilled = false.obs;
+  var letsCalculateEnabled = false.obs;
+
   // final individualController = TextEditingController();
   final startDate = TextEditingController();
   final endDate = TextEditingController();
@@ -40,9 +42,24 @@ class SetDestinationController extends GetxController {
   var busSuccess = false.obs;
   var busOrAirline = false.obs;
 
+  void letsCalculate() {
+    log("calculate called");
+    if (startDate.value.text.isNotEmpty &&
+        endDate.value.text.isNotEmpty &&
+        ((selectedBus.value != -1) || (selectedAirline.value != -1)) &&
+        (selectedLodge.value != -1)) {
+      letsCalculateEnabled.value = true;
+      log("letsCalculateEnabled: ${letsCalculateEnabled.value}");
+    } else {
+      letsCalculateEnabled.value = false;
+      log("letsCalculateDisabled: ${letsCalculateEnabled.value}");
+    }
+  }
+
   @override
   void onReady() {
     super.onReady();
+    log("Location id: ${(arguments["location"]).toString()}");
     locationId.value = (arguments["location"]).toString();
     loadAirlines();
     loadHotels();
@@ -55,11 +72,11 @@ class SetDestinationController extends GetxController {
         .getRequest("http://10.0.2.2:8000/api/destinations/$locationId/hotels");
     response.then((http.Response response) {
       if (response.statusCode == 200) {
+        log("Hotels data: ${response.body}");
         BusAirHotelModel hotelResponse =
             BusAirHotelModel.fromJson(jsonDecode(response.body));
         hotelData.value = hotelResponse;
         hotelLoading.value = false;
-        log("Hotel: ${response.body}");
       } else {
         hotelLoading.value = false;
         Get.rawSnackbar(message: "Something went wrong");
@@ -72,12 +89,12 @@ class SetDestinationController extends GetxController {
     Future<http.Response> response = ApiClient().getRequest(
         "http://10.0.2.2:8000/api/destinations/$locationId/airlines");
     response.then((http.Response response) {
+      log("Airlines data: ${response.body}");
       if (response.statusCode == 200) {
         BusAirHotelModel airlineResponse =
             BusAirHotelModel.fromJson(jsonDecode(response.body));
         airlineData.value = airlineResponse;
         airlinesLoading.value = false;
-        log("Airlines: ${response.body}");
       } else {
         airlinesLoading.value = false;
         Get.rawSnackbar(message: "Something went wrong");
@@ -90,12 +107,12 @@ class SetDestinationController extends GetxController {
     Future<http.Response> response = ApiClient()
         .getRequest("http://10.0.2.2:8000/api/destinations/$locationId/buses");
     response.then((http.Response response) {
+      log("Buses data: ${response.body}");
       if (response.statusCode == 200) {
         BusAirHotelModel busesResponse =
             BusAirHotelModel.fromJson(jsonDecode(response.body));
         busesData.value = busesResponse;
         busesLoading.value = false;
-        log("Buses: ${response.body}");
       } else {
         busesLoading.value = false;
         Get.rawSnackbar(message: "Something went wrong");

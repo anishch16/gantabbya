@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,6 +15,10 @@ import 'package:http/http.dart' as http;
 
 
 class HomeController extends GetxController {
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+  void openDrawer() {
+    scaffoldKey.currentState?.openDrawer();
+  }
   final localData = GetStorage();
 
   final isGrid = false.obs;
