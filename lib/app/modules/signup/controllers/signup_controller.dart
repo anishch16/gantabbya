@@ -9,6 +9,7 @@ import '../models/signup_response_model.dart';
 
 class SignupController extends GetxController {
   var isSigningUp = false.obs;
+  var isPasswordVisible = true.obs;
   final fn = TextEditingController();
   final ln = TextEditingController();
   final email = TextEditingController();

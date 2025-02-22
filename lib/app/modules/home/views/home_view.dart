@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gantabbya/app/data/remote/api_urls.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

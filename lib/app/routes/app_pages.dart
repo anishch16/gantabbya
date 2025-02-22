@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../modules/all_destination/bindings/all_destination_binding.dart';
 import '../modules/all_destination/views/all_destination_view.dart';
@@ -39,13 +38,13 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
       transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.BOTTOM_NAV,
-      page: () => BottomNavView(),
+      page: () => const BottomNavView(),
       binding: BottomNavBinding(),
       transition: Transition.fade,
     ),
@@ -92,7 +91,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_DESTINATION,
-      page: () => DetailDestinationView(),
+      page: () => const DetailDestinationView(),
       binding: DetailDestinationBinding(),
     ),
     GetPage(

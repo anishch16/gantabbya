@@ -18,10 +18,6 @@ class AllDestinationController extends GetxController {
   final TextEditingController searchController = TextEditingController();
   final RxList<Destination> filteredDestinations = <Destination>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   @override
   void onReady() {

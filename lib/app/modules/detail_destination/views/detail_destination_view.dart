@@ -171,7 +171,7 @@ class DetailDestinationView extends GetView<DetailDestinationController> {
                     const SizedBox(height: 20),
                     ReadMoreText(
                       controller.data.description ?? "",
-                      trimLines: 5,
+                      trimLines: 8,
                       style: AppTextStyles.smallStyle.copyWith(
                         color: AppColors.white,
                       ),

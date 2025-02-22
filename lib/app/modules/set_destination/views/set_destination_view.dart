@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gantabbya/app/constants/styles.dart';
+import 'package:gantabbya/app/data/remote/models/bus_air_hotel_model.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import '../../../constants/colors.dart';
-import '../../../data/remote/models/post_cost_params.dart';
+import '../../../routes/app_pages.dart';
 import '../../../widgets/custom_date_picker.dart';
 import '../../cost_details/views/cost_details_view.dart';
+import '../controllers/args_model.dart';
 import '../controllers/set_destination_controller.dart';
 import 'card_shimmer.dart';
 
@@ -27,13 +28,25 @@ class SetDestinationView extends GetView<SetDestinationController> {
           floatingActionButton: GestureDetector(
             onTap: controller.letsCalculateEnabled.value
                 ? () {
-                    if (controller.busOrAirline.value) {
-                      controller.postAirlineChoices();
-                      controller.postLodgingChoices();
-                    } else {
-                      controller.postLodgingChoices();
-                      controller.postBusChoices();
-                    }
+                    TravelCostDetails travelDetails = TravelCostDetails(
+                        startDate: controller.startDate.value.text,
+                        endDate: controller.endDate.value.text,
+                        optimalAir: controller.highestRatedAir.value,
+                        optimalBus: controller.highestRatedBus.value,
+                        optimalLodge: controller.highestRatedHotel.value,
+                        selectedBus: controller.selectedBusesModel.value,
+                        selectedAir: controller.selectedAirlineModel.value,
+                        selectedLodge: controller.selectedLodgeModel.value,
+                        location: controller.arguments["name"] ?? "");
+                    Get.offAllNamed(Routes.ESTIMATED_COST,
+                        arguments: travelDetails);
+                    // if (controller.busOrAirline.value) {
+                    //   controller.postAirlineChoices();
+                    //   controller.postLodgingChoices();
+                    // } else {
+                    //   controller.postLodgingChoices();
+                    //   controller.postBusChoices();
+                    // }
                   }
                 : null,
             child: Container(
@@ -118,7 +131,7 @@ class SetDestinationView extends GetView<SetDestinationController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              (controller.busOrAirline.value ?? false)
+                              (controller.busOrAirline.value)
                                   ? "Airlines Selected"
                                   : "Bus Selected",
                               style: AppTextStyles.smallStyle
@@ -175,6 +188,10 @@ class SetDestinationView extends GetView<SetDestinationController> {
                                           onTap: () {
                                             controller.selectedAirline.value =
                                                 index;
+                                            controller.selectedAirlineModel
+                                                .value = controller.busesData
+                                                    .value.data?[index] ??
+                                                BusAirHotelData();
                                             controller.letsCalculate();
                                           },
                                           isSelected: controller
@@ -241,31 +258,10 @@ class SetDestinationView extends GetView<SetDestinationController> {
                                           onTap: () {
                                             controller.selectedBus.value =
                                                 index;
-                                            controller
-                                                    .selectedBusesModel.value =
-                                                PostCostParams(
-                                                    destinationID: controller
-                                                        .busesData
-                                                        .value
-                                                        .data?[index]
-                                                        .id,
-                                                    userID: GetStorage()
-                                                        .read("user_id"),
-                                                    title: controller
-                                                        .busesData
-                                                        .value
-                                                        .data?[index]
-                                                        .name,
-                                                    price: controller
-                                                        .busesData
-                                                        .value
-                                                        .data?[index]
-                                                        .price,
-                                                    startDate: DateTime.parse(
-                                                        controller.startDate
-                                                            .value.text),
-                                                    endDate: DateTime.parse(
-                                                        controller.endDate.value.text));
+                                            controller.selectedBusesModel
+                                                .value = controller.busesData
+                                                    .value.data?[index] ??
+                                                BusAirHotelData();
                                             controller.letsCalculate();
                                           },
                                           isSelected:
@@ -340,24 +336,9 @@ class SetDestinationView extends GetView<SetDestinationController> {
                                       onTap: () {
                                         controller.selectedLodge.value = index;
                                         controller.selectedLodgeModel.value =
-                                            PostCostParams(
-                                                destinationID: controller
-                                                    .hotelData
-                                                    .value
-                                                    .data?[index]
-                                                    .id,
-                                                userID: GetStorage()
-                                                    .read("user_id"),
-                                                title: controller.hotelData
-                                                    .value.data?[index].name,
-                                                price: controller.hotelData
-                                                    .value.data?[index].price,
-                                                startDate: DateTime.parse(
-                                                    controller
-                                                        .startDate.value.text),
-                                                endDate: DateTime.parse(
-                                                    controller
-                                                        .endDate.value.text));
+                                            controller.hotelData.value
+                                                    .data?[index] ??
+                                                BusAirHotelData();
                                         controller.letsCalculate();
                                       },
                                     );

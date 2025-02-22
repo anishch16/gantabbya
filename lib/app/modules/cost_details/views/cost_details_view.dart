@@ -408,6 +408,7 @@ class HotelCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         // margin: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(

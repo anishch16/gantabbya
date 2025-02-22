@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -232,7 +231,7 @@ class ApiClient {
         throw Exception("Unable to connect to the server. Please check your internet or API server.");
       } else {
         log('An unexpected error occurred: $error');
-        throw error;
+        rethrow;
       }
     }
   }
@@ -248,13 +247,13 @@ class ApiClient {
                 'Bearer ' + localData.read('access_token'),
           },
           body: body);
-      print("res:" + response.body);
+      print("res:${response.body}");
 
       if (response.statusCode == 401) {
         Get.rawSnackbar(
           message: 'Token Expired Please Login Again',
           backgroundColor: AppColors.grey.shade600,
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           snackPosition: SnackPosition.BOTTOM,
         );
       } else if (response.statusCode > 201) {
@@ -265,7 +264,7 @@ class ApiClient {
       return response;
     } catch (error) {
       print('An error occurred: $error');
-      throw error; // Rethrow the error to propagate it to the caller
+      rethrow; // Rethrow the error to propagate it to the caller
     }
   }
 
@@ -318,8 +317,8 @@ class ApiClient {
     Get.rawSnackbar(
         message: errorResponse,
         backgroundColor: AppColors.grey.shade800,
-        duration: Duration(seconds: 2),
-        animationDuration: Duration(milliseconds: 100),
+        duration: const Duration(seconds: 2),
+        animationDuration: const Duration(milliseconds: 100),
         snackPosition: SnackPosition.BOTTOM);
 
     print(errorMessage); // You can replace this with UI-specific code

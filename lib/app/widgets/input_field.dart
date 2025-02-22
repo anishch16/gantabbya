@@ -37,11 +37,11 @@ class InputField extends StatelessWidget {
             hintText: hintText,
             contentPadding: const EdgeInsets.all(8.0),
             errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.red),
+              borderSide: const BorderSide(color: AppColors.red),
               borderRadius: BorderRadius.circular(8.0),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.red),
+              borderSide: const BorderSide(color: AppColors.red),
               borderRadius: BorderRadius.circular(8.0),
             ),
             focusedBorder:OutlineInputBorder(

@@ -8,7 +8,6 @@ import '../../../utils/snackbar_util.dart';
 import '../../../widgets/button_large.dart';
 import '../../../widgets/checkbox_view.dart';
 import '../../../widgets/custom_textfield.dart';
-import '../../bottomNav/views/bottom_nav_view.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {

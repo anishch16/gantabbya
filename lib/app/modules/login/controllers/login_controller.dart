@@ -14,7 +14,7 @@ class LoginController extends GetxController {
   var isLogging = false.obs;
   var loginData = LoginResponseModel().obs;
   final localData = GetStorage();
-  var isPasswordVisible = false.obs;
+  var isPasswordVisible = true.obs;
   var isRememberMe = false.obs;
   final email = TextEditingController();
   final username = TextEditingController();
