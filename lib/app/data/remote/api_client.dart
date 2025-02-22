@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -22,87 +21,155 @@ class ApiClient {
   //get method
   Future<http.Response> getRequest(String url) async {
     try {
+      String? accessToken = localData.read('access_token');
+      if (accessToken == null || accessToken.isEmpty) {
+        Get.offAll(() => const LoginView());
+        Get.rawSnackbar(
+          message: 'Session Expired. Please Login Again',
+          backgroundColor: AppColors.grey.shade600,
+          duration: const Duration(seconds: 2),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        throw Exception("Access token is missing.");
+      }
       var response = await http.get(
         Uri.parse(url),
         headers: {
-          HttpHeaders.authorizationHeader:
-              'Bearer ' + localData.read('access_token'),
+          HttpHeaders.authorizationHeader: "Bearer $accessToken",
+          HttpHeaders.contentTypeHeader: "application/json",
         },
       );
-      print("Response::::::::${response.body}");
-      print("Response statusCode ::::::::${response.statusCode}");
+
+      // Handle 401 (Unauthorized) - Token expired
       if (response.statusCode == 401) {
         localData.erase();
-        Get.offAll(() => LoginView());
+        Get.offAll(() => const LoginView());
         Get.rawSnackbar(
-          message: 'Token Expired Please Login Again',
+          message: 'Token Expired. Please Login Again',
           backgroundColor: AppColors.grey.shade600,
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 2),
           snackPosition: SnackPosition.BOTTOM,
         );
+        throw Exception("Unauthorized - Token expired.");
       }
-      // else if (response.statusCode == 204) {
-      //   print('No Content returned::::::::::::::::::');
-      //   Get.back();
-      //   Get.rawSnackbar(
-      //     message: 'No data found',
-      //     backgroundColor: AppColors.grey.shade600,
-      //     duration: Duration(seconds: 1),
-      //     snackPosition: SnackPosition.BOTTOM,
-      //   );
-      // }
 
-      else if (response.statusCode != 200) {
-        print("gg");
-        print("Response we get:::::::::::" + response.body);
-        if(response.body.isNotEmpty){
+      // Handle other errors (non-200 responses)
+      if (response.statusCode != 200) {
+        log("Error Response: ${response.body}");
+
+        if (response.body.isNotEmpty) {
           var errorMap = jsonDecode(response.body);
           var errorMessage = extractErrorMessage(errorMap);
           showErrorMessage(errorMessage);
         } else {
-          Get.back();
-          showErrorMessage("Empty Data");
+          showErrorMessage("No Data Received from Server.");
         }
       }
+
       return response;
     } catch (error, stackTrace) {
-      print('An error occurred: $error');
-      print('Stack trace: $stackTrace');
-      throw error; // Rethrow the error to propagate it to the caller
+      log('An error occurred: $error');
+      log('Stack trace: $stackTrace');
+      throw Exception("Network error: $error");
     }
   }
 
+
   //post method
-  Future<http.Response> postRequest(
-      String url, Map<String, dynamic> body) async {
+  Future<http.Response> postRequest(String url, Map<String, dynamic> body) async {
     try {
-      var response = await http.post(Uri.parse(url),
-          headers: {
-            HttpHeaders.authorizationHeader:
-                'Bearer ' + localData.read('access_token'),
-          },
-          body: body);
-      print("Response::::::::${response.body}");
+      String? accessToken = localData.read('access_token');
+      if (accessToken == null || accessToken.isEmpty) {
+        _handleSessionExpired();
+        throw Exception("Access token is missing.");
+      }
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {
+          HttpHeaders.authorizationHeader: "Bearer $accessToken",
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+        body: jsonEncode(body),
+      );
+
+      log("Request: $url | Body: ${jsonEncode(body)} | Response: ${response.body}");
       if (response.statusCode == 401) {
         localData.erase();
-        Get.offAll(() => LoginView());
-        Get.rawSnackbar(
-          message: 'Token Expired Please Login Again',
-          backgroundColor: AppColors.grey.shade600,
-          duration: Duration(seconds: 1),
-          snackPosition: SnackPosition.BOTTOM,
-        );
-      } else if (response.statusCode > 201) {
-        var errorMap = jsonDecode(response.body);
-        var errorMessage = extractErrorMessage(errorMap);
-        showErrorMessage(errorMessage);
+        _handleSessionExpired();
+        throw Exception("Unauthorized - Token expired.");
       }
       return response;
     } catch (error) {
-      print('An error occurred: $error');
-      throw error; // Rethrow the error to propagate it to the caller
+      if (error is SocketException) {
+        log('Network error: $error');
+        throw Exception("Unable to connect to the server. Please check your internet or API server.");
+      } else {
+        log('An unexpected error occurred: $error');
+        rethrow;
+      }
     }
   }
+  void _handleSessionExpired() {
+    Get.offAll(() => const LoginView());
+    Get.rawSnackbar(
+      message: 'Session Expired. Please Login Again',
+      backgroundColor: AppColors.grey.shade600,
+      duration: const Duration(seconds: 2),
+      snackPosition: SnackPosition.BOTTOM,
+    );
+  }
+  // Future<http.Response> postRequest(String url, Map<String, dynamic> body) async {
+  //   try {
+  //     String? accessToken = localData.read('access_token');
+  //     if (accessToken == null || accessToken.isEmpty) {
+  //       Get.offAll(() => const LoginView());
+  //       Get.rawSnackbar(
+  //         message: 'Session Expired. Please Login Again',
+  //         backgroundColor: AppColors.grey.shade600,
+  //         duration: const Duration(seconds: 2),
+  //         snackPosition: SnackPosition.BOTTOM,
+  //       );
+  //       throw Exception("Access token is missing.");
+  //     }
+  //
+  //     var response = await http.post(
+  //       Uri.parse(url),
+  //       headers: {
+  //         HttpHeaders.authorizationHeader: "Bearer $accessToken",
+  //         HttpHeaders.contentTypeHeader: "application/json",
+  //       },
+  //       body: jsonEncode(body),
+  //     );
+  //     if (response.statusCode == 401) {
+  //       localData.erase();
+  //       Get.offAll(() => const LoginView());
+  //       Get.rawSnackbar(
+  //         message: 'Token Expired. Please Login Again',
+  //         backgroundColor: AppColors.grey.shade600,
+  //         duration: const Duration(seconds: 2),
+  //         snackPosition: SnackPosition.BOTTOM,
+  //       );
+  //       throw Exception("Unauthorized - Token expired.");
+  //     }
+  //     if (response.statusCode != 201) {
+  //       log("Error Response: ${response.body}");
+  //       if (response.body.isNotEmpty) {
+  //         var errorMap = jsonDecode(response.body);
+  //         var errorMessage = extractErrorMessage(errorMap);
+  //         showErrorMessage(errorMessage);
+  //       } else {
+  //         showErrorMessage("No Data Received from Server.");
+  //       }
+  //     }
+  //
+  //     return response;
+  //   } catch (error, stackTrace) {
+  //     log('An error occurred: $error');
+  //     log('Stack trace: $stackTrace');
+  //     throw Exception("Network error: $error");
+  //   }
+  // }
+
 
   //delete method
   Future<http.Response> deleteRequest(String url) async {
@@ -114,14 +181,14 @@ class ApiClient {
               'Bearer ' + localData.read('access_token'),
         },
       );
-      print("Response::::::::${response.body}");
+      log("Response::::::::${response.body}");
       if (response.statusCode == 401) {
         // refreshToken();
         // Get.offAll(() => LoginView());
         Get.rawSnackbar(
           message: 'Token Expired Please Login Again',
           backgroundColor: AppColors.grey.shade600,
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           snackPosition: SnackPosition.BOTTOM,
         );
       } else if (response.statusCode != 204) {
@@ -131,9 +198,9 @@ class ApiClient {
       }
       return response;
     } catch (error, stackTrace) {
-      print('An error occurred: $error');
-      print('Stack trace: $stackTrace');
-      throw error; // Rethrow the error to propagate it to the caller
+      log('An error occurred: $error');
+      log('Stack trace: $stackTrace');
+      rethrow; // Rethrow the error to propagate it to the caller
     }
   }
 
@@ -142,21 +209,33 @@ class ApiClient {
   Future<http.Response> postRequestWithoutToken(
       String url, Map<String, dynamic> body) async {
     try {
-      var jsonData = body;
-      var response = await http.post(Uri.parse(url),
-          body: jsonData);
-      log("Response:${response.body}");
+      var jsonData = jsonEncode(body);
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: jsonData,
+      );
+
+      log("Response: ${response.body}");
+
       if (response.statusCode >= 400) {
         var errorMap = jsonDecode(response.body);
         var errorMessage = extractErrorMessage(errorMap);
         showErrorMessage(errorMessage);
       }
+
       return response;
     } catch (error) {
-      log('An error occurred: $error');
-      throw error; // Rethrow the error to propagate it to the caller
+      if (error is SocketException) {
+        log('Network error: $error');
+        throw Exception("Unable to connect to the server. Please check your internet or API server.");
+      } else {
+        log('An unexpected error occurred: $error');
+        rethrow;
+      }
     }
   }
+
 
   // patch method
   Future<http.Response> patchRequest(
@@ -168,13 +247,13 @@ class ApiClient {
                 'Bearer ' + localData.read('access_token'),
           },
           body: body);
-      print("res:" + response.body);
+      print("res:${response.body}");
 
       if (response.statusCode == 401) {
         Get.rawSnackbar(
           message: 'Token Expired Please Login Again',
           backgroundColor: AppColors.grey.shade600,
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           snackPosition: SnackPosition.BOTTOM,
         );
       } else if (response.statusCode > 201) {
@@ -185,7 +264,7 @@ class ApiClient {
       return response;
     } catch (error) {
       print('An error occurred: $error');
-      throw error; // Rethrow the error to propagate it to the caller
+      rethrow; // Rethrow the error to propagate it to the caller
     }
   }
 
@@ -238,8 +317,8 @@ class ApiClient {
     Get.rawSnackbar(
         message: errorResponse,
         backgroundColor: AppColors.grey.shade800,
-        duration: Duration(seconds: 2),
-        animationDuration: Duration(milliseconds: 100),
+        duration: const Duration(seconds: 2),
+        animationDuration: const Duration(milliseconds: 100),
         snackPosition: SnackPosition.BOTTOM);
 
     print(errorMessage); // You can replace this with UI-specific code

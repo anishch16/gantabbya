@@ -31,7 +31,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'dimens.dart';
 
 mixin AppDimens {
   static const double tiny = 12.0;

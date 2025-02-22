@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 
 import 'package:get/get.dart';
-import '../../../constants/colors.dart';
 import '../../favorite_trips/views/favorite_trips_view.dart';
 import '../../home/views/home_view.dart';
 import '../../location/views/location_view.dart';
@@ -22,7 +20,7 @@ class BottomNavView extends GetView<BottomNavController> {
           controller.changePage(index);
         },
         children: [
-          HomeView(),
+          const HomeView(),
           const FavoriteTripsView(),
           LocationView(),
           UserProfileView(),

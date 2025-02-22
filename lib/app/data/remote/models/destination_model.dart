@@ -6,11 +6,11 @@ class Destination {
   final String? description;
   final String? destinationType;
   final String? location;
-  final List<String>? image;
+  final String? image;
   final double? latitude;
   final double? longitude;
   final DateTime? createdAt;
-  final String? popularity;
+  final double? popularity;
 
   Destination({
     this.id,
@@ -19,10 +19,10 @@ class Destination {
     this.destinationType,
     this.location,
     this.image,
-    this.createdAt,
-    this.popularity,
     this.latitude,
     this.longitude,
+    this.createdAt,
+    this.popularity,
   });
 
   factory Destination.fromJson(Map<String, dynamic> json) {
@@ -32,11 +32,11 @@ class Destination {
       description: json['description'] as String?,
       destinationType: json['destination_type'] as String?,
       location: json['location'] as String?,
-      image: (json['image'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at'] as String) : null,
-      popularity: json['popularity'] as String?,
+      image: json['image'] as String?,
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
+      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
+      popularity: (json['popularity'] as num?)?.toDouble(),
     );
   }
 
@@ -48,17 +48,11 @@ class Destination {
       'destination_type': destinationType,
       'location': location,
       'image': image,
-      'created_at': createdAt?.toIso8601String(),
-      'popularity': popularity,
       'latitude': latitude,
       'longitude': longitude,
+      'created_at': createdAt?.toIso8601String(),
+      'popularity': popularity,
     };
-  }
-
-  static List<Destination> fromJsonList(String jsonString) {
-    final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-    final List<dynamic> jsonData = jsonMap['data'] as List<dynamic>;
-    return jsonData.map((json) => Destination.fromJson(json as Map<String, dynamic>)).toList();
   }
 }
 
@@ -66,27 +60,41 @@ class DestinationResponse {
   final int? error;
   final String? message;
   final List<Destination>? data;
+  final int? page;
+  final int? size;
+  final int? count;
 
   DestinationResponse({
     this.error,
     this.message,
     this.data,
+    this.page,
+    this.size,
+    this.count,
   });
 
-  factory DestinationResponse.fromJson(String jsonString) {
-    final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+  factory DestinationResponse.fromJson(Map<String, dynamic> jsonMap) {
     return DestinationResponse(
       error: jsonMap['error'] as int?,
       message: jsonMap['message'] as String?,
-      data: (jsonMap['data'] as List<dynamic>?)?.map((json) => Destination.fromJson(json as Map<String, dynamic>)).toList(),
+      data: (jsonMap['data'] as List<dynamic>?)
+          ?.map((json) => Destination.fromJson(json as Map<String, dynamic>))
+          .toList(),
+      page: jsonMap['page'] as int?,
+      size: jsonMap['size'] as int?,
+      count: jsonMap['count'] as int?,
     );
   }
+
 
   String toJson() {
     return jsonEncode({
       'error': error,
       'message': message,
       'data': data?.map((destination) => destination.toJson()).toList(),
+      'page': page,
+      'size': size,
+      'count': count,
     });
   }
 }

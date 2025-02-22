@@ -98,10 +98,10 @@ class LocationView extends GetView<LocationController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           DropdownButtonFormField<String>(
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
@@ -134,7 +134,7 @@ class LocationView extends GetView<LocationController> {
           InkWell(
             onTap: onTap,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(15),
@@ -142,7 +142,7 @@ class LocationView extends GetView<LocationController> {
               ),
               child: Text(
                 '${selectedDate.toLocal()}'.split(' ')[0],
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ),
           ),

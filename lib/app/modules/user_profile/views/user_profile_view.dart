@@ -17,7 +17,7 @@ class UserProfileView extends GetView<UserProfileController> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(right: 16, left: 16, top: 24),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
         ),
         child: Column(
@@ -280,7 +280,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: 16),
+                                        const SizedBox(width: 16),
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
@@ -336,7 +336,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                         )
                                       ],
                                     ));
-                              }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 16); },
+                              }, separatorBuilder: (BuildContext context, int index) { return const SizedBox(height: 16); },
                             );
                     })
                   ],

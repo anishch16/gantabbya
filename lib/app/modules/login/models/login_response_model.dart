@@ -1,59 +1,69 @@
 class LoginResponseModel {
-  String? refresh;
-  String? access;
+  int? error;
+  String? message;
+  TokenData? data;
 
-  LoginResponseModel({this.refresh, this.access});
+  LoginResponseModel({this.error, this.message, this.data});
 
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
+    error = json['error'];
+    message = json['message'];
+    data = json['data'] != null ? TokenData.fromJson(json['data']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['error'] = error;
+    data['message'] = message;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
+}
+
+class TokenData {
+  String? refresh;
+  String? access;
+  User? user;
+
+  TokenData({this.refresh, this.access, this.user});
+
+  TokenData.fromJson(Map<String, dynamic> json) {
     refresh = json['refresh'];
     access = json['access'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['refresh'] = refresh;
     data['access'] = access;
+    if (user != null) {
+      data['user'] = user!.toJson();
+    }
     return data;
   }
 }
 
 class User {
-  String? fullName;
+  int? id;
+  String? username;
   String? email;
-  bool? isVerified;
-  List<String>? roles;
-  bool? hasFilledProfileInfo;
-  bool? hasFilledEducationInfo;
-  bool? hasFilledWorkExperience;
 
-  User(
-      {this.fullName,
-        this.email,
-        this.isVerified,
-        this.roles,
-        this.hasFilledProfileInfo,
-        this.hasFilledEducationInfo,
-        this.hasFilledWorkExperience});
+  User({this.id, this.username, this.email});
 
   User.fromJson(Map<String, dynamic> json) {
-    fullName = json['full_name'];
+    id = json['id'];
+    username = json['username'];
     email = json['email'];
-    isVerified = json['is_verified'];
-    roles = json['roles'].cast<String>();
-    hasFilledProfileInfo = json['has_filled_profile_info'];
-    hasFilledEducationInfo = json['has_filled_education_info'];
-    hasFilledWorkExperience = json['has_filled_work_experience'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['full_name'] = fullName;
+    data['id'] = id;
+    data['username'] = username;
     data['email'] = email;
-    data['is_verified'] = isVerified;
-    data['roles'] = roles;
-    data['has_filled_profile_info'] = hasFilledProfileInfo;
-    data['has_filled_education_info'] = hasFilledEducationInfo;
-    data['has_filled_work_experience'] = hasFilledWorkExperience;
     return data;
   }
 }

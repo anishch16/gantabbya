@@ -34,7 +34,7 @@ Widget buildShimmerWidget(Size size) {
             height: 20.0,
             color: Colors.white,
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             width: size.width * 0.1,
             height: 20.0,

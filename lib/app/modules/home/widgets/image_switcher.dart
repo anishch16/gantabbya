@@ -5,6 +5,8 @@ import '../../../data/remote/api_urls.dart';
 import '../../../utils/preview_image_card.dart';
 
 class ImageSwitcher extends StatefulWidget {
+  const ImageSwitcher({super.key});
+
   @override
   _ImageSwitcherState createState() => _ImageSwitcherState();
 }

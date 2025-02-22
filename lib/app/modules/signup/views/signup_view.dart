@@ -30,7 +30,8 @@ class SignupView extends GetView<SignupController> {
               ),
               Text(
                 "SignUp",
-                style: InRiaTextStyles.veryBigStyle.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                style: InRiaTextStyles.veryBigStyle
+                    .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 24.0),
               Padding(
@@ -45,7 +46,8 @@ class SignupView extends GetView<SignupController> {
                         enabled: true,
                         textEditingController: controller.fn,
                         autoValidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (string) => Validator.validateUsername(string: string ?? ""),
+                        validator: (string) =>
+                            Validator.validateUsername(string: string ?? ""),
                       ),
                       const SizedBox(
                         height: 16,
@@ -56,41 +58,77 @@ class SignupView extends GetView<SignupController> {
                         icon: const Icon(Icons.mail),
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         textEditingController: controller.email,
-                        validator: (string) => Validator.validateEmail(string: string ?? ""),
+                        validator: (string) =>
+                            Validator.validateEmail(string: string ?? ""),
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      CustomTextField(
-                        hint: "Password",
-                        enabled: true,
-                        icon: const Icon(Icons.lock),
-                        maxLength: 15,
-                        textEditingController: controller.pw,
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (string) => Validator.validatePassword(string: string ?? ""),
-                      ),
+                      Obx(() {
+                        return CustomTextField(
+                          hint: "Password",
+                          icon: const Icon(Icons.lock),
+                          enabled: true,
+                          textEditingController: controller.pw,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (string) =>
+                              Validator.validatePassword(string: string ?? ""),
+                          obscureText: controller.isPasswordVisible.value,
+                          suffixIcon: controller.isPasswordVisible.value
+                              ? GestureDetector(
+                                  onTap: () {
+                                    controller.isPasswordVisible.value =
+                                        !controller.isPasswordVisible.value;
+                                  },
+                                  child: const Icon(Icons.visibility_off))
+                              : GestureDetector(
+                                  onTap: () {
+                                    controller.isPasswordVisible.value =
+                                        !controller.isPasswordVisible.value;
+                                  },
+                                  child: const Icon(Icons.visibility)),
+                        );
+                      }),
                       const SizedBox(
                         height: 16,
                       ),
-                      CustomTextField(
-                        hint: "Confirm Password",
-                        enabled: true,
-                        icon: const Icon(Icons.lock),
-                        maxLength: 15,
-                        textEditingController: controller.confirmPw,
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (string) => Validator.confirmPassword(password: controller.pw.text, cPassword: string ?? ""),
-                      ),
+                      Obx(() {
+                        return CustomTextField(
+                          hint: "Confirm Password",
+                          icon: const Icon(Icons.lock),
+                          enabled: true,
+                          textEditingController: controller.confirmPw,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (string) => Validator.confirmPassword(
+                              password: controller.pw.text,
+                              cPassword: string ?? ""),
+                          obscureText: controller.isPasswordVisible.value,
+                          suffixIcon: controller.isPasswordVisible.value
+                              ? GestureDetector(
+                                  onTap: () {
+                                    controller.isPasswordVisible.value =
+                                        !controller.isPasswordVisible.value;
+                                  },
+                                  child: const Icon(Icons.visibility_off))
+                              : GestureDetector(
+                                  onTap: () {
+                                    controller.isPasswordVisible.value =
+                                        !controller.isPasswordVisible.value;
+                                  },
+                                  child: const Icon(Icons.visibility)),
+                        );
+                      }),
                       const SizedBox(
                         height: 24,
                       ),
                       Obx(
                         () => controller.isSigningUp.value
-                            ? const CircularProgressIndicator(color: AppColors.primary, strokeWidth: 3)
+                            ? const CircularProgressIndicator(
+                                color: AppColors.primary, strokeWidth: 3)
                             : GestureDetector(
                                 onTap: () {
-                                  if (controller.signUpFormKey.currentState!.validate()) {
+                                  if (controller.signUpFormKey.currentState!
+                                      .validate()) {
                                     controller.signup(
                                       email: controller.email.text,
                                       pw: controller.pw.text,
@@ -101,7 +139,8 @@ class SignupView extends GetView<SignupController> {
                                         message: "Invalid Input",
                                         backgroundColor: AppColors.red,
                                         duration: const Duration(seconds: 2),
-                                        animationDuration: const Duration(milliseconds: 100),
+                                        animationDuration:
+                                            const Duration(milliseconds: 100),
                                         snackPosition: SnackPosition.BOTTOM);
                                   }
                                 },
@@ -116,7 +155,8 @@ class SignupView extends GetView<SignupController> {
                         children: [
                           Text(
                             "Already an account?",
-                            style: AppTextStyles.smallStyle.copyWith(color: Colors.black),
+                            style: AppTextStyles.smallStyle
+                                .copyWith(color: Colors.black),
                           ),
                           const SizedBox(
                             width: 8,
@@ -125,7 +165,8 @@ class SignupView extends GetView<SignupController> {
                             onTap: () => Get.offAllNamed(Routes.LOGIN),
                             child: Text(
                               "LogIn",
-                              style: AppTextStyles.smallStyle.copyWith(color: Colors.blue),
+                              style: AppTextStyles.smallStyle
+                                  .copyWith(color: Colors.blue),
                             ),
                           )
                         ],

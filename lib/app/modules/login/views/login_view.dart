@@ -8,7 +8,6 @@ import '../../../utils/snackbar_util.dart';
 import '../../../widgets/button_large.dart';
 import '../../../widgets/checkbox_view.dart';
 import '../../../widgets/custom_textfield.dart';
-import '../../bottomNav/views/bottom_nav_view.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -94,15 +93,15 @@ class LoginView extends GetView<LoginController> {
                                 clicked: controller.isRememberMe.value,
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                // Get.to(() => ForgotPassword());
-                              },
-                              child: const Text(
-                                "Forgot Password?",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     // Get.to(() => ForgotPassword());
+                            //   },
+                            //   child: const Text(
+                            //     "Forgot Password?",
+                            //     style: TextStyle(color: Colors.red),
+                            //   ),
+                            // ),
                           ],
                         );
                       }),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../data/remote/models/destination_model.dart';
 import '../../../data/remote/models/weather_model.dart';
 
 class DetailDestinationController extends GetxController {
@@ -15,24 +16,18 @@ class DetailDestinationController extends GetxController {
   final PageController pageController = PageController();
   var weatherLoading = false.obs;
   var weatherData = WeatherData().obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  final Destination data = Get.arguments;
+
   @override
   void onReady() {
     super.onReady();
     getWeather(
-      latitude: Get.arguments["latitude"].toString(),
-      longitude: Get.arguments["longitude"].toString(),
+      latitude: data.latitude.toString(),
+      longitude: data.longitude.toString(),
     );
 
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
  Future<void> getWeather({required String latitude, required String longitude}) async {
   weatherLoading.value = true;
   final String url = "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&past_days=10&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"; // Replace with your weather API endpoint

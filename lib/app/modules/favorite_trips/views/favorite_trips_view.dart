@@ -199,11 +199,11 @@ class MyTabTwo extends StatelessWidget {
                 ),
                 labelColor: Colors.black,
                 dividerColor: Colors.black,
-                tabs: [
-                  const Tab(
+                tabs: const [
+                  Tab(
                     text: "Live",
                   ),
-                  const Tab(
+                  Tab(
                     text: "Result",
                   ),
                 ],
@@ -213,7 +213,7 @@ class MyTabTwo extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Expanded(
+          const Expanded(
             child: TabBarView(children: [
               // MyLivePage(),
               // MyResultPage(),

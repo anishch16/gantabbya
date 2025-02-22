@@ -70,7 +70,10 @@ class CostDetailsView extends GetView<CostDetailsController> {
             borderRadius: BorderRadius.circular(20),
             color: Colors.teal,
           ),
-          child: Center(child: Text("Final Trip Cost", style: AppTextStyles.miniStyle.copyWith(fontSize: 16, color: Colors.white))),
+          child: Center(
+              child: Text("Final Trip Cost",
+                  style: AppTextStyles.miniStyle
+                      .copyWith(fontSize: 16, color: Colors.white))),
         ),
       ),
       appBar: AppBar(
@@ -91,7 +94,8 @@ class CostDetailsView extends GetView<CostDetailsController> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 "Transportation Choices",
-                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                style: AppTextStyles.smallStyle
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             ListView.separated(
@@ -103,7 +107,8 @@ class CostDetailsView extends GetView<CostDetailsController> {
                 final data = transportationData[index];
                 return Obx(() {
                   return TransportationCard(
-                    onTap: (){
+                    price: "",
+                    onTap: () {
                       controller.selectedTravel.value = index;
                     },
                     isSelected: controller.selectedTravel.value == index,
@@ -113,6 +118,7 @@ class CostDetailsView extends GetView<CostDetailsController> {
                     endTime: data['endTime'],
                     title: data['title'],
                     icon: data['icon'],
+                    remarks: "jhjsdhfjs",
                   );
                 });
               },
@@ -123,7 +129,8 @@ class CostDetailsView extends GetView<CostDetailsController> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 "Lodging Choices",
-                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                style: AppTextStyles.smallStyle
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 10),
@@ -139,22 +146,22 @@ class CostDetailsView extends GetView<CostDetailsController> {
                 crossAxisSpacing: 16,
               ),
               primary: false,
-              itemBuilder: (context, index) =>
-                  Obx(() {
-                    return FoodCard(
-                      isSelected: controller.selectedLodge.value == index,
-                      onPress: () {
-                        controller.selectedLodge.value = index;
-                      },
-                    );
-                  }),
+              itemBuilder: (context, index) => Obx(() {
+                return FoodCard(
+                  isSelected: controller.selectedLodge.value == index,
+                  onPress: () {
+                    controller.selectedLodge.value = index;
+                  },
+                );
+              }),
             ),
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 "Fooding Choices",
-                style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+                style: AppTextStyles.smallStyle
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 10),
@@ -170,15 +177,14 @@ class CostDetailsView extends GetView<CostDetailsController> {
                 crossAxisSpacing: 16,
               ),
               primary: false,
-              itemBuilder: (context, index) =>
-                  Obx(() {
-                    return FoodCard(
-                      isSelected: controller.selectedFood.value == index,
-                      onPress: () {
-                        controller.selectedFood.value = index;
-                      },
-                    );
-                  }),
+              itemBuilder: (context, index) => Obx(() {
+                return FoodCard(
+                  isSelected: controller.selectedFood.value == index,
+                  onPress: () {
+                    controller.selectedFood.value = index;
+                  },
+                );
+              }),
             ),
             const SizedBox(height: 100),
           ],
@@ -194,6 +200,8 @@ class TransportationCard extends StatelessWidget {
   final String startTime;
   final String endTime;
   final String title;
+  final String remarks;
+  final String price;
   final Widget icon;
   final bool isSelected;
   final void Function() onTap;
@@ -208,6 +216,8 @@ class TransportationCard extends StatelessWidget {
     required this.icon,
     required this.isSelected,
     required this.onTap,
+    required this.remarks,
+    required this.price,
   });
 
   @override
@@ -218,9 +228,11 @@ class TransportationCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         // margin: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-            border: Border.all(color: isSelected ? Colors.teal : Colors.transparent),
+            border: Border.all(
+                width: 2,
+                color: isSelected ? Colors.green : Colors.transparent),
             borderRadius: BorderRadius.circular(16),
-            color: AppColors.white,
+            color: isSelected ? Colors.green.shade50 : AppColors.white,
             boxShadow: [
               BoxShadow(
                 offset: const Offset(0, 1),
@@ -231,15 +243,22 @@ class TransportationCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: AppTextStyles.smallStyle),
-            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(startTime, style: AppTextStyles.smallStyle),
-                Text(endTime, style: AppTextStyles.smallStyle),
+                Expanded(
+                  child: Text(title,
+                      maxLines: 1,
+                      style: AppTextStyles.smallStyle
+                          .copyWith(fontWeight: FontWeight.bold)),
+                ),
+                const SizedBox(width: 10),
+                Text("Rs. $price",
+                    style: AppTextStyles.smallStyle.copyWith(
+                        fontWeight: FontWeight.bold, color: Colors.green)),
               ],
             ),
+            const SizedBox(height: 10),
             Row(
               children: [
                 const Icon(
@@ -274,10 +293,30 @@ class TransportationCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(startPoint, style: AppTextStyles.smallStyle),
-                Text(endPoint, style: AppTextStyles.smallStyle),
+                Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                      color:
+                          isSelected ? Colors.green.shade50 : AppColors.white,
+                    ),
+                    child: Text(startPoint, style: AppTextStyles.smallStyle)),
+                Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.grey),
+                      borderRadius: BorderRadius.circular(12),
+                      color:
+                          isSelected ? Colors.green.shade50 : AppColors.white,
+                    ),
+                    child: Text(endPoint, style: AppTextStyles.smallStyle)),
               ],
             ),
+            const SizedBox(height: 10),
+            Text(remarks,
+                style: AppTextStyles.smallStyle
+                    .copyWith(fontWeight: FontWeight.bold)),
           ],
         ),
       ),
@@ -302,7 +341,11 @@ class FoodCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
-          border: Border.all(color: isSelected ? Colors.tealAccent : AppColors.grey.withOpacity(0.3), width: 2),
+          border: Border.all(
+              color: isSelected
+                  ? Colors.tealAccent
+                  : AppColors.grey.withOpacity(0.3),
+              width: 2),
           color: AppColors.white,
           boxShadow: [
             BoxShadow(
@@ -313,10 +356,10 @@ class FoodCard extends StatelessWidget {
             )
           ],
           borderRadius: BorderRadius.circular(12)),
-      width: width,
+      width: double.infinity,
       child: GestureDetector(
         onTap: onPress,
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const PreviewCardImage(
@@ -330,10 +373,71 @@ class FoodCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               "Veg Item",
-              style: AppTextStyles.smallStyle.copyWith(fontWeight: FontWeight.bold),
+              style: AppTextStyles.smallStyle
+                  .copyWith(fontWeight: FontWeight.bold),
               maxLines: 2,
             ),
-            Text("\$${100}", style: AppTextStyles.smallStyle.copyWith(color: AppColors.redAccent, fontWeight: FontWeight.bold))
+            Text("\$${100}",
+                style: AppTextStyles.smallStyle.copyWith(
+                    color: AppColors.redAccent, fontWeight: FontWeight.bold))
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HotelCard extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  final String price;
+  final bool isSelected;
+  final void Function() onTap;
+
+  const HotelCard({
+    super.key,
+    required this.title,
+    required this.subTitle,
+    required this.isSelected,
+    required this.price,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        // margin: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+            border: Border.all(
+                width: 2,
+                color: isSelected ? Colors.green : Colors.transparent),
+            borderRadius: BorderRadius.circular(16),
+            color: isSelected ? Colors.green.shade50 : AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(0, 1),
+                blurRadius: 1,
+                color: AppColors.black.withOpacity(0.3),
+              )
+            ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title,
+                style: AppTextStyles.smallStyle
+                    .copyWith(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Text(subTitle,
+                style: AppTextStyles.smallStyle.copyWith(
+                    color: AppColors.grey, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Text("Rs. $price",
+                style: AppTextStyles.smallStyle.copyWith(
+                    color: Colors.green, fontWeight: FontWeight.bold)),
           ],
         ),
       ),

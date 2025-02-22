@@ -4,10 +4,15 @@ import '../constants/colors.dart';
 import '../constants/styles.dart';
 
 class CustomDatePicker extends StatefulWidget {
-  final int? firstDate;
+  final int? firstDateYear;
+  final int? firstDateMonth;
+  final int? firstDateDay;
   final int? lastDateYear;
   final int? lastDateMonth;
   final int? lastDateDay;
+  final int? initialDateYear;
+  final int? initialDateMonth;
+  final int? initialDateDay;
   final String title;
   final TextEditingController date;
   final String? Function(String?)? validator;
@@ -19,10 +24,16 @@ class CustomDatePicker extends StatefulWidget {
       required this.date,
       this.validator,
       this.onChanged,
-      this.firstDate,
+      this.firstDateYear,
+      this.firstDateMonth,
+      this.firstDateDay,
       this.lastDateYear,
       this.lastDateMonth,
-      this.lastDateDay});
+      this.lastDateDay,
+      this.initialDateDay,
+      this.initialDateMonth,
+      this.initialDateYear
+      });
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
@@ -31,7 +42,11 @@ class CustomDatePicker extends StatefulWidget {
 class _CustomDatePickerState extends State<CustomDatePicker> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(12.0),
+      ),
       height: 50,
       child: TextFormField(
         controller: widget.date,
@@ -63,9 +78,14 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         onTap: () async {
           DateTime? pickedDate = await showDatePicker(
               context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(widget.firstDate ?? 1900),
-              lastDate: DateTime((widget.lastDateYear ?? 2100), (widget.lastDateMonth ?? 1), (widget.lastDateDay ?? 1)));
+              initialDate: DateTime(
+                  (widget.initialDateYear ?? DateTime.now().year),
+                  (widget.initialDateMonth ?? DateTime.now().month),
+                  (widget.initialDateDay ?? DateTime.now().day)),
+              firstDate: DateTime((widget.firstDateYear ?? 1900),
+                  (widget.firstDateMonth ?? 1), (widget.firstDateDay ?? 1)),
+              lastDate: DateTime((widget.lastDateYear ?? 2100),
+                  (widget.lastDateMonth ?? 1), (widget.lastDateDay ?? 1)));
           if (pickedDate != null) {
             String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
             setState(() {
