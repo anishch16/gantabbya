@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../constants/colors.dart';
-import '../../../constants/images.dart';
 import '../../../constants/styles.dart';
 import '../../../routes/app_pages.dart';
 import '../../cost_details/views/cost_details_view.dart';
 import '../controllers/estimated_cost_controller.dart';
 import 'no_data_card.dart';
-import 'title_card.dart';
 
 class EstimatedCostView extends GetView<EstimatedCostController> {
   const EstimatedCostView({super.key});
@@ -24,8 +21,22 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
         backgroundColor: Colors.transparent,
         appBar: _buildAppBar(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: _buildBackButton(),
-        body: _buildBody(),
+        floatingActionButton: Row(
+          children: [
+            Expanded(child: _buildBackButton(
+              title: "Back Home",
+              color: Colors.teal,
+              onTap: () => Get.offNamed(Routes.HOME),
+            )),
+            const SizedBox(width: 8.0),
+            Expanded(child: _buildBackButton(
+              color: AppColors.green,
+              title: "Save Trip",
+              onTap: () => Get.offNamed(Routes.HOME),
+            )),
+          ],
+        ),
+        body: _buildTabView(),
       ),
     );
   }
@@ -49,88 +60,24 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
   }
 
   // Back button widget
-  Widget _buildBackButton() {
+  Widget _buildBackButton({required String title, required void Function() onTap, required Color color}) {
     return GestureDetector(
-      onTap: () {
-        Get.offAllNamed(Routes.HOME);
-      },
+      onTap: onTap,
       child: Container(
         height: 50,
         margin: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.teal,
+          color: color,
         ),
         child: Center(
           child: Text(
-            "Back to Home",
+            title,
             style: AppTextStyles.miniStyle
                 .copyWith(fontSize: 16, color: Colors.white),
           ),
         ),
       ),
-    );
-  }
-
-  // Body content widget
-  Widget _buildBody() {
-    return Container(
-      margin: const EdgeInsets.all(8),
-      width: double.maxFinite,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 0.2,
-            blurRadius: 0.2,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          _buildHeader(),
-          Expanded(child: _buildTabView()),
-        ],
-      ),
-    );
-  }
-
-  // Header with background image
-  Widget _buildHeader() {
-    return Stack(
-      children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
-          ),
-          child: Image.asset(AppImages.planeBackground),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Image.asset(AppImages.gantabyaLogoPng, height: 40, width: 40),
-                  const SizedBox(width: 16),
-                  Text(
-                    "Travel Choices",
-                    style: AppTextStyles.normalStyle.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 
@@ -140,6 +87,84 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
       length: 3,
       child: Column(
         children: [
+          Container(
+            width: double.maxFinite,
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColors.black),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Your Choices",
+                  style: AppTextStyles.normalStyle.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.white,
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                if (controller.args.selectedBus.price != null)
+                  CostCard(
+                    title: "Bus",
+                    cost: controller.args.selectedBus.price.toString(),
+                  ),
+                if (controller.args.selectedAir.price != null)
+                  CostCard(
+                    title: "Airline",
+                    cost: controller.args.selectedAir.price.toString(),
+                  ),
+                if (controller.args.selectedLodge.price != null)
+                  CostCard(
+                    title: "Hotel",
+                    cost: controller.args.selectedLodge.price.toString(),
+                  ),
+                const Divider(),
+                Row(
+                  children: [
+                    Text(
+                      "Total",
+                      style: AppTextStyles.normalStyle.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.white,
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                        "Rs. ${(controller.args.selectedBus.price ?? 0) + (controller.args.selectedAir.price ?? 0) + (controller.args.selectedLodge.price ?? 0)}",
+                        style: AppTextStyles.normalStyle.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.green,
+                        ))
+                  ],
+                )
+              ],
+            ),
+          ),
+          Text(
+            "Recommended Choices",
+            style: AppTextStyles.normalStyle.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.white,
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(
+            "These choices are recommended for you. These are based on the cheapest cost and the rating of their one.",
+            textAlign: TextAlign.center,
+            style: AppTextStyles.miniStyle.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.grey,
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
           _buildTabBar(),
           Expanded(
             child: TabBarView(
@@ -213,44 +238,17 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
       padding: const EdgeInsets.only(bottom: 100),
       child: Column(
         children: [
-          Column(
-            children: [
-              const TitleContainer(
-                icon: Icons.flight,
-                title: "Selected Airline",
-              ),
-              (controller.args.selectedAir.price != null)
-                  ? _buildTransportationCard(
-                      controller.args.selectedAir,
-                      "Kathmandu",
-                      controller.args.location,
-                      Icons.flight,
-                    )
-                  : const NoSelectionMessage(
-                      title: "No Airline Selected",
-                      icon: Icons.flight,
-                    ),
-            ],
-          ),
-          Column(
-            children: [
-              const TitleContainer(
-                icon: Icons.flight,
-                title: "Cheapest Airline",
-              ),
-              (controller.args.optimalAir.price != null)
-                  ? _buildTransportationCard(
-                      controller.args.optimalAir,
-                      "Kathmandu",
-                      controller.args.location,
-                      Icons.flight,
-                    )
-                  : const NoSelectionMessage(
-                      title: "No Airlines Available",
-                      icon: Icons.flight,
-                    ),
-            ],
-          ),
+          (controller.args.optimalAir.price != null)
+              ? _buildTransportationCard(
+                  controller.args.optimalAir,
+                  "Kathmandu",
+                  controller.args.location,
+                  Icons.flight,
+                )
+              : const NoSelectionMessage(
+                  title: "No Airlines Available",
+                  icon: Icons.flight,
+                ),
         ],
       ),
     );
@@ -262,45 +260,17 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
       padding: const EdgeInsets.only(bottom: 100),
       child: Column(
         children: [
-          (controller.args.selectedBus.price != null)
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const TitleContainer(
-                      icon: Icons.directions_bus,
-                      title: "Selected Bus",
-                    ),
-                    _buildTransportationCard(
-                      controller.args.selectedBus,
-                      "Kathmandu",
-                      controller.args.location,
-                      Icons.directions_bus,
-                    ),
-                  ],
+          (controller.args.optimalBus.price != null)
+              ? _buildTransportationCard(
+                  controller.args.optimalBus,
+                  "Kathmandu",
+                  controller.args.location,
+                  Icons.directions_bus,
                 )
               : const NoSelectionMessage(
-                  title: "No Bus Selected",
+                  title: "No Bus Available",
                   icon: Icons.directions_bus,
-                ),
-          Column(
-            children: [
-              const TitleContainer(
-                icon: Icons.directions_bus,
-                title: "Cheapest Bus",
-              ),
-              (controller.args.optimalBus.price != null)
-                  ? _buildTransportationCard(
-                      controller.args.optimalBus,
-                      "Kathmandu",
-                      controller.args.location,
-                      Icons.directions_bus,
-                    )
-                  : const NoSelectionMessage(
-                      title: "No Bus Available",
-                      icon: Icons.directions_bus,
-                    ),
-            ],
-          )
+                )
         ],
       ),
     );
@@ -312,30 +282,10 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
       padding: const EdgeInsets.only(bottom: 100),
       child: Column(
         children: [
-          Column(
-            children: [
-              const TitleContainer(
-                icon: Icons.hotel,
-                title: "Selected Hotel",
-              ),
-              (controller.args.selectedLodge.price != null)
-                  ? _buildHotelCard(controller.args.selectedLodge)
-                  : const NoSelectionMessage(
-                      title: "No Lodge Selected", icon: Icons.hotel),
-            ],
-          ),
-          Column(
-            children: [
-              const TitleContainer(
-                icon: Icons.hotel,
-                title: "Cheapest Hotel",
-              ),
-              (controller.args.optimalLodge.price != null)
-                  ? _buildHotelCard(controller.args.optimalLodge)
-                  : const NoSelectionMessage(
-                      title: "No Lodges Available", icon: Icons.hotel),
-            ],
-          )
+          (controller.args.optimalLodge.price != null)
+              ? _buildHotelCard(controller.args.optimalLodge)
+              : const NoSelectionMessage(
+                  title: "No Lodges Available", icon: Icons.hotel)
         ],
       ),
     );
@@ -371,6 +321,49 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
         isSelected: true,
         title: lodge.name ?? "",
         subTitle: lodge.remarks ?? "",
+      ),
+    );
+  }
+}
+
+class CostCard extends StatelessWidget {
+  final String? title;
+  final String? cost;
+  const CostCard({
+    super.key,
+    this.title,
+    this.cost,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        children: [
+          Icon(
+            title == "Bus"
+                ? Icons.directions_bus
+                : title == "Airline"
+                    ? Icons.flight
+                    : Icons.hotel,
+            color: AppColors.white,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text("Selected $title",
+              style: AppTextStyles.normalStyle.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.white,
+              )),
+          const Spacer(),
+          Text("Rs. $cost",
+              style: AppTextStyles.normalStyle.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.green,
+              )),
+        ],
       ),
     );
   }

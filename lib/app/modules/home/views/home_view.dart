@@ -57,7 +57,9 @@ class HomeView extends GetView<HomeController> {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(Routes.HISTORY);
+                        },
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 40),
                           backgroundColor: const Color(0xFF979797).withOpacity(0.3),
@@ -184,6 +186,7 @@ class HomeView extends GetView<HomeController> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 16),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GestureDetector(
@@ -198,10 +201,11 @@ class HomeView extends GetView<HomeController> {
                             ),
                             const SizedBox(width: 12),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                     "${getGreetingMessage()} ${controller.localData.read("user") ?? ""}",
-                                    style: InRiaTextStyles.mediumStyle
+                                    style: InRiaTextStyles.normalStyle
                                         .copyWith(color: Colors.white)),
                                 const SizedBox(width: 8),
                                 Icon(

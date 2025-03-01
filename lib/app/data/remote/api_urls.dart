@@ -3,7 +3,7 @@ mixin ApiUrls {
   static const String BASE_URL = "http://10.0.2.2:8000";
   static const String LOGIN = "http://10.0.2.2:8000/api/user/login";
   static const String SIGNUP = "http://10.0.2.2:8000/api/user/signup";
-  static const String DESTINATIONS = "http://10.0.2.2:8000/api/destinations";
+  static const String DESTINATIONS = "http://10.0.2.2:8000/api/destinations/popular";
   static const String IMAGES = "http://10.0.2.2:8000/api/images";
   static const String HOTELS = "http://10.0.2.2:8000/api/hotels";
   static const String AIRLINES = "http://10.0.2.2:8000/api/airlines";

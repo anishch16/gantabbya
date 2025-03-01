@@ -54,12 +54,37 @@ class AllDestinationController extends GetxController {
     });
   }
   void _filterDestinations() {
-    final query = searchController.text.toLowerCase();
-    if (query.isEmpty) {
-      filteredDestinations.value = destinationData.value.data ?? [];
-    } else {
-      filteredDestinations.value =
-          (destinationData.value.data ?? []).where((destination) => (destination.name ?? "").toLowerCase().contains(query)).toList();
+  final query = searchController.text.toLowerCase();
+  List<Destination> results = [];
+  
+  if (query.isEmpty) {
+    results = destinationData.value.data ?? [];
+  } else {
+    final destinations = destinationData.value.data ?? [];
+    for (final destination in destinations) {
+      // Convert each field to lowercase for case-insensitive matching.
+      final name = (destination.name ?? "").toLowerCase();
+      final description = (destination.description ?? "").toLowerCase();
+      final location = (destination.location ?? "").toLowerCase();
+      
+      // Check if the query is contained in any of these fields.
+      if (name.contains(query) ||
+          description.contains(query) ||
+          location.contains(query)) {
+        results.add(destination);
+      }
     }
   }
+  
+  filteredDestinations.value = results;
+}
+  // void _filterDestinations() {
+  //   final query = searchController.text.toLowerCase();
+  //   if (query.isEmpty) {
+  //     filteredDestinations.value = destinationData.value.data ?? [];
+  //   } else {
+  //     filteredDestinations.value =
+  //         (destinationData.value.data ?? []).where((destination) => (destination.name ?? "").toLowerCase().contains(query)).toList();
+  //   }
+  // }
 }
