@@ -1,4 +1,5 @@
 # Miscellaneous
+*.env
 *.class
 *.dart~
 *.json~

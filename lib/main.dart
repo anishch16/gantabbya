@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -11,6 +12,7 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent),
   );
+  await dotenv.load(fileName: "keys.env");
   await GetStorage.init();
   await DatabaseHelper.instance.deleteDatabaseFile();
 

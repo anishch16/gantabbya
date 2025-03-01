@@ -18,6 +18,7 @@ abstract class Routes {
   static const SPLASH = _Paths.SPLASH;
   static const HISTORY = _Paths.HISTORY;
   static const CHAT = _Paths.CHAT;
+  static const DEMO_CHAT = _Paths.DEMO_CHAT;
 }
 
 abstract class _Paths {
@@ -38,4 +39,5 @@ abstract class _Paths {
   static const SPLASH = '/splash';
   static const HISTORY = '/history';
   static const CHAT = '/chat';
+  static const DEMO_CHAT = '/demo-chat';
 }

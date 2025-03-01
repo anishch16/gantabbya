@@ -8,6 +8,8 @@ import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/cost_details/bindings/cost_details_binding.dart';
 import '../modules/cost_details/views/cost_details_view.dart';
+import '../modules/demo_chat/bindings/demo_chat_binding.dart';
+import '../modules/demo_chat/views/demo_chat_view.dart';
 import '../modules/detail_destination/bindings/detail_destination_binding.dart';
 import '../modules/detail_destination/views/detail_destination_view.dart';
 import '../modules/estimated_cost/bindings/estimated_cost_binding.dart';
@@ -125,8 +127,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT,
-      page: () =>  ChatView(),
+      page: () => ChatView(),
       binding: ChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.DEMO_CHAT,
+      page: () => const DemoChatView(),
+      binding: DemoChatBinding(),
     ),
   ];
 }

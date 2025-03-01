@@ -31,7 +31,9 @@ class HomeView extends GetView<HomeController> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: GestureDetector(
           onTap:(){
-            Get.toNamed(Routes.CHAT);
+            Get.toNamed(Routes.DEMO_CHAT, 
+            arguments: controller.destinationData.value
+            );
           },
           child: Container(
             height: 56,
