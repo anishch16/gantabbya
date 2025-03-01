@@ -4,6 +4,8 @@ import '../modules/all_destination/bindings/all_destination_binding.dart';
 import '../modules/all_destination/views/all_destination_view.dart';
 import '../modules/bottomNav/bindings/bottom_nav_binding.dart';
 import '../modules/bottomNav/views/bottom_nav_view.dart';
+import '../modules/chat/bindings/chat_binding.dart';
+import '../modules/chat/views/chat_view.dart';
 import '../modules/cost_details/bindings/cost_details_binding.dart';
 import '../modules/cost_details/views/cost_details_view.dart';
 import '../modules/detail_destination/bindings/detail_destination_binding.dart';
@@ -120,6 +122,11 @@ class AppPages {
       name: _Paths.HISTORY,
       page: () => const HistoryView(),
       binding: HistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () =>  ChatView(),
+      binding: ChatBinding(),
     ),
   ];
 }

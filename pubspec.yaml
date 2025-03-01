@@ -40,6 +40,7 @@ dependencies:
   dotted_line: ^3.2.3
   flutter_animate: ^4.5.2
   flutter_rating: ^2.0.2
+  ikchatbot: ^1.0.5
 
 dev_dependencies:
   flutter_test:

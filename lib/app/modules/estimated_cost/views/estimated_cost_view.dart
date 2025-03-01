@@ -23,16 +23,21 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Row(
           children: [
-            Expanded(child: _buildBackButton(
+            Expanded(
+                child: _buildBackButton(
               title: "Back Home",
               color: Colors.teal,
               onTap: () => Get.offNamed(Routes.HOME),
             )),
             const SizedBox(width: 8.0),
-            Expanded(child: _buildBackButton(
+            Expanded(
+                child: _buildBackButton(
               color: AppColors.green,
               title: "Save Trip",
-              onTap: () => Get.offNamed(Routes.HOME),
+              onTap: () {
+                controller.saveData();
+                Get.offNamed(Routes.HOME);
+              },
             )),
           ],
         ),
@@ -60,7 +65,10 @@ class EstimatedCostView extends GetView<EstimatedCostController> {
   }
 
   // Back button widget
-  Widget _buildBackButton({required String title, required void Function() onTap, required Color color}) {
+  Widget _buildBackButton(
+      {required String title,
+      required void Function() onTap,
+      required Color color}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(

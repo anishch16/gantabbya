@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -32,20 +34,40 @@ class HistoryView extends GetView<HistoryController> {
         ),
         backgroundColor: Colors.transparent,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: ListView.builder(
-          itemCount: 10,
-          shrinkWrap: true,
-          itemBuilder: (context, index) => const TravelCatalogCard(
-            destinationName: "Lumbini",
-            totalPrice: 2000,
-            date: "12-01-2023",
-            travelType: "By Bus",
-            travelCompanyName: "Anish Travels and Tours",
-            travelPrice: 200,
-            lodgeName: "Anish Hotels and Lodge",
-            lodgePrice: 200,
-          ),
-        ),
+        body: controller.models.isEmpty
+            ? Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.history,
+                      color: AppColors.white,
+                      size: 50,
+                      ),
+                    Text(
+                      "No history found",
+                      style: AppTextStyles.normalStyle
+                          .copyWith(color: AppColors.white),
+                    ),
+                  ],
+                ),
+              )
+            : ListView.builder(
+                itemCount: controller.models.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) => TravelCatalogCard(
+                  destinationName: controller.models[index].destinationName,
+                  totalPrice:
+                      double.parse(controller.models[index].travelPrice) +
+                          double.parse(controller.models[index].lodgePrice),
+                  date: controller.models[index].date,
+                  travelType: controller.models[index].travelType,
+                  travelCompanyName: controller.models[index].travelCompanyName,
+                  travelPrice: controller.models[index].travelPrice,
+                  lodgeName: controller.models[index].lodgeName,
+                  lodgePrice: controller.models[index].lodgePrice,
+                ),
+              ),
       ),
     );
   }
@@ -57,9 +79,9 @@ class TravelCatalogCard extends StatelessWidget {
   final String date;
   final String travelType;
   final String travelCompanyName;
-  final double travelPrice;
+  final String travelPrice;
   final String lodgeName;
-  final double lodgePrice;
+  final String lodgePrice;
   final VoidCallback? onTap;
 
   const TravelCatalogCard({
@@ -155,7 +177,7 @@ class TravelCatalogCard extends StatelessWidget {
                 children: [
                   Text("Price", style: AppTextStyles.smallStyle),
                   const Spacer(),
-                  Text("Rs. ${travelPrice.toStringAsFixed(0)}",
+                  Text("Rs. $travelPrice",
                       style: AppTextStyles.smallStyle.copyWith(
                           color: AppColors.green, fontWeight: FontWeight.bold)),
                 ],
@@ -173,7 +195,7 @@ class TravelCatalogCard extends StatelessWidget {
                       style: AppTextStyles.smallStyle
                           .copyWith(fontWeight: FontWeight.bold)),
                   const Spacer(),
-                  Text("Rs. ${lodgePrice.toStringAsFixed(0)}",
+                  Text("Rs. $lodgePrice",
                       style: AppTextStyles.smallStyle.copyWith(
                           color: AppColors.green, fontWeight: FontWeight.bold)),
                 ],

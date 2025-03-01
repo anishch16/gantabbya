@@ -17,6 +17,7 @@ abstract class Routes {
   static const ESTIMATED_COST = _Paths.ESTIMATED_COST;
   static const SPLASH = _Paths.SPLASH;
   static const HISTORY = _Paths.HISTORY;
+  static const CHAT = _Paths.CHAT;
 }
 
 abstract class _Paths {
@@ -36,4 +37,5 @@ abstract class _Paths {
   static const ESTIMATED_COST = '/estimated-cost';
   static const SPLASH = '/splash';
   static const HISTORY = '/history';
+  static const CHAT = '/chat';
 }

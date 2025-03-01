@@ -62,5 +62,17 @@ class BusAirHotelData {
       destinationID: json['destinationID'],
     );
   }
+   Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'createdAt': createdAt,
+      'name': name,
+      'price': price,
+      'rating': rating,
+      'timeTaken': timeTaken,
+      'remarks': remarks,
+      'destinationID': destinationID,
+    };
+  }
 }
 

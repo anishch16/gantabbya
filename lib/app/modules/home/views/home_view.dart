@@ -28,7 +28,23 @@ class HomeView extends GetView<HomeController> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         key: controller.scaffoldKey,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: GestureDetector(
+          onTap:(){
+            Get.toNamed(Routes.CHAT);
+          },
+          child: Container(
+            height: 56,
+            width: 56,
+            decoration:const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.teal,
+            ),
+            child: const Icon(Icons.android,
+            size: 30,
+             color: Colors.white),
+          ),
+        ),
         drawer: Container(
           color: Colors.black54.withOpacity(0.8),
           width: 300,
@@ -69,10 +85,10 @@ class HomeView extends GetView<HomeController> {
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.person, color: Colors.white),
+                            const Icon(Icons.history, color: Colors.white),
                             const SizedBox(width: 12),
                             Text(
-                              "Profile",
+                              "History",
                               style: AppTextStyles.smallStyle.copyWith(
                                 color: Colors.white,
                               ),
