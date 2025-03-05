@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../../../data/remote/models/database_helper.dart';
 import '../../set_destination/controllers/args_model.dart';
 
 class EstimatedCostController extends GetxController {

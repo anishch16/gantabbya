@@ -189,7 +189,7 @@ class SetDestinationView extends GetView<SetDestinationController> {
                                             controller.selectedAirline.value =
                                                 index;
                                             controller.selectedAirlineModel
-                                                .value = controller.busesData
+                                                .value = controller.airlineData
                                                     .value.data?[index] ??
                                                 BusAirHotelData();
                                             controller.letsCalculate();
